@@ -42,10 +42,9 @@ export default function ConsentModal({
 
   const t = TEXT[language] || TEXT.en;
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (!checked) return;
-
-    onSubmit();
+    await onSubmit();
     setChecked(false);
   }
 

@@ -332,11 +332,11 @@ async function submitConversation() {
       throw new Error(data.error || "Unknown error");
     }
 
-    alert("Thank you! Your conversation has been submitted.");
-
-    console.log(data.analysis);
-
     setShowConsent(false);
+
+    console.log(data);
+
+    alert("Thank you! Your conversation has been submitted.");
 
   } catch (err) {
 
