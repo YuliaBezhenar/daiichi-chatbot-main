@@ -1,5 +1,16 @@
 import { useState, useRef, useEffect } from "react";
 import Head from "next/head";
+import { getSessionId } from "../lib/session";
+import {
+  saveConversation,
+  loadConversation,
+  saveTopic,
+  loadTopic,
+  saveLanguage,
+  loadLanguage,
+} from "../lib/storage";
+import ConsentModal from "../components/ConsentModal";
+import ShareConversation from "../components/ShareConversation";
 
 const TOPICS = {
   radiation: { emoji: "☢️", en: "Radiation Safety", ar: "السلامة الإشعاعية", ja: "放射線の安全性" },
@@ -160,12 +171,35 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [showLearn, setShowLearn] = useState(false);
+  const [showConsent, setShowConsent] = useState(false);
+  const [submittingConversation, setSubmittingConversation] = useState(false);
+  const [sessionId, setSessionId] = useState(null);
   const chatEndRef = useRef(null);
   const inputRef = useRef(null);
   const countdownRef = useRef(null);
 
   const t = UI_TEXT[language];
   const dir = LANGUAGES[language].dir;
+  useEffect(() => {
+  const id = getSessionId();
+  setSessionId(id);
+
+  const savedMessages = loadConversation();
+  const savedTopic = loadTopic();
+  const savedLanguage = loadLanguage();
+
+  if (savedLanguage) {
+    setLanguage(savedLanguage);
+  }
+
+  if (savedTopic) {
+    setTopic(savedTopic);
+  }
+
+  if (savedMessages.length > 0) {
+    setMessages(savedMessages);
+  }
+}, []);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -177,6 +211,20 @@ export default function Home() {
       return () => clearTimeout(countdownRef.current);
     }
   }, [countdown]);
+
+  useEffect(() => {
+  saveConversation(messages);
+}, [messages]);
+
+useEffect(() => {
+  if (topic) {
+    saveTopic(topic);
+  }
+}, [topic]);
+
+useEffect(() => {
+  saveLanguage(language);
+}, [language]);
 
   async function callAPI(msgs, topicKey, lang) {
     const res = await fetch("/api/chat", {
@@ -202,7 +250,11 @@ export default function Home() {
 
   async function startTopic(topicKey) {
     setTopic(topicKey);
+    saveTopic(topicKey);
+
     setMessages([]);
+    saveConversation([]);
+
     setLoading(true);
     try {
       const data = await callAPI(
@@ -245,10 +297,58 @@ export default function Home() {
   }
 
   function goBack() {
-    setTopic(null);
-    setMessages([]);
-    setInput("");
+  setTopic(null);
+  setMessages([]);
+  setInput("");
+
+  saveConversation([]);
+  saveTopic("");
+}
+
+async function submitConversation() {
+
+  if (messages.length === 0) return;
+
+  try {
+
+    setSubmittingConversation(true);
+
+    const res = await fetch("/api/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        sessionId,
+        topic,
+        language,
+        conversation: messages,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error || "Unknown error");
+    }
+
+    alert("Thank you! Your conversation has been submitted.");
+
+    console.log(data.analysis);
+
+    setShowConsent(false);
+
+  } catch (err) {
+
+    alert(err.message);
+
+  } finally {
+
+    setSubmittingConversation(false);
+
   }
+
+}
 
   const facts = FACT_SHEETS[language] || FACT_SHEETS.en;
 
@@ -268,13 +368,24 @@ export default function Home() {
             <div>
               <h1 style={styles.headerTitle}>{t.title}</h1>
               <p style={styles.headerSub}>{t.subtitle}</p>
+              {/* delete later */}
+              <p style={{ fontSize: 10, opacity: 0.6 }}>
+                Session: {sessionId}
+              </p>
             </div>
           </div>
           <div style={styles.langBar}>
             {Object.entries(LANGUAGES).map(([key, val]) => (
               <button
                 key={key}
-                onClick={() => { setLanguage(key); setTopic(null); setMessages([]); }}
+                onClick={() => {
+                    setLanguage(key);
+                    setTopic(null);
+                    setMessages([]);
+
+                    saveConversation([]);
+                    saveTopic("");
+                }}
                 style={{ ...styles.langBtn, ...(language === key ? styles.langBtnActive : {}) }}
               >
                 {val.flag} {val.label}
@@ -365,6 +476,16 @@ export default function Home() {
                 {t.send}
               </button>
             </form>
+            <div style={styles.shareContainer}>
+              <ShareConversation
+                language={language}
+                disabled={
+                  messages.length === 0 ||
+                  submittingConversation
+                }
+                onClick={() => setShowConsent(true)}
+              />
+            </div>
           </div>
         )}
 
@@ -399,6 +520,12 @@ export default function Home() {
             </div>
           </div>
         )}
+        <ConsentModal
+          open={showConsent}
+          language={language}
+          onClose={() => setShowConsent(false)}
+          onSubmit={submitConversation}
+        />
       </div>
 
       <style jsx global>{`
@@ -464,4 +591,5 @@ const styles = {
   factStat: { display: "flex", alignItems: "baseline", gap: 8, padding: "10px 14px", background: "#d8f3dc", borderRadius: 10 },
   factStatNum: { fontSize: 22, fontWeight: 800, color: "#1a3a2a" },
   factStatLabel: { fontSize: 13, color: "#3a5a48" },
+  shareContainer: { padding: "0 16px 12px",  background: "#fff", },
 };
