@@ -266,8 +266,8 @@ useEffect(() => {
 
   async function startQuiz() {
     setShowChat(true);
-    if (messages.length > 0) {
-      return;
+    if (!force && messages.length > 0) {
+        return;
     }
 
     setLoading(true);
@@ -374,7 +374,7 @@ async function submitConversation() {
 
 }
 
-function handleNewConversation() {
+async function handleNewConversation() {
 
     const id = createNewSession();
 
@@ -384,7 +384,7 @@ function handleNewConversation() {
 
     saveConversation([]);
 
-    await startQuiz();
+    await startQuiz(true);
 
 }
 
@@ -418,11 +418,9 @@ function handleNewConversation() {
                 key={key}
                 onClick={() => {
                     setLanguage(key);
-                    setTopic(null);
                     setMessages([]);
 
                     saveConversation([]);
-                    saveTopic("");
                 }}
                 style={{ ...styles.langBtn, ...(language === key ? styles.langBtnActive : {}) }}
               >
