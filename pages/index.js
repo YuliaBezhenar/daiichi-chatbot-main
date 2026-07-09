@@ -450,9 +450,9 @@ async function submitConversation() {
               >
                 <span style={styles.topicEmoji}>🧠</span>
                 <span style={styles.topicLabel}>
-                  {language === "en" && "Start Quiz"}
-                  {language === "ja" && "クイズを始める"}
-                  {language === "ar" && "ابدأ الاختبار"}
+                  {language === "en" && "Start Chat"}
+                  {language === "ja" && "チャットを始める"}
+                  {language === "ar" && "ابدأ الدردشة"}
                 </span>
               </button>
 
