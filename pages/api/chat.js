@@ -34,11 +34,11 @@ const FUKUSHIMA_FACTS = {
   sources: [
     {
       name: "Fukushima Prefecture",
-      url: ""
+      url: "https://www.pref.fukushima.lg.jp/site/portal-english/"
     },
     {
       name: "IAEA",
-      url: ""
+      url: "https://www.iaea.org/topics/response/fukushima-daiichi-nuclear-accident"
     },
     {
       name: "TEPCO",
