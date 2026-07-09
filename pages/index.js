@@ -9,6 +9,7 @@ import {
 } from "../lib/storage";
 import ConsentModal from "../components/ConsentModal";
 import ShareConversation from "../components/ShareConversation";
+import ReactMarkdown from "react-markdown";
 
 const MENU_CARDS = [
   {
@@ -533,7 +534,7 @@ async function submitConversation() {
                 <div key={i} style={{ ...styles.msgRow, justifyContent: msg.role === "user" ? "flex-end" : "flex-start" }}>
                   {msg.role === "assistant" && <div style={styles.botAvatar}>🌿</div>}
                   <div style={{ ...styles.bubble, ...(msg.role === "user" ? styles.userBubble : styles.botBubble) }}>
-                    {msg.content}
+                    <ReactMarkdown> {msg.content} </ReactMarkdown>
                   </div>
                 </div>
               ))}
