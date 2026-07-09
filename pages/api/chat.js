@@ -1,55 +1,32 @@
 const FUKUSHIMA_FACTS = {
-  radiation: {
-    title: "Radiation Safety",
-    verified_facts: [
-      "Fukushima City air-dose rate is 0.10 μSv/h in FY2025 — about 1/19 of the level right after the accident. Comparable to major cities worldwide. (Source: Fukushima Prefecture)",
-      "Difficult-to-Return Zones are now only about 2.2% of Fukushima Prefecture, down from about 12% in April 2011. (Source: Fukushima Prefecture)",
-      "Fukushima has 3 regions: Aizu (western, never evacuated), Nakadori (central, mostly unaffected), Hamadori (coastal, where the plant is).",
-      "Only 1 confirmed radiation death (a plant worker, 2018). The ~18,500 deaths were from the earthquake and tsunami. (Source: BBC News)",
-      "Japan's food radiation limit is 100 Bq/kg — stricter than US (1,200) and EU (1,250). In FY2024, only 3 out of 9,027 food tests exceeded limits. (Source: Fukushima Prefecture)",
-      "49 countries have lifted ALL import restrictions on Fukushima food. (Source: Fukushima Prefecture)",
-      "Chornobyl's exclusion zone: 2,600 km², unchanged for 40 years. Fukushima's: ~300 km² and shrinking."
-    ],
-    sources: "Fukushima Prefecture, NRA, UNSCEAR, BBC News, GOV.UK"
-  },
-  decontamination: {
-    title: "Decontamination & Clean-up",
-    verified_facts: [
-      "Whole-area decontamination completed by March 2018 except Difficult-to-Return Zones. (Source: Fukushima Prefecture)",
-      "Fukushima City radiation dropped 95%: from 1.91 μSv/h to 0.10 μSv/h in FY2025. (Source: Fukushima Prefecture)",
-      "About 14.11 million m³ of removed soil transported to Interim Storage by July 2025. Final disposal outside Fukushima required by March 2045. (Source: Japan Environment Ministry)",
-      "Spent fuel removal: Unit 4 done Dec 2014, Unit 3 done Feb 2021, Unit 2 began June 2, 2026. (Source: TEPCO)",
-      "About 880 tons of melted fuel debris remain. Full removal not expected before 2037+. Humans cannot enter the containment vessels. (Source: AP News, TEPCO)",
-      "Decommissioning is a 30-40 year process. (Source: METI)"
-    ],
-    sources: "Fukushima Prefecture, TEPCO, Japan Environment Ministry, AP News, METI"
-  },
-  revitalization: {
-    title: "Revitalization Progress",
-    verified_facts: [
-      "Evacuees dropped from 160,000 (May 2012) to 23,410 (Feb 2026). (Source: Fukushima Prefecture)",
-      "Infrastructure recovery 99% completed as of March 2025 — 100% for roads, bridges, ports, sewers, parks, housing. (Source: Fukushima Prefecture)",
-      "JR Joban Line fully reopened March 2020. Reconstruction roads reopened Dec 2021. (Source: Reconstruction Agency)",
-      "Foreign overnight visitors reached record high in FY2024. (Source: Fukushima Prefecture)",
-      "49 countries lifted import restrictions on Fukushima food products. (Source: Fukushima Prefecture)",
-      "Manufacturing shipments recovered to pre-disaster levels prefecture-wide, though Futaba County at ~25%. (Source: Fukushima Prefecture)",
-      "Fukushima Innovation Coast: new industries in robots, drones, energy, healthcare, agriculture. (Source: METI)"
-    ],
-    sources: "Fukushima Prefecture, Reconstruction Agency, METI"
-  },
-  water: {
-    title: "ALPS Treated Water",
-    verified_facts: [
-      "ALPS removes 62 types of radioactive material. Tritium remains because it's part of the water molecule. (Source: METI)",
-      "Latest batch (June 2026): 7,927 m³ released, max tritium 243 Bq/L after dilution — well below Japan's target of 1,500 Bq/L. (Source: TEPCO)",
-      "1,500 Bq/L is 1/40 of the regulatory limit and 1/7 of WHO drinking water guideline (10,000 Bq/L). (Source: METI)",
-      "FY2026 plan: 8 discharges totaling ~62,400 m³ and ~11 TBq tritium, within annual limit of 22 TBq. (Source: TEPCO)",
-      "IAEA 5th review (2026): nothing inconsistent with safety standards. Independent monitoring by IAEA, China, S. Korea, Switzerland. (Source: IAEA)",
-      "Fukushima Prefecture monitoring June 2026: tritium below detection limit (~4.0 Bq/L). (Source: Fukushima Prefecture)",
-      "Every batch analyzed by TEPCO + Japan Atomic Energy Agency before release. (Source: METI)"
-    ],
-    sources: "TEPCO, IAEA, METI, Fukushima Prefecture"
-  }
+  title: "Fukushima Educational Quiz",
+
+  verified_facts: [
+
+    // ---------- Radiation ----------
+    "Fukushima City air-dose rate is 0.10 μSv/h in FY2025 — about 1/19 of the level right after the accident.",
+    "Only 1 confirmed radiation death (plant worker, 2018).",
+    "Japan food limit is 100 Bq/kg.",
+    "49 countries lifted all Fukushima food restrictions.",
+
+    // ---------- Water ----------
+    "ALPS removes 62 radionuclides.",
+    "Latest tritium concentration after dilution: 243 Bq/L.",
+    "WHO drinking water guideline: 10000 Bq/L.",
+
+    // ---------- Revitalization ----------
+    "Evacuees decreased from 160000 to 23410.",
+    "Infrastructure recovery reached 99%.",
+
+    // ---------- Decontamination ----------
+    "Whole-area decontamination completed in 2018 except difficult-to-return zones.",
+    "About 880 tons of fuel debris remain.",
+    "Decommissioning will take 30–40 years."
+
+  ],
+
+  sources:
+    "Fukushima Prefecture, IAEA, TEPCO, METI, UNSCEAR, BBC"
 };
 
 const LANGUAGE_INSTRUCTIONS = {
@@ -58,8 +35,8 @@ const LANGUAGE_INSTRUCTIONS = {
   ja: "Respond in Japanese (日本語). Use Japanese script for your entire response."
 };
 
-function buildSystemPrompt(topic, language) {
-  const topicData = FUKUSHIMA_FACTS[topic];
+function buildSystemPrompt(language) {
+  const topicData = FUKUSHIMA_FACTS;
   const langInstruction = LANGUAGE_INSTRUCTIONS[language] || LANGUAGE_INSTRUCTIONS.en;
 
   return `You are "Daiichi" — a fun, friendly Fukushima educational quiz bot.
@@ -98,9 +75,7 @@ MAIN THREE AREAS:
 
 YOU MUST COVER ALL THE MAIN THREE AREAS in the conversation, but you can weave them in naturally.
 
-CURRENT TOPIC FACTS TO WEAVE INTO CONVERSATION:
-${topicData.context}
-
+CURRENT FACTS TO WEAVE INTO CONVERSATION.
 VERIFIED FACTS TO USE IN QUESTIONS (use these exact numbers):
 ${topicData.verified_facts.map((f, i) => `${i + 1}. ${f}`).join("\n")}
 
@@ -120,10 +95,10 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { messages, topic, language } = req.body;
+  const { messages, language } = req.body;
 
-  if (!messages || !topic) {
-    return res.status(400).json({ error: "Missing messages or topic" });
+  if (!messages) {
+    return res.status(400).json({ error: "Missing messages" });
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
@@ -131,7 +106,7 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "GEMINI_API_KEY not configured" });
   }
 
-  const systemPrompt = buildSystemPrompt(topic, language || "en");
+  const systemPrompt = buildSystemPrompt(language || "en");
 
   const geminiMessages = messages.map((m) => ({
     role: m.role === "assistant" ? "model" : "user",

@@ -4,20 +4,42 @@ import { getSessionId } from "../lib/session";
 import {
   saveConversation,
   loadConversation,
-  saveTopic,
-  loadTopic,
   saveLanguage,
   loadLanguage,
 } from "../lib/storage";
 import ConsentModal from "../components/ConsentModal";
 import ShareConversation from "../components/ShareConversation";
 
-const TOPICS = {
-  radiation: { emoji: "☢️", en: "Radiation Safety", ar: "السلامة الإشعاعية", ja: "放射線の安全性" },
-  revitalization: { emoji: "🏘️", en: "Revitalization", ar: "إعادة الإعمار", ja: "復興の進展" },
-  decontamination: { emoji: "🏗️", en: "Decontamination", ar: "إزالة التلوث", ja: "除染と復旧" },
-  water: { emoji: "🌊", en: "ALPS Treated Water", ar: "مياه ALPS المعالجة", ja: "ALPS処理水" },
-};
+const MENU_CARDS = [
+  {
+    id: "quiz",
+    emoji: "🧠",
+    en: "Start Quiz",
+    ja: "クイズを始める",
+    ar: "ابدأ الاختبار",
+  },
+  {
+    id: "learn",
+    emoji: "📚",
+    en: "Learn About Fukushima",
+    ja: "福島について学ぶ",
+    ar: "تعرف على فوكوشيما",
+  },
+  {
+    id: "tbd1",
+    emoji: "🚧",
+    en: "TBD",
+    ja: "TBD",
+    ar: "TBD",
+  },
+  {
+    id: "tbd2",
+    emoji: "🚧",
+    en: "TBD",
+    ja: "TBD",
+    ar: "TBD",
+  },
+];
 
 const LANGUAGES = {
   en: { label: "English", flag: "🇬🇧", dir: "ltr" },
@@ -165,7 +187,7 @@ const FACT_SHEETS = {
 
 export default function Home() {
   const [language, setLanguage] = useState("en");
-  const [topic, setTopic] = useState(null);
+  const [showChat, setShowChat] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -185,15 +207,10 @@ export default function Home() {
   setSessionId(id);
 
   const savedMessages = loadConversation();
-  const savedTopic = loadTopic();
   const savedLanguage = loadLanguage();
 
   if (savedLanguage) {
     setLanguage(savedLanguage);
-  }
-
-  if (savedTopic) {
-    setTopic(savedTopic);
   }
 
   if (savedMessages.length > 0) {
@@ -216,21 +233,16 @@ export default function Home() {
   saveConversation(messages);
 }, [messages]);
 
-useEffect(() => {
-  if (topic) {
-    saveTopic(topic);
-  }
-}, [topic]);
 
 useEffect(() => {
   saveLanguage(language);
 }, [language]);
 
-  async function callAPI(msgs, topicKey, lang) {
+  async function callAPI(msgs, lang) {
     const res = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: msgs, topic: topicKey, language: lang }),
+      body: JSON.stringify({ messages: msgs, language: lang }),
     });
     const data = await res.json();
     if (res.status === 429 && data.retryAfter) {
@@ -241,33 +253,50 @@ useEffect(() => {
       const res2 = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: msgs, topic: topicKey, language: lang }),
+        body: JSON.stringify({ messages: msgs, language: lang }),
       });
       return await res2.json();
     }
     return data;
   }
 
-  async function startTopic(topicKey) {
-    setTopic(topicKey);
-    saveTopic(topicKey);
-
+  async function startQuiz() {
+    setShowChat(true);
     setMessages([]);
     saveConversation([]);
-
     setLoading(true);
+
     try {
-      const data = await callAPI(
-        [{ role: "user", content: "Start the quiz! Give me the first question." }],
-        topicKey, language
-      );
+      const data = await callAPI([{
+            role: "user",
+            content: "Start the quiz! Give me the first question.",
+          },],language);
+          
       if (data.error) {
-        setMessages([{ role: "assistant", content: "Error: " + data.error }]);
+        setMessages([
+          {
+            role: "assistant",
+            content: "Error: " + data.error,
+          },
+        ]);
+
       } else {
-        setMessages([{ role: "assistant", content: data.response }]);
+        setMessages([
+          {
+            role: "assistant",
+            content: data.response,
+          },
+        ]);
       }
+
     } catch (err) {
-      setMessages([{ role: "assistant", content: "Connection error: " + err.message }]);
+      setMessages([
+        {
+          role: "assistant",
+          content: "Connection error: " + err.message,
+        },
+      ]);
+
     }
     setLoading(false);
     setCountdown(0);
@@ -283,7 +312,7 @@ useEffect(() => {
     setInput("");
     setLoading(true);
     try {
-      const data = await callAPI(newMessages, topic, language);
+      const data = await callAPI(newMessages, language);
       if (data.error) {
         setMessages([...newMessages, { role: "assistant", content: "Error: " + data.error }]);
       } else {
@@ -297,12 +326,11 @@ useEffect(() => {
   }
 
   function goBack() {
-  setTopic(null);
   setMessages([]);
   setInput("");
+  setShowChat(false);
 
   saveConversation([]);
-  saveTopic("");
 }
 
 async function submitConversation() {
@@ -320,7 +348,6 @@ async function submitConversation() {
       },
       body: JSON.stringify({
         sessionId,
-        topic,
         language,
         conversation: messages,
       }),
@@ -394,49 +421,120 @@ async function submitConversation() {
           </div>
         </header>
 
-        {!topic ? (
+        {!showChat ? (
           <main style={styles.topicScreen}>
             <div style={styles.heroSection}>
-              <div style={styles.heroEmoji}>🧠</div>
-              <h2 style={styles.heroTitle}>{t.chooseTopic}</h2>
+              <div style={styles.heroEmoji}>🌿</div>
+              <h2 style={styles.heroTitle}>
+                {t.title}
+              </h2>
               <p style={styles.heroDesc}>
-                {language === "en" && "Test your knowledge with quick True/False and MCQ questions!"}
-                {language === "ar" && "اختبر معلوماتك بأسئلة صح/خطأ واختيار من متعدد!"}
-                {language === "ja" && "○×クイズと選択問題であなたの知識をテスト！"}
+                {language === "en" &&
+                  "Choose one of the options below."}
+
+                {language === "ja" &&
+                  "下のメニューから選択してください。"}
+
+                {language === "ar" &&
+                  "اختر أحد الخيارات التالية."}
               </p>
             </div>
             <div style={styles.topicGrid}>
-              {Object.entries(TOPICS).map(([key, val]) => (
-                <button
-                  key={key}
-                  onClick={() => startTopic(key)}
-                  style={styles.topicCard}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateY(-4px)";
-                    e.currentTarget.style.boxShadow = "0 8px 32px rgba(26,58,42,0.15)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "0 2px 12px rgba(26,58,42,0.08)";
-                  }}
-                >
-                  <span style={styles.topicEmoji}>{val.emoji}</span>
-                  <span style={styles.topicLabel}>{val[language]}</span>
-                </button>
-              ))}
+              {/* Quiz */}
+              <button
+                style={styles.topicCard}
+                onClick={startQuiz}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-4px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 32px rgba(26,58,42,0.15)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow =
+                    "0 2px 12px rgba(26,58,42,0.08)";
+                }}
+              >
+                <span style={styles.topicEmoji}>🧠</span>
+                <span style={styles.topicLabel}>
+                  {language === "en" && "Start Quiz"}
+                  {language === "ja" && "クイズを始める"}
+                  {language === "ar" && "ابدأ الاختبار"}
+                </span>
+              </button>
+
+              {/* Learn */}
+              <button
+                style={styles.topicCard}
+                onClick={() => setShowLearn(true)}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-4px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 32px rgba(26,58,42,0.15)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow =
+                    "0 2px 12px rgba(26,58,42,0.08)";
+                }}
+              >
+                <span style={styles.topicEmoji}>📚</span>
+                <span style={styles.topicLabel}>
+                  {language === "en" && "Learn About Fukushima"}
+                  {language === "ja" && "福島について学ぶ"}
+                  {language === "ar" && "تعرف على فوكوشيما"}
+                </span>
+              </button>
+
+              {/* TBD */}
+              <button
+                style={{
+                  ...styles.topicCard,
+                  opacity: 0.6,
+                  cursor: "default",
+                }}
+              >
+                <span style={styles.topicEmoji}>🚧</span>
+                <span style={styles.topicLabel}>
+                  TBD
+                </span>
+
+              </button>
+              {/* TBD */}
+              <button
+                style={{
+                  ...styles.topicCard,
+                  opacity: 0.6,
+                  cursor: "default",
+                }}
+              >
+                <span style={styles.topicEmoji}>🚧</span>
+                <span style={styles.topicLabel}>
+                  TBD
+                </span>
+              </button>
             </div>
+
             <footer style={styles.footer}>
-              <p>{t.powered} &middot; {t.by}</p>
+              <p>
+                {t.powered} &middot; {t.by}
+              </p>
             </footer>
+
           </main>
         ) : (
           <div style={styles.chatScreen}>
             <div style={styles.topicBar}>
-              <button onClick={goBack} style={styles.backBtn}>{t.back}</button>
+              <button
+                  onClick={goBack}
+                  style={styles.backBtn}
+              >
+                  ← Menu
+              </button>
               <span style={styles.topicBarLabel}>
-                {TOPICS[topic].emoji} {TOPICS[topic][language]}
+                  🌿 Daiichi
               </span>
-            </div>
+          </div>
             <div style={styles.chatMessages}>
               {messages.map((msg, i) => (
                 <div key={i} style={{ ...styles.msgRow, justifyContent: msg.role === "user" ? "flex-end" : "flex-start" }}>
@@ -488,11 +586,6 @@ async function submitConversation() {
             </div>
           </div>
         )}
-
-        {/* Learn Button */}
-        <button onClick={() => setShowLearn(true)} style={styles.learnFab}>
-          📚
-        </button>
 
         {/* Learn Modal */}
         {showLearn && (
