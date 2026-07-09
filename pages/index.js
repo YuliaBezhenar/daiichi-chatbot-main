@@ -14,14 +14,14 @@ const MENU_CARDS = [
   {
     id: "quiz",
     emoji: "🧠",
-    en: "Start Quiz",
-    ja: "クイズを始める",
-    ar: "ابدأ الاختبار",
+    en: "Start Chat",
+    ja: "チャットを始める",
+    ar: "ابدأ الدردشة",
   },
   {
     id: "learn",
     emoji: "📚",
-    en: "Learn About Fukushima",
+    en: "Fukushima Facts",
     ja: "福島について学ぶ",
     ar: "تعرف على فوكوشيما",
   },
@@ -57,7 +57,7 @@ const UI_TEXT = {
     powered: "Built at IER, Fukushima University",
     by: "By Abdulrahman Alblooshi",
     back: "← Change Topic",
-    learnTitle: "Learn About Fukushima",
+    learnTitle: "Fukushima Facts",
     learnClose: "Close",
   },
   ar: {
@@ -262,16 +262,23 @@ useEffect(() => {
 
   async function startQuiz() {
     setShowChat(true);
-    setMessages([]);
-    saveConversation([]);
+    if (messages.length > 0) {
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const data = await callAPI([{
+      const data = await callAPI(
+        [
+          {
             role: "user",
             content: "Start the quiz! Give me the first question.",
-          },],language);
-          
+          },
+        ],
+        language
+      );
+
       if (data.error) {
         setMessages([
           {
@@ -279,7 +286,6 @@ useEffect(() => {
             content: "Error: " + data.error,
           },
         ]);
-
       } else {
         setMessages([
           {
@@ -289,18 +295,9 @@ useEffect(() => {
         ]);
       }
 
-    } catch (err) {
-      setMessages([
-        {
-          role: "assistant",
-          content: "Connection error: " + err.message,
-        },
-      ]);
-
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-    setCountdown(0);
-    setTimeout(() => inputRef.current?.focus(), 100);
   }
 
   async function sendMessage(e) {
@@ -326,11 +323,7 @@ useEffect(() => {
   }
 
   function goBack() {
-  setMessages([]);
-  setInput("");
   setShowChat(false);
-
-  saveConversation([]);
 }
 
 async function submitConversation() {

@@ -1,4 +1,5 @@
 import { buildAnalysisPrompt } from "../../lib/prompts";
+import supabase from "../../lib/supabase";
 
 export default async function handler(req, res) {
 
@@ -10,7 +11,6 @@ export default async function handler(req, res) {
 
   const {
     sessionId,
-    topic,
     language,
     conversation,
   } = req.body;
@@ -37,7 +37,11 @@ export default async function handler(req, res) {
             {
               parts: [
                 {
-                  text: buildAnalysisPrompt(conversation),
+                  text: buildAnalysisPrompt(
+                          sessionId,
+                          language,
+                          conversation
+                        ),
                 },
               ],
             },
@@ -61,28 +65,62 @@ export default async function handler(req, res) {
 
     try {
       analysis = JSON.parse(text);
-    } catch {
+    } catch (e) {
+      console.error("Gemini JSON parse error:", e);
 
-      analysis = {
-        raw: text,
-      };
-
+      return res.status(500).json({
+        error: "Gemini returned invalid JSON.",
+      });
     }
-
-    // Тут потім буде Supabase
 
     console.log({
       sessionId,
-      topic,
       language,
       analysis,
-      conversation,
     });
+
+    const { error } = await supabase
+    .from("chat_sessions")
+    .upsert({
+      session_id: sessionId,
+
+      language: language,
+
+      completed: true,
+
+      updated_at: new Date().toISOString(),
+
+      age: analysis.age,
+
+      knowledge: analysis.knowledge,
+
+      knowledge_score: analysis.knowledge_score,
+
+      misconceptions: analysis.misconceptions,
+
+      sources_of_knowledge: analysis.sources_of_knowledge,
+
+      notes: analysis.notes,
+
+      conversation: conversation,
+    },
+    {
+      onConflict: "session_id",
+    });
+
+    if (error) {
+
+    console.error(error);
+
+    return res.status(500).json({
+      error: error.message,
+    });
+
+  }
 
     return res.status(200).json({
       success: true,
       sessionId,
-      topic,
       language,
       analysis,
       conversation,
