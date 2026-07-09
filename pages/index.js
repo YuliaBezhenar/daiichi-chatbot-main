@@ -384,7 +384,7 @@ function handleNewConversation() {
 
     saveConversation([]);
 
-    startConversation();
+    await startQuiz();
 
 }
 
@@ -544,7 +544,7 @@ function handleNewConversation() {
               </button>
               <button
               onClick={handleNewConversation}
-              style={styles.menuButton}
+              style={styles.backBtn}
               >
                 ↻ New Conversation
               </button>
