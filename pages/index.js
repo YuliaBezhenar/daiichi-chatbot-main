@@ -534,7 +534,7 @@ async function submitConversation() {
                 <div key={i} style={{ ...styles.msgRow, justifyContent: msg.role === "user" ? "flex-end" : "flex-start" }}>
                   {msg.role === "assistant" && <div style={styles.botAvatar}>🌿</div>}
                   <div style={{ ...styles.bubble, ...(msg.role === "user" ? styles.userBubble : styles.botBubble) }}>
-                    <ReactMarkdown> {msg.content} </ReactMarkdown>
+                    {msg.content}
                   </div>
                 </div>
               ))}

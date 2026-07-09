@@ -42,7 +42,7 @@ const FUKUSHIMA_FACTS = {
     },
     {
       name: "TEPCO",
-      url: ""
+      url: "https://www.tepco.co.jp/en/decommission/progress/watertreatment/"
     }
   ]
 };
