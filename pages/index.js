@@ -1,6 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import Head from "next/head";
-import { getSessionId } from "../lib/session";
+import {
+  getSessionId,
+  createNewSession,
+} from "../lib/session";
 import {
   saveConversation,
   loadConversation,
@@ -371,6 +374,20 @@ async function submitConversation() {
 
 }
 
+function handleNewConversation() {
+
+    const id = createNewSession();
+
+    setSessionId(id);
+
+    setMessages([]);
+
+    saveConversation([]);
+
+    startConversation();
+
+}
+
   const facts = FACT_SHEETS[language] || FACT_SHEETS.en;
 
   return (
@@ -520,10 +537,16 @@ async function submitConversation() {
           <div style={styles.chatScreen}>
             <div style={styles.topicBar}>
               <button
-                  onClick={goBack}
-                  style={styles.backBtn}
+              onClick={goBack}
+              style={styles.backBtn}
               >
-                  ← Menu
+                ← Menu
+              </button>
+              <button
+              onClick={handleNewConversation}
+              style={styles.menuButton}
+              >
+                ↻ New Conversation
               </button>
               <span style={styles.topicBarLabel}>
                   🌿 Daiichi
