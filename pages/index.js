@@ -266,10 +266,6 @@ useEffect(() => {
 
   async function startQuiz() {
     setShowChat(true);
-    if (!force && messages.length > 0) {
-        return;
-    }
-
     setLoading(true);
 
     try {
@@ -380,9 +376,9 @@ async function handleNewConversation() {
 
     setSessionId(id);
 
-    setMessages([]);
-
     saveConversation([]);
+
+    setMessages([]);
 
     await startQuiz(true);
 
