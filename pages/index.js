@@ -266,18 +266,16 @@ useEffect(() => {
     return data;
   }
 
-  async function startQuiz(force = false) {
-
+  async function startQuiz() {
     setShowChat(true);
 
-    if (!force && messages.length > 0) {
+    if (messages.length > 0) {
       return;
     }
 
     setLoading(true);
 
     try {
-
       const data = await callAPI(
         [
           {
@@ -303,7 +301,6 @@ useEffect(() => {
           },
         ]);
       }
-
     } finally {
       setLoading(false);
     }
@@ -332,66 +329,95 @@ useEffect(() => {
   }
 
   function goBack() {
-  setShowChat(false);
-}
+    setShowChat(false);
+  }
 
-async function submitConversation() {
+  async function submitConversation() {
 
-  if (messages.length === 0) return;
+    if (messages.length === 0) return;
 
-  try {
+    try {
 
-    setSubmittingConversation(true);
+      setSubmittingConversation(true);
 
-    const res = await fetch("/api/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        sessionId,
-        language,
-        conversation: messages,
-      }),
-    });
+      const res = await fetch("/api/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sessionId,
+          language,
+          conversation: messages,
+        }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (!res.ok) {
-      throw new Error(data.error || "Unknown error");
+      if (!res.ok) {
+        throw new Error(data.error || "Unknown error");
+      }
+
+      setShowConsent(false);
+
+      console.log(data);
+
+      alert("Thank you! Your conversation has been submitted.");
+
+    } catch (err) {
+
+      alert(err.message);
+
+    } finally {
+
+      setSubmittingConversation(false);
+
     }
-
-    setShowConsent(false);
-
-    console.log(data);
-
-    alert("Thank you! Your conversation has been submitted.");
-
-  } catch (err) {
-
-    alert(err.message);
-
-  } finally {
-
-    setSubmittingConversation(false);
 
   }
 
-}
-
-async function handleNewConversation() {
-
+  async function handleNewConversation() {
     const id = createNewSession();
 
     setSessionId(id);
 
+    setMessages([]);
     saveConversation([]);
 
-    setMessages([]);
+    setShowChat(true);
 
-    await startQuiz(true);
+    setLoading(true);
 
-}
+    try {
+      const data = await callAPI(
+        [
+          {
+            role: "user",
+            content: "Start the quiz! Give me the first question.",
+          },
+        ],
+        language
+      );
+
+      if (data.error) {
+        setMessages([
+          {
+            role: "assistant",
+            content: "Error: " + data.error,
+          },
+        ]);
+      } else {
+        setMessages([
+          {
+            role: "assistant",
+            content: data.response,
+          },
+        ]);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const facts = FACT_SHEETS[language] || FACT_SHEETS.en;
 
