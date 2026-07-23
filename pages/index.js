@@ -242,6 +242,8 @@ useEffect(() => {
   saveLanguage(language);
 }, [language]);
 
+
+
   async function callAPI(msgs, lang) {
     const res = await fetch("/api/chat", {
       method: "POST",
@@ -264,11 +266,18 @@ useEffect(() => {
     return data;
   }
 
-  async function startQuiz() {
+  async function startQuiz(force = false) {
+
     setShowChat(true);
+
+    if (!force && messages.length > 0) {
+      return;
+    }
+
     setLoading(true);
 
     try {
+
       const data = await callAPI(
         [
           {
