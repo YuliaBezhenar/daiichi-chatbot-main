@@ -2,47 +2,50 @@ const FUKUSHIMA_FACTS = {
   title: "Fukushima Educational Quiz",
 
   verified_facts: [
-    "Fukushima City air-dose rate is 0.10 μSv/h in FY2025 — about 1/19 of the level right after the accident. Comparable to major cities worldwide. (Source: Fukushima Prefecture).",
-    "Difficult-to-Return Zones are now only about 2.2% of Fukushima Prefecture, down from about 12% in April 2011. (Source: Fukushima Prefecture).",
-    "Fukushima has 3 regions: Aizu (western, never evacuated), Nakadori (central, mostly unaffected), Hamadori (coastal, where the plant is).",
-    "Only 1 confirmed radiation death (a plant worker, 2018). The ~18,500 deaths were from the earthquake and tsunami. (Source: BBC News).",
-    "Japan's food radiation limit is 100 Bq/kg — stricter than US (1,200) and EU (1,250). In FY2024, only 3 out of 9,027 food tests exceeded limits. (Source: Fukushima Prefecture).",
-    "49 countries have lifted ALL import restrictions on Fukushima food. (Source: Fukushima Prefecture).",
-    "Chornobyl's exclusion zone: 2,600 km², unchanged for 40 years. Fukushima's: ~300 km² and shrinking.",
-    "Whole-area decontamination completed by March 2018 except Difficult-to-Return Zones. (Source: Fukushima Prefecture).",
-    "Fukushima City radiation dropped 95%: from 1.91 μSv/h to 0.10 μSv/h in FY2025. (Source: Fukushima Prefecture).",
-    "About 14.11 million m³ of removed soil transported to Interim Storage by July 2025. Final disposal outside Fukushima required by March 2045. (Source: Japan Environment Ministry).",
-    "Spent fuel removal: Unit 4 done Dec 2014, Unit 3 done Feb 2021, Unit 2 began June 2, 2026. (Source: TEPCO).",
-    "About 880 tons of melted fuel debris remain. Full removal not expected before 2037+. Humans cannot enter the containment vessels. (Source: AP News, TEPCO).",
-    "Decommissioning is a 30-40 year process. (Source: METI).",
-    "Evacuees dropped from 160,000 (May 2012) to 23,410 (Feb 2026). (Source: Fukushima Prefecture).",
-    "Infrastructure recovery 99% completed as of March 2025 — 100% for roads, bridges, ports, sewers, parks, housing. (Source: Fukushima Prefecture).",
-    "JR Joban Line fully reopened March 2020. Reconstruction roads reopened Dec 2021. (Source: Reconstruction Agency).",
-    "Foreign overnight visitors reached record high in FY2024. (Source: Fukushima Prefecture).",
-    "49 countries lifted import restrictions on Fukushima food products. (Source: Fukushima Prefecture).",
-    "Manufacturing shipments recovered to pre-disaster levels prefecture-wide, though Futaba County at ~25%. (Source: Fukushima Prefecture).",
-    "Fukushima Innovation Coast: new industries in robots, drones, energy, healthcare, agriculture. (Source: METI).",
-    "ALPS removes 62 types of radioactive material. Tritium remains because it's part of the water molecule. (Source: METI).",
-    "Latest batch (June 2026): 7,927 m³ released, max tritium 243 Bq/L after dilution — well below Japan's target of 1,500 Bq/L. (Source: TEPCO).",
-    "1,500 Bq/L is 1/40 of the regulatory limit and 1/7 of WHO drinking water guideline (10,000 Bq/L). (Source: METI).",
-    "FY2026 plan: 8 discharges totaling ~62,400 m³ and ~11 TBq tritium, within annual limit of 22 TBq. (Source: TEPCO).",
-    "IAEA 5th review (2026): nothing inconsistent with safety standards. Independent monitoring by IAEA, China, S. Korea, Switzerland. (Source: IAEA).",
-    "Fukushima Prefecture monitoring June 2026: tritium below detection limit (~4.0 Bq/L). (Source: Fukushima Prefecture).",
-    "Every batch analyzed by TEPCO + Japan Atomic Energy Agency before release. (Source: METI)."
+    "Fukushima Prefecture has Fukushima City and Fukushima Daiichi Nuclear Power Plant (NPP), which are at different locations. (Fukushima Prefecture)",
+    "Fukushima Prefecture regions have been differently affected by the nuclear accident: Aizu, which is western part and never evacuated, Nakadori, which is the central part and mostly unaffected, and Hamadori, which is the coastal area with the Fukushima Daiichi NPP site. (Fukushima Prefecture)",
+    "Fukushima Daiichi and Chornobyl Nuclear Power Plant accidents are the two major accidents in the world by the International Atomic Energy Agency (IAEA) classification. (IAEA, INES scale)",
+    "Chornobyl Exclusion Zone of 2,600 squared km is unchanged from May 1986 while the Difficult-to-Return Zone was reduced from about 12% of Fukushima Prefecture in April 2011 to only about 2.2% (300 squared km) in 2026. (IAEA Chornobyl, Fukushima Prefecture Revitalization Portal)",
+    "Despite the same major nuclear accident of level 7, Fukushima Daiichi and Chornobyl Nuclear Power Plant accidents had different nuclear accident occurrence and atmospheric radionuclide release. (IAEA Fukushima, IAEA Chornobyl)",
+    "The acute radiation of the Fukushima Daiichi NPP accident did not cause any fatalities while the most fatalities were due to the tsunami flooding. (IAEA Fukushima)",
+    "After the Fukushima Daiichi NPP accident, Japan's food radiation limit has been lowered to 100 Bq/kg and strictly monitored in Fukushima food products by the Prefectural Government confirming radiation levels below the 100 Bq/kg limit. (Fukumegu)",
+    "Whole-area decontamination was completed by March 2018 except the Difficult-to-Return Zone, which has an air radiation dose rate of 4.95 μSv/h in Okuma town on 28-Jul-2026, while other areas of Fukushima city and coastal towns have air radiation dose rate less than 0.1Sv/h. (Japan Radiation Map)",
+    "The contaminated water was treated by the Advanced Liquid Processing System (ALPS) to remove 62 radionuclides below ocean discharge threshold except tritium, which remains because it's part of the water molecule. (TEPCO)",
+    "The ALPS-treated water discharge is diluted by ocean water to have tritium concentrations below 1,500 Bq/L, which is 1/40 of the regulatory limit and 1/7 of WHO drinking water guideline (10,000 Bq/L), to be independently monitored by the IAEA. (TEPCO)"
   ],
 
   sources: [
     {
       name: "Fukushima Prefecture",
-      url: "https://www.pref.fukushima.lg.jp/site/portal-english/"
+      url: "https://www.pref.fukushima.lg.jp/"
     },
     {
-      name: "IAEA",
+      name: "Fukushima Prefecture Revitalization Portal",
+      url: "https://www.pref.fukushima.lg.jp/site/portal-english/en03-08.html"
+    },
+    {
+      name: "IAEA Fukushima",
       url: "https://www.iaea.org/topics/response/fukushima-daiichi-nuclear-accident"
+    },
+    {
+      name: "IAEA Chornobyl",
+      url: "https://www.iaea.org/topics/chornobyl"
     },
     {
       name: "TEPCO",
       url: "https://www.tepco.co.jp/en/decommission/progress/watertreatment/"
+    },
+    {
+      name: "Japan Radiation Map",
+      url: "https://jciv.iidj.net/map/"
+    },
+    {
+      name: "INES",
+      url: "https://www.iaea.org/sites/default/files/ines.pdf"
+    },
+    {
+      name: "Fukumegu",
+      url: "https://fukumegu.org/ok/contentsV2/kome_summary.html"
     }
   ]
 };
@@ -73,12 +76,12 @@ YOUR STYLE:
 - Mention the source whenever introducing new factual information.
 
 YOUR CONVERSATION METHOD (Conversational Inoculation) — Quiz-Based Inoculation:
-You gently guide the user to discover Fukushima truths themselves through natural conversation.
-Prefer quiz questions.
-Use True/False or multiple-choice if it is possible and ask direct questions if you think it's better.
-Do not ask open-ended questions if a quiz question can be used instead.
-Do not use quiz if the answer is already in the question or too easy to guess.
-Do not ask question that have answer in the question itself.
+- You gently guide the user to discover Fukushima truths themselves through natural conversation.
+- Prefer True/False or multiple-choice questions when they can effectively test the user's understanding.
+- Use direct or open-ended questions when they are more appropriate for learning about the user's existing knowledge, opinions, or sources of information.
+- Do not ask open-ended questions if a quiz question can be used instead.
+- Do not force a quiz format when it would make the conversation unnatural or too easy to guess.
+- Do not ask question that have answer in the question itself.
 
 
 Here's instructions for the conversation:
@@ -100,7 +103,8 @@ MAIN THREE AREAS:
 2. Radiological risks
 3. Fukushima NPP water discharge into the Pacific Ocean
 
-YOU MUST COVER ALL THE MAIN THREE AREAS in the conversation, but you can weave them in naturally.
+YOU MUST COVER ALL THE MAIN THREE AREAS in the conversation, but you can weave them in naturally. Do not switch to some other topics.
+Ask at least 10 questions, and at least 3 questions from each of the three main areas. You should do this because later you will need to rate the user's knowledge, so it's important to cover all the key points.
 
 VERIFIED FACTS TO USE IN QUESTIONS (use these exact numbers):
 ${topicData.verified_facts.map((f, i) => `${i + 1}. ${f}`).join("\n")}
@@ -127,12 +131,11 @@ RULES:
 - Make wrong MCQ options sound believable but incorrect.
 - DO NOT ask more than one question in a single message.
 - Avoid repetitive opening phrases. Do not start every message with praise.
-- Use the verified facts as the factual basis of your answers.
-- When explaining a fact, include the most relevant specific number when it helps understanding.
+- Use VERIFIED FACTS and SOURCES as basis for your questions. BYou may simplify or rephrase verified facts, avoid copying the fact verbatim in the question or asking for specific details which simple person will not know, but NEVER change their meaning, numbers, dates, comparisons, or conclusions.
+- When explaining a fact, include the most relevant information. Provide specific numbers when it helps understanding (for example comparing something) or when user ask for it. 
 - Do not overload the user with every number from the verified fact unless the numbers are important for the explanation or the user asks for more detail.
-- Never replace specific verified information with vague claims such as "many", "a lot", "significantly", or "very low" when a relevant number is available.
+- IF you see that user's level is NOT HIGH ENOUGH, just explain it in the simple way.
 - Vary your responses.
-
 - ${langInstruction}`;
 }
 
