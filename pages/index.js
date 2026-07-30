@@ -430,6 +430,11 @@ useEffect(() => {
 
   const facts = FACT_SHEETS[language] || FACT_SHEETS.en;
 
+  const handlers = {
+    quiz: startQuiz,
+    general: () => setShowLearn(true),
+  };
+
   return (
     <>
       <Head>
@@ -486,20 +491,28 @@ useEffect(() => {
                   "اختر أحد الخيارات التالية."}
               </p>
             </div>
-            <div className={styles.topicGrid}>
+            <div style={styles.topicGrid}>
               {MENU_CARDS.map((card) => {
                 const onClick = handlers[card.id];
                 const enabled = Boolean(onClick);
-      
+ 
                 return (
                   <button
                     key={card.id}
                     onClick={onClick}
                     disabled={!enabled}
-                    className={`${styles.topicCard} ${!enabled ? styles.topicCardDisabled : ""}`}
+                    style={enabled ? styles.topicCard : { ...styles.topicCard, opacity: 0.6, cursor: "default" }}
+                    onMouseEnter={enabled ? (e) => {
+                      e.currentTarget.style.transform = "translateY(-4px)";
+                      e.currentTarget.style.boxShadow = "0 8px 32px rgba(26,58,42,0.15)";
+                    } : undefined}
+                    onMouseLeave={enabled ? (e) => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "0 2px 12px rgba(26,58,42,0.08)";
+                    } : undefined}
                   >
-                    <span className={styles.topicEmoji}>{card.emoji}</span>
-                    <span className={styles.topicLabel}>{card[language]}</span>
+                    <span style={styles.topicEmoji}>{card.emoji}</span>
+                    <span style={styles.topicLabel}>{card[language]}</span>
                   </button>
                 );
               })}
@@ -519,7 +532,7 @@ useEffect(() => {
               onClick={goBack}
               style={styles.backBtn}
               >
-                ← {t.dack}
+                ← {t.back}
               </button>
               <button
               onClick={handleNewConversation}
