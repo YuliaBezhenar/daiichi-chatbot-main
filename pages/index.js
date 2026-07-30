@@ -64,6 +64,10 @@ export const UI_TEXT = {
     back: "← Menu",
     learnTitle: "Learn about Fukushima",
     learnClose: "Close",
+    welcomeTitle: "Welcome to Daiichi",
+    welcomeCaption: "QR code coming soon",
+    welcomeCheckbox: "I understand and agree to continue",
+    welcomeButton: "Continue",
   },
   ar: {
     title: "دايتشي",
@@ -76,6 +80,10 @@ export const UI_TEXT = {
     back: "→ القائمة",
     learnTitle: "تعرّف على فوكوشيما",
     learnClose: "إغلاق",
+    welcomeTitle: "مرحباً بك في دايتشي",
+    welcomeCaption: "رمز QR سيُضاف قريباً",
+    welcomeCheckbox: "أوافق وأفهم ذلك للمتابعة",
+    welcomeButton: "متابعة",
   },
   ja: {
     title: "ダイイチ",
@@ -88,6 +96,10 @@ export const UI_TEXT = {
     back: "← メニュー",
     learnTitle: "福島について学ぶ",
     learnClose: "閉じる",
+    welcomeTitle: "ダイイチへようこそ",
+    welcomeCaption: "QRコードは近日公開",
+    welcomeCheckbox: "内容を理解し、同意します",
+    welcomeButton: "続ける",
   },
 };
 
@@ -207,6 +219,10 @@ export default function Home() {
   const [countdown, setCountdown] = useState(0);
   const [showLearn, setShowLearn] = useState(false);
   const [showConsent, setShowConsent] = useState(false);
+  // Opens automatically on page load, can only be closed via its own button,
+  // and never reopens afterwards (even when navigating back to the topic screen).
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [welcomeAgreed, setWelcomeAgreed] = useState(false);
   const [submittingConversation, setSubmittingConversation] = useState(false);
   const [sessionId, setSessionId] = useState(null);
   const chatEndRef = useRef(null);
@@ -430,9 +446,13 @@ useEffect(() => {
 
   const facts = FACT_SHEETS[language] || FACT_SHEETS.en;
 
+  // Maps each MENU_CARDS id to its click handler. Cards with no entry here
+  // (nuclear, ocean) render as disabled placeholders.
   const handlers = {
     quiz: startQuiz,
     general: () => setShowLearn(true),
+    nuclear: () => setShowLearn(true),
+    ocean: () => setShowLearn(true),
   };
 
   return (
@@ -494,8 +514,8 @@ useEffect(() => {
             <div style={styles.topicGrid}>
               {MENU_CARDS.map((card) => {
                 const onClick = handlers[card.id];
-                const enabled = Boolean(onClick);
- 
+                const enabled = Boolean(onClick)&& !showWelcome;
+
                 return (
                   <button
                     key={card.id}
@@ -532,7 +552,7 @@ useEffect(() => {
               onClick={goBack}
               style={styles.backBtn}
               >
-                ← {t.back}
+                {t.back}
               </button>
               <button
               onClick={handleNewConversation}
@@ -598,6 +618,37 @@ useEffect(() => {
                 }
                 onClick={() => setShowConsent(true)}
               />
+            </div>
+          </div>
+        )}
+
+        {/* Welcome Modal — mockup only. Opens on load, no outside-click close,
+            closes only via its button, and never reopens after that. */}
+        {showWelcome && (
+          <div style={styles.modalOverlay}>
+            <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
+              <div style={styles.modalHeader}>
+                <h2 style={styles.modalTitle}>{t.welcomeTitle}</h2>
+              </div>
+              <div style={styles.modalBody}>
+                <div style={styles.welcomeImagePlaceholder}>📷</div>
+                <p style={styles.welcomeCaption}>{t.welcomeCaption}</p>
+                <label style={styles.welcomeCheckboxRow}>
+                  <input
+                    type="checkbox"
+                    checked={welcomeAgreed}
+                    onChange={(e) => setWelcomeAgreed(e.target.checked)}
+                  />
+                  {t.welcomeCheckbox}
+                </label>
+                <button
+                  onClick={() => setShowWelcome(false)}
+                  disabled={!welcomeAgreed}
+                  style={welcomeAgreed ? styles.welcomeButton : { ...styles.welcomeButton, opacity: 0.5, cursor: "not-allowed" }}
+                >
+                  {t.welcomeButton}
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -697,6 +748,10 @@ const styles = {
   modalTitle: { fontSize: 20, fontWeight: 700 },
   modalClose: { background: "none", border: "none", color: "#fff", fontSize: 22, cursor: "pointer", padding: 4 },
   modalBody: { overflowY: "auto", padding: 20, display: "flex", flexDirection: "column", gap: 16 },
+  welcomeImagePlaceholder: { width: 160, height: 160, margin: "0 auto", background: "#d8f3dc", border: "2px dashed #74c69d", borderRadius: 16, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 40, color: "#2d6a4f" },
+  welcomeCaption: { fontSize: 13, color: "#6b8f7a", textAlign: "center", margin: 0 },
+  welcomeCheckboxRow: { display: "flex", alignItems: "center", gap: 8, justifyContent: "center", fontSize: 13, color: "#1a3a2a", cursor: "pointer" },
+  welcomeButton: { padding: "12px 24px", background: "#2d6a4f", color: "#fff", border: "none", borderRadius: 24, fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "inherit", transition: "opacity 0.2s" },
   factCard: { background: "#fff", borderRadius: 16, padding: 20, border: "1px solid #d8f3dc", boxShadow: "0 2px 8px rgba(26,58,42,0.06)" },
   factTop: { display: "flex", alignItems: "center", gap: 10, marginBottom: 10 },
   factEmoji: { fontSize: 28 },
