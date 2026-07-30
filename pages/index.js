@@ -65,8 +65,8 @@ export const UI_TEXT = {
     learnTitle: "Learn about Fukushima",
     learnClose: "Close",
     welcomeTitle: "Welcome to Daiichi",
-    welcomeCaption: "Please, make the survey first",
-    welcomeCheckbox: "I confirm that I made a survey and wish to continue.",
+    welcomeCaption: "Please, take the survey first",
+    welcomeCheckbox: "I confirm that I finished a survey and want to continue.",
     welcomeSubtitle: "*After pressing this button you will be switched to main chatbot screen and will not be able to make the survey anymore.",
     welcomeButton: "Proceed to Daiichi",
     urltex: "Or open the survey via this URL",
@@ -649,6 +649,7 @@ useEffect(() => {
                   />
                   {t.welcomeCheckbox}
                 </label>
+                <p style={styles.welcomeSubtitle}>{t.welcomeSubtitle}</p>
                 <button
                   onClick={() => setShowWelcome(false)}
                   disabled={!welcomeAgreed}
@@ -759,6 +760,7 @@ const styles = {
   welcomeImagePlaceholder: { width: 160, height: 160, margin: "0 auto", background: "#d8f3dc", border: "2px dashed #74c69d", borderRadius: 16, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 40, color: "#2d6a4f" },
   welcomeCaption: { fontSize: 16, fontWeight: 500, color: "#2d6a4f" },
   welcomeURL: { fontSize: 13, color: "#6b8f7a", textAlign: "center", margin: 0, textDecoration: "underline" },
+  welcomeSubtitle: { fontSize: 12, color: "#6b6b6b", textAlign: "center", margin: 0 },
   welcomeCheckboxRow: { display: "flex", alignItems: "center", gap: 8, justifyContent: "center", fontSize: 13, color: "#1a3a2a", cursor: "pointer" },
   welcomeButton: { padding: "12px 24px", background: "#2d6a4f", color: "#fff", border: "none", borderRadius: 24, fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "inherit", transition: "opacity 0.2s" },
   factCard: { background: "#fff", borderRadius: 16, padding: 20, border: "1px solid #d8f3dc", boxShadow: "0 2px 8px rgba(26,58,42,0.06)" },
