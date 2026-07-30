@@ -14,18 +14,18 @@ import ConsentModal from "../components/ConsentModal";
 import ShareConversation from "../components/ShareConversation";
 import ReactMarkdown from "react-markdown";
 
-const MENU_CARDS = [
+export const MENU_CARDS = [
   {
     id: "quiz",
     emoji: "🧠",
-    en: "Start Chat",
+    en: "Start Fukushima Chat",
     ja: "チャットを始める",
     ar: "ابدأ الدردشة",
   },
   {
     id: "general",
     emoji: "📚",
-    en: "Fukushima Facts",
+    en: "Fukushima Information",
     ja: "福島について学ぶ",
     ar: "تعرف على فوكوشيما",
   },
@@ -33,15 +33,16 @@ const MENU_CARDS = [
     id: "nuclear",
     emoji: "☢️",
     en: "Nuclear Accident",
-    ja: "TBD",
-    ar: "TBD",
+    ja: "原発事故",
+    ar: "الحادث النووي",
   },
   {
     id: "ocean",
     emoji: "🌊",
     en: "Ocean Situation",
-    ja: "TBD",
-    ar: "TBD",
+    ja: "海洋の状況",
+    ar: "وضع المحيط",
+ 
   },
 ];
 
@@ -51,40 +52,40 @@ const LANGUAGES = {
   ja: { label: "日本語", flag: "🇯🇵", dir: "ltr" },
 };
 
-const UI_TEXT = {
+export const UI_TEXT = {
   en: {
     title: "Daiichi",
     subtitle: "Fukushima Myth-Buster Chatbot",
-    chooseTopic: "Choose a topic to start the quiz:",
+    chooseTopic: "Open chatbot to start learning:",
     typeMessage: "Type your answer...",
     send: "Send",
     powered: "Built at IER, Fukushima University",
-    by: "By Abdulrahman Alblooshi and Yuliia Bezhenar",
-    back: "← Change Topic",
-    learnTitle: "Fukushima Facts",
+    by: "By Abdulrahman Alblooshi, Yuliia Bezhenar and Maksym Gusyev",
+    back: "← Menu",
+    learnTitle: "Learn about Fukushima",
     learnClose: "Close",
   },
   ar: {
     title: "دايتشي",
     subtitle: "روبوت تصحيح خرافات فوكوشيما",
-    chooseTopic: "اختر موضوعاً لبدء الاختبار:",
+    chooseTopic: "افتح روبوت الدردشة لبدء التعلم:",
     typeMessage: "اكتب إجابتك...",
     send: "إرسال",
     powered: "تم بناؤه في IER، جامعة فوكوشيما",
-    by: "بواسطة عبدالرحمن البلوشي",
-    back: "→ تغيير الموضوع",
+    by: "بواسطة عبدالرحمن البلوشي، يوليا بيجينار وماكسيم غوسييف",
+    back: "→ القائمة",
     learnTitle: "تعرّف على فوكوشيما",
     learnClose: "إغلاق",
   },
   ja: {
     title: "ダイイチ",
     subtitle: "福島の誤解を正すチャットボット",
-    chooseTopic: "トピックを選んでクイズを始めよう：",
+    chooseTopic: "チャットボットを開いて学び始めよう：",
     typeMessage: "回答を入力...",
     send: "送信",
     powered: "福島大学IERで開発",
-    by: "Abdulrahman Alblooshi と Yuliia Bezhenar 作成",
-    back: "← トピックを変更",
+    by: "Abdulrahman Alblooshi、Yuliia Bezhenar と Maksym Gusyev 作成",
+    back: "← メニュー",
     learnTitle: "福島について学ぶ",
     learnClose: "閉じる",
   },
@@ -479,88 +480,29 @@ useEffect(() => {
               <p style={styles.heroDesc}>
                 {language === "en" &&
                   "Choose one of the options below."}
-
                 {language === "ja" &&
                   "下のメニューから選択してください。"}
-
                 {language === "ar" &&
                   "اختر أحد الخيارات التالية."}
               </p>
             </div>
-            <div style={styles.topicGrid}>
-              {/* Quiz */}
-              <button
-                style={styles.topicCard}
-                onClick={startQuiz}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 32px rgba(26,58,42,0.15)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow =
-                    "0 2px 12px rgba(26,58,42,0.08)";
-                }}
-              >
-                <span style={styles.topicEmoji}>🧠</span>
-                <span style={styles.topicLabel}>
-                  {language === "en" && "Start Chat About Fukushima"}
-                  {language === "ja" && "チャットを始める"}
-                  {language === "ar" && "ابدأ الدردشة"}
-                </span>
-              </button>
-
-              {/* Learn */}
-              <button
-                style={styles.topicCard}
-                onClick={() => setShowLearn(true)}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 32px rgba(26,58,42,0.15)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow =
-                    "0 2px 12px rgba(26,58,42,0.08)";
-                }}
-              >
-                <span style={styles.topicEmoji}>📚</span>
-                <span style={styles.topicLabel}>
-                  {language === "en" && "General Information"}
-                  {language === "ja" && "福島について学ぶ"}
-                  {language === "ar" && "تعرف على فوكوشيما"}
-                </span>
-              </button>
-
-              {/* TBD */}
-              <button
-                style={{
-                  ...styles.topicCard,
-                  opacity: 0.6,
-                  cursor: "default",
-                }}
-              >
-                <span style={styles.topicEmoji}>☢️</span>
-                <span style={styles.topicLabel}>
-                  Nuclear Accident
-                </span>
-
-              </button>
-              {/* TBD */}
-              <button
-                style={{
-                  ...styles.topicCard,
-                  opacity: 0.6,
-                  cursor: "default",
-                }}
-              >
-                <span style={styles.topicEmoji}>🌊</span>
-                <span style={styles.topicLabel}>
-                  Ocean Situation
-                </span>
-              </button>
+            <div className={styles.topicGrid}>
+              {MENU_CARDS.map((card) => {
+                const onClick = handlers[card.id];
+                const enabled = Boolean(onClick);
+      
+                return (
+                  <button
+                    key={card.id}
+                    onClick={onClick}
+                    disabled={!enabled}
+                    className={`${styles.topicCard} ${!enabled ? styles.topicCardDisabled : ""}`}
+                  >
+                    <span className={styles.topicEmoji}>{card.emoji}</span>
+                    <span className={styles.topicLabel}>{card[language]}</span>
+                  </button>
+                );
+              })}
             </div>
 
             <footer style={styles.footer}>
@@ -577,7 +519,7 @@ useEffect(() => {
               onClick={goBack}
               style={styles.backBtn}
               >
-                ← Menu
+                ← {t.dack}
               </button>
               <button
               onClick={handleNewConversation}
