@@ -23,23 +23,23 @@ const MENU_CARDS = [
     ar: "ابدأ الدردشة",
   },
   {
-    id: "learn",
+    id: "general",
     emoji: "📚",
     en: "Fukushima Facts",
     ja: "福島について学ぶ",
     ar: "تعرف على فوكوشيما",
   },
   {
-    id: "tbd1",
-    emoji: "🚧",
-    en: "TBD",
+    id: "nuclear",
+    emoji: "☢️",
+    en: "Nuclear Accident",
     ja: "TBD",
     ar: "TBD",
   },
   {
-    id: "tbd2",
-    emoji: "🚧",
-    en: "TBD",
+    id: "ocean",
+    emoji: "🌊",
+    en: "Ocean Situation",
     ja: "TBD",
     ar: "TBD",
   },
@@ -59,7 +59,7 @@ const UI_TEXT = {
     typeMessage: "Type your answer...",
     send: "Send",
     powered: "Built at IER, Fukushima University",
-    by: "By Abdulrahman Alblooshi",
+    by: "By Abdulrahman Alblooshi and Yuliia Bezhenar",
     back: "← Change Topic",
     learnTitle: "Fukushima Facts",
     learnClose: "Close",
@@ -83,7 +83,7 @@ const UI_TEXT = {
     typeMessage: "回答を入力...",
     send: "送信",
     powered: "福島大学IERで開発",
-    by: "Abdulrahman Alblooshi 作成",
+    by: "Abdulrahman Alblooshi と Yuliia Bezhenar 作成",
     back: "← トピックを変更",
     learnTitle: "福島について学ぶ",
     learnClose: "閉じる",
@@ -187,6 +187,14 @@ const FACT_SHEETS = {
       stat: "99%", statLabel: "インフラ復旧率",
     },
   ],
+};
+
+const markdownComponents = {
+  a: ({ node, ...props }) => (
+    <a {...props} target="_blank" rel="noopener noreferrer" style={styles.mdLink} />
+  ),
+  p: ({ node, ...props }) => <p {...props} style={styles.mdParagraph} />,
+  strong: ({ node, ...props }) => <strong {...props} style={styles.mdStrong} />,
 };
 
 export default function Home() {
@@ -497,7 +505,7 @@ useEffect(() => {
               >
                 <span style={styles.topicEmoji}>🧠</span>
                 <span style={styles.topicLabel}>
-                  {language === "en" && "Start Chat"}
+                  {language === "en" && "Start Chat About Fukushima"}
                   {language === "ja" && "チャットを始める"}
                   {language === "ar" && "ابدأ الدردشة"}
                 </span>
@@ -520,7 +528,7 @@ useEffect(() => {
               >
                 <span style={styles.topicEmoji}>📚</span>
                 <span style={styles.topicLabel}>
-                  {language === "en" && "Learn About Fukushima"}
+                  {language === "en" && "General Information"}
                   {language === "ja" && "福島について学ぶ"}
                   {language === "ar" && "تعرف على فوكوشيما"}
                 </span>
@@ -534,9 +542,9 @@ useEffect(() => {
                   cursor: "default",
                 }}
               >
-                <span style={styles.topicEmoji}>🚧</span>
+                <span style={styles.topicEmoji}>☢️</span>
                 <span style={styles.topicLabel}>
-                  TBD
+                  Nuclear Accident
                 </span>
 
               </button>
@@ -548,9 +556,9 @@ useEffect(() => {
                   cursor: "default",
                 }}
               >
-                <span style={styles.topicEmoji}>🚧</span>
+                <span style={styles.topicEmoji}>🌊</span>
                 <span style={styles.topicLabel}>
-                  TBD
+                  Ocean Situation
                 </span>
               </button>
             </div>
@@ -586,7 +594,13 @@ useEffect(() => {
                 <div key={i} style={{ ...styles.msgRow, justifyContent: msg.role === "user" ? "flex-end" : "flex-start" }}>
                   {msg.role === "assistant" && <div style={styles.botAvatar}>🌿</div>}
                   <div style={{ ...styles.bubble, ...(msg.role === "user" ? styles.userBubble : styles.botBubble) }}>
-                    {msg.content}
+                    {msg.role === "assistant" ? (
+                      <div className="md-content">
+                        <ReactMarkdown components={markdownComponents}>{msg.content}</ReactMarkdown>
+                      </div>
+                    ) : (
+                      msg.content
+                    )}
                   </div>
                 </div>
               ))}
@@ -672,6 +686,9 @@ useEffect(() => {
           0%, 80%, 100% { opacity: 0.3; }
           40% { opacity: 1; }
         }
+        .md-content p:last-child {
+          margin-bottom: 0;
+        }
       `}</style>
     </>
   );
@@ -707,6 +724,9 @@ const styles = {
   bubble: { maxWidth: "75%", padding: "12px 16px", borderRadius: 18, fontSize: 14, lineHeight: 1.55, whiteSpace: "pre-wrap", wordBreak: "break-word" },
   userBubble: { background: "#2d6a4f", color: "#fff", borderBottomRightRadius: 4 },
   botBubble: { background: "#fff", color: "#1b2e24", border: "1px solid #d8f3dc", borderBottomLeftRadius: 4, boxShadow: "0 1px 4px rgba(26,58,42,0.06)" },
+  mdParagraph: { margin: "0 0 8px 0" },
+  mdStrong: { fontWeight: 700 },
+  mdLink: { color: "#2d6a4f", fontWeight: 600, textDecoration: "underline", wordBreak: "break-word" },
   loadingBubble: { display: "flex", gap: 5, padding: "14px 20px", alignItems: "center" },
   countdownText: { fontSize: 13, color: "#2d6a4f", fontWeight: 500 },
   dot: { width: 8, height: 8, borderRadius: "50%", background: "#74c69d", display: "inline-block", animation: "blink 1.4s infinite both" },
