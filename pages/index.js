@@ -635,7 +635,7 @@ useEffect(() => {
                 <p style={styles.welcomeCaption}>{t.welcomeCaption}</p>
                 <div style={styles.welcomeImagePlaceholder}>
                   <img 
-                    src="/img/QRcode1.png" 
+                    src="/img/QRcode1.jpeg"
                     alt="📷"
                     style={styles.welcomeImage}
                   />                  
