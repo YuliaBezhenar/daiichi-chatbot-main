@@ -637,9 +637,9 @@ useEffect(() => {
                 <a
                 href="https://docs.google.com/forms/"
                 target="_blank"
-                rel="noopener noreferrer">
+                rel="noopener noreferrer"
+                style={styles.welcomeURL}>
                   {t.urltex}
-                style={styles.welcomeURL}
                 </a>
                 <label style={styles.welcomeCheckboxRow}>
                   <input
