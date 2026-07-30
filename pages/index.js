@@ -56,7 +56,7 @@ export const UI_TEXT = {
   en: {
     title: "Daiichi",
     subtitle: "Fukushima Myth-Buster Chatbot",
-    chooseTopic: "Open chatbot to start learning:",
+    OpenChatMessage: "Open chatbot to start learning:",
     typeMessage: "Type your answer...",
     send: "Send",
     powered: "Built at IER, Fukushima University",
@@ -65,14 +65,15 @@ export const UI_TEXT = {
     learnTitle: "Learn about Fukushima",
     learnClose: "Close",
     welcomeTitle: "Welcome to Daiichi",
-    welcomeCaption: "QR code coming soon",
-    welcomeCheckbox: "I understand and agree to continue",
-    welcomeButton: "Continue",
+    welcomeCaption: "Please, make the survey first",
+    welcomeCheckbox: "I confirm that I made a survey and wish to continue.",
+    welcomeSubtitle: "*After pressing this button you will be switched to main chatbot screen and will not be able to make the survey anymore.",
+    welcomeButton: "Proceed to Daiichi",
   },
   ar: {
     title: "دايتشي",
     subtitle: "روبوت تصحيح خرافات فوكوشيما",
-    chooseTopic: "افتح روبوت الدردشة لبدء التعلم:",
+    OpenChatMessage: "افتح روبوت الدردشة لبدء التعلم:",
     typeMessage: "اكتب إجابتك...",
     send: "إرسال",
     powered: "تم بناؤه في IER، جامعة فوكوشيما",
@@ -81,14 +82,15 @@ export const UI_TEXT = {
     learnTitle: "تعرّف على فوكوشيما",
     learnClose: "إغلاق",
     welcomeTitle: "مرحباً بك في دايتشي",
-    welcomeCaption: "رمز QR سيُضاف قريباً",
-    welcomeCheckbox: "أوافق وأفهم ذلك للمتابعة",
-    welcomeButton: "متابعة",
+    welcomeCaption: "يرجى إجراء الاستبيان أولاً.",
+    welcomeCheckbox: "أؤكد أنني أجريت استطلاعاً وأرغب في المتابعة.",
+    welcomeSubtitle: "بعد الضغط على هذا الزر، سيتم نقلك إلى الشاشة الرئيسية لروبوت المحادثة ولن تتمكن من إجراء الاستبيان بعد الآن.",
+    welcomeButton: "توجه إلى داييتشي",
   },
   ja: {
     title: "ダイイチ",
     subtitle: "福島の誤解を正すチャットボット",
-    chooseTopic: "チャットボットを開いて学び始めよう：",
+    OpenChatMessage: "チャットボットを開いて学び始めよう：",
     typeMessage: "回答を入力...",
     send: "送信",
     powered: "福島大学IERで開発",
@@ -97,9 +99,10 @@ export const UI_TEXT = {
     learnTitle: "福島について学ぶ",
     learnClose: "閉じる",
     welcomeTitle: "ダイイチへようこそ",
-    welcomeCaption: "QRコードは近日公開",
-    welcomeCheckbox: "内容を理解し、同意します",
-    welcomeButton: "続ける",
+    welcomeCaption: "まずはアンケートを作成してください。",
+    welcomeCheckbox: "アンケートに回答済みであり、継続を希望することを確認します。",
+    welcomeSubtitle: "このボタンを押すと、メインのチャットボット画面に切り替わり、アンケートには回答できなくなります。",
+    welcomeButton: "ダイイチへお進みください。",
   },
 };
 
@@ -503,12 +506,7 @@ useEffect(() => {
                 {t.title}
               </h2>
               <p style={styles.heroDesc}>
-                {language === "en" &&
-                  "Choose one of the options below."}
-                {language === "ja" &&
-                  "下のメニューから選択してください。"}
-                {language === "ar" &&
-                  "اختر أحد الخيارات التالية."}
+                {t.OpenChatMessage}
               </p>
             </div>
             <div style={styles.topicGrid}>
@@ -631,8 +629,9 @@ useEffect(() => {
                 <h2 style={styles.modalTitle}>{t.welcomeTitle}</h2>
               </div>
               <div style={styles.modalBody}>
-                <div style={styles.welcomeImagePlaceholder}>📷</div>
                 <p style={styles.welcomeCaption}>{t.welcomeCaption}</p>
+                <div style={styles.welcomeImagePlaceholder}>📷</div>
+                <a style={styles.welcomeURL} href=""></a>
                 <label style={styles.welcomeCheckboxRow}>
                   <input
                     type="checkbox"
@@ -749,7 +748,8 @@ const styles = {
   modalClose: { background: "none", border: "none", color: "#fff", fontSize: 22, cursor: "pointer", padding: 4 },
   modalBody: { overflowY: "auto", padding: 20, display: "flex", flexDirection: "column", gap: 16 },
   welcomeImagePlaceholder: { width: 160, height: 160, margin: "0 auto", background: "#d8f3dc", border: "2px dashed #74c69d", borderRadius: 16, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 40, color: "#2d6a4f" },
-  welcomeCaption: { fontSize: 13, color: "#6b8f7a", textAlign: "center", margin: 0 },
+  welcomeCaption: { fontSize: 16, fontWeight: 500, color: "#2d6a4f" },
+  welcomeURL: { fontSize: 13, color: "#6b8f7a", textAlign: "center", margin: 0, textDecoration: "underline" },
   welcomeCheckboxRow: { display: "flex", alignItems: "center", gap: 8, justifyContent: "center", fontSize: 13, color: "#1a3a2a", cursor: "pointer" },
   welcomeButton: { padding: "12px 24px", background: "#2d6a4f", color: "#fff", border: "none", borderRadius: 24, fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "inherit", transition: "opacity 0.2s" },
   factCard: { background: "#fff", borderRadius: 16, padding: 20, border: "1px solid #d8f3dc", boxShadow: "0 2px 8px rgba(26,58,42,0.06)" },
