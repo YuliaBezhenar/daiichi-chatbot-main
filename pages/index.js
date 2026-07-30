@@ -67,7 +67,7 @@ export const UI_TEXT = {
     welcomeTitle: "Welcome to Daiichi",
     welcomeCaption: "Please, take the survey first",
     welcomeCheckbox: "I confirm that I finished a survey and want to continue.",
-    welcomeSubtitle: "*After pressing this button you will be switched to main chatbot screen and will not be able to make the survey anymore.",
+    welcomeSubtitle: "*Make sure to complere the survey. After pressing this button you will be switched to main chatbot screen and will not be able to take the survey anymore.",
     welcomeButton: "Proceed to Daiichi",
     urltex: "Or open the survey via this URL",
   },
