@@ -69,6 +69,7 @@ export const UI_TEXT = {
     welcomeCheckbox: "I confirm that I made a survey and wish to continue.",
     welcomeSubtitle: "*After pressing this button you will be switched to main chatbot screen and will not be able to make the survey anymore.",
     welcomeButton: "Proceed to Daiichi",
+    urltex: "Or open the survey via this URL",
   },
   ar: {
     title: "دايتشي",
@@ -86,6 +87,7 @@ export const UI_TEXT = {
     welcomeCheckbox: "أؤكد أنني أجريت استطلاعاً وأرغب في المتابعة.",
     welcomeSubtitle: "بعد الضغط على هذا الزر، سيتم نقلك إلى الشاشة الرئيسية لروبوت المحادثة ولن تتمكن من إجراء الاستبيان بعد الآن.",
     welcomeButton: "توجه إلى داييتشي",
+    urltex: "أو افتح الاستبيان عبر هذا الرابط.",
   },
   ja: {
     title: "ダイイチ",
@@ -103,6 +105,7 @@ export const UI_TEXT = {
     welcomeCheckbox: "アンケートに回答済みであり、継続を希望することを確認します。",
     welcomeSubtitle: "このボタンを押すと、メインのチャットボット画面に切り替わり、アンケートには回答できなくなります。",
     welcomeButton: "ダイイチへお進みください。",
+    urltex: "または、こちらのURLからアンケートを開いてください。",
   },
 };
 
@@ -631,7 +634,7 @@ useEffect(() => {
               <div style={styles.modalBody}>
                 <p style={styles.welcomeCaption}>{t.welcomeCaption}</p>
                 <div style={styles.welcomeImagePlaceholder}>📷</div>
-                <a style={styles.welcomeURL} href=""></a>
+                <a style={styles.welcomeURL} href="">{t.urltex}t</a>
                 <label style={styles.welcomeCheckboxRow}>
                   <input
                     type="checkbox"
