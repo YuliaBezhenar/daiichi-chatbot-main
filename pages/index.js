@@ -633,9 +633,15 @@ useEffect(() => {
               </div>
               <div style={styles.modalBody}>
                 <p style={styles.welcomeCaption}>{t.welcomeCaption}</p>
-                <div style={styles.welcomeImagePlaceholder}>📷</div>
+                <div style={styles.welcomeImagePlaceholder}>
+                  <img 
+                    src="/img/QRcode1.png" 
+                    alt="📷"
+                    style={styles.welcomeImage}
+                  />                  
+                </div>
                 <a
-                href="https://docs.google.com/forms/"
+                href="https://forms.gle/chvR55UbcLxisTQv9"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={styles.welcomeURL}>
@@ -757,7 +763,8 @@ const styles = {
   modalTitle: { fontSize: 20, fontWeight: 700 },
   modalClose: { background: "none", border: "none", color: "#fff", fontSize: 22, cursor: "pointer", padding: 4 },
   modalBody: { overflowY: "auto", padding: 20, display: "flex", flexDirection: "column", gap: 16 },
-  welcomeImagePlaceholder: { width: 160, height: 160, margin: "0 auto", background: "#d8f3dc", border: "2px dashed #74c69d", borderRadius: 16, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 40, color: "#2d6a4f" },
+  welcomeImagePlaceholder: { width: 160, height: 160, margin: "0 auto", background: "#d8f3dc", border: "2px #74c69d", borderRadius: 16, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 40, color: "#2d6a4f" },
+  welcomeImage: { width: "100%", height: "100%", objectFit: "cover" },
   welcomeCaption: { fontSize: 16, fontWeight: 500, color: "#2d6a4f" },
   welcomeURL: { fontSize: 13, color: "#6b8f7a", textAlign: "center", margin: 0, textDecoration: "underline" },
   welcomeSubtitle: { fontSize: 12, color: "#6b6b6b", textAlign: "center", margin: 0 },
