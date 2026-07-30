@@ -634,7 +634,13 @@ useEffect(() => {
               <div style={styles.modalBody}>
                 <p style={styles.welcomeCaption}>{t.welcomeCaption}</p>
                 <div style={styles.welcomeImagePlaceholder}>📷</div>
-                <a style={styles.welcomeURL} href="https://docs.google.com/forms/">{t.urltex}</a>
+                <a
+                href="https://docs.google.com/forms/"
+                target="_blank"
+                rel="noopener noreferrer">
+                  {t.urltex}
+                style={styles.welcomeURL}
+                </a>
                 <label style={styles.welcomeCheckboxRow}>
                   <input
                     type="checkbox"
