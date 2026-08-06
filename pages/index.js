@@ -174,24 +174,29 @@ const FACT_SHEETS = {
   general: {
     en: [
       {
-        emoji: "📍", title: "What is Fukushima",
-        text: "There is Fukushima Prefecture with Fukushima City as its capital and and two Fukushima Nuclear Power Plants (Daiichi and Daini) located at the Pacific coast.",
+        emoji: "🤔", title: "Wait… Which Fukushima?",
+        text: "There is Fukushima Prefecture with Fukushima City as its capital located in the central part of the prefecture and and two Fukushima Nuclear Power Plants (Daiichi and Daini) located at the Pacific coast.",
         reference: "Fukushima travel", refURL: "https://fukushima.travel/",
       },
       {
-        emoji: "🍚", title: "Food is Safe",
-        text: "Japan's food radiation limit (100 Bq/kg) is 12x stricter than the US. In FY2024, only 3 out of 9,027 food tests exceeded limits. 49 countries lifted all import bans.",
-        reference: "100 Bq/kg", refURL: "Japan's strict food limit",
+        emoji: "🗾", title: "Fukushima Prefecture",
+        text: "As the 3rd largest in Japan, Fukushima Prefecture has an area of 13783.9 square kilometers with three regions: Hamadori coastal area of 2,969.11 square kilometers, Nakadori central area of  5,392.95 square kilometers, and Aizu.",
+        reference: "Fukushima Prefecture Revitalization Portal", refURL: "https://www.pref.fukushima.lg.jp/site/portal-english/en05-01.html",
       },
       {
-        emoji: "🏘️", title: "People Are Returning",
-        text: "Evacuees dropped from 160,000 to 23,410. Infrastructure is 99% rebuilt. Tourism hit record highs in FY2024. New industries are growing.",
-        reference: "99%", refURL: "infrastructure rebuilt",
+        emoji: "🍑", title: "Famous Products",
+        text: "Fukushima Prefecture is famous for its agricultural products such as peaches,  rice, Japanese sake, and beef and each of three regions has unique activities.",
+        reference: "JanapGov", refURL: "https://www.japan.go.jp/kizuna/2022/02/the_flavor_of_fukushima.html",
+      },
+      {
+        emoji: "♨️", title: "Famous Attractions",
+        text: "Fukushima city, which is located in the central part, has three famous hot springs; Fukushima coastal area has many fisherman communities and swimming places.",
+        reference: "Fukushima City Guide:", refURL: "https://www.f-kankou.jp/en/onsen/",
       },
     ],
     ar: [
       {
-        emoji: "📍", title: "3 مناطق وليست واحدة",
+        emoji: "🤔", title: "انتظر… أي فوكوشيما؟",
         text: "محافظة فوكوشيما كبيرة! فقط منطقة هامادوري الساحلية تأثرت. آيزو (الجبال الغربية) لم يتم إخلاؤها أبداً.",
         reference: "97%", refURL: "من فوكوشيما بمستوى إشعاع طبيعي",
       },
@@ -701,12 +706,12 @@ useEffect(() => {
                     </div>
                     <p style={styles.factText}>{fact.text}</p>
                     <div style={styles.factRef}>
-                      <span style={styles.factTitle}>References:</span>
+                      <span style={styles.factTitle}>Source:</span>
                       <a
                         href={fact.refURL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={styles.factRefURL}
+                        style={styles.factReference}
                       >{fact.reference}</a>
                     </div>
                   </div>
