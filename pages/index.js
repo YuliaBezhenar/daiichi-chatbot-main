@@ -113,14 +113,29 @@ const FACT_SHEETS = {
   nuclear: {
     en: [
       {
-        emoji: "🗾", title: "What Happened?",
-        text: "On March 11, 2011, a massive earthquake and tsunami hit Japan. The tsunami caused a meltdown at the Fukushima Daiichi Nuclear Power Plant. About 18,500 people died — almost all from the tsunami, not radiation.",
-        reference: "1", refURL: "confirmed radiation death",
+        emoji: "☢️", title: "What Happened?",
+        text: "On March 11 2011 the tsunami flooding destroyed all cooling equipment for the Unit 1-4 nuclear reactors of Fukushima Daiichi Nuclear Power Plant (FDNPP) leading to the major nuclear accident.",
+        reference: "World Nuclear Association", refURL: "https://world-nuclear.org/information-library/safety-and-security/safety-of-plants/fukushima-daiichi-accident#inside-the-fukushima-daiichi-reactors",
       },
       {
-        emoji: "📉", title: "Radiation Today",
-        text: "Radiation in Fukushima City dropped 95% since 2011. The restricted zone shrank from 12% to just 2.2% of the prefecture. It's safe to live and visit.",
-        reference: "0.10 μSv/h", refURL: "current Fukushima City level",
+        emoji: "😵", title: "Nuclear Accident Impact",
+        text: "The FDNPP-accident affected area was evacuated with radiation levels above 20 mSv per year (or above  2 μSv per hour) without any fatalities due to acute radiation compared with tsunami, earthquake and evacuation-related causes.",
+        reference: "UNSCEAR", refURL: "https://www.unscear.org/unscear/en/areas-of-work/fukushima.html",
+      },
+      {
+        emoji: "🍚", title: "Food Safety",
+        text: "After the FDNPP accident, Japan's food radiation limit has been lowered to 100 Bq/kg and Fukushima food products has been strictly confirming food products by the Prefectural Government confirming radiation levels below the 100 Bq/kg limit.",
+        reference: "Fukumegu", refURL: "https://fukumegu.org/ok/contentsV2/",
+      },
+      {
+        emoji: "🏘️", title: "Decontamination Efforts",
+        text: "Since the start of decontamination efforts in Fukushima Prefecture, the maximum emergency evacuation area of 1150 square km in August 2011 was reduced to 371 square km in April 2017.",
+        reference: "Fukushima Prefecture Revitalization Portal", refURL: "https://www.pref.fukushima.lg.jp/site/portal-english/en03-08.html",
+      },
+      {
+        emoji: "📉", title: "Current Radiation Levels",
+        text: "Whole-area decontamination was completed by March 2018 except the Difficult-to-Return Zone, which has an area of 309 square km in 2026 and air radiation dose rate of 4.95 μSv/h in Okuma town on 28 Jul 2026, while other areas of Fukushima city and coastal towns have air radiation dose rate less than 0.1 Sv/h.",
+        reference: "Japan Radiation Map", refURL: "https://jciv.iidj.net/map/",
       },
     ],
     ar: [
@@ -151,21 +166,36 @@ const FACT_SHEETS = {
   ocean: {
     en: [
       {
-        emoji: "🌊", title: "ALPS Treated Water",
-        text: "The water is filtered through ALPS, removing 62 radioactive substances. Remaining tritium is diluted to 243 Bq/L — that's 43x below WHO drinking water limits.",
-        reference: "1/40", refURL: "regulatory safety limit",
+        emoji: "⚠️", title: "Water Contamination",
+        text: "The excessive amount of contaminated water was generated due to groundwater inflow into Fukushima Daiichi damaged reactor buildings, which required cooling of melted nuclear fuel, and it was stored in many surface tanks at the FDNPP site.",
+        reference: "Agency for Natural Resources and Energy (METI)", refURL: "https://www.enecho.meti.go.jp/en/category/special/article/detail_143.html",
+      },
+      {
+        emoji: "🧪", title: "Cleaning the Water",
+        text: "The stored contaminated water was treated by the Advanced Liquid Processing System (ALPS) to remove 62 radionuclides below ocean discharge threshold except tritium, which remains because it's part of the water molecule.",
+        reference: "Ministry of Environment", refURL: "https://www.env.go.jp/en/chemi/rhm/basic-info/1st/06-03-05.html",
+      },
+      {
+        emoji: "💧", title: "What is tritium?",
+        text: "Tritium (H-3 or T) radionuclide, which is a nuclide that is unstable with a half-life of 12.32 years, is </br>A) Naturally and artificially produced; B) Beta emitter; C) Forms tritiated water (HTO); D) Discharge from Nuclear Power Plants.",
+        reference: "TEPCO", refURL: "https://www.tepco.co.jp/en/decommission/progress/watertreatment/faq/index-e.html",
+      },
+      {
+        emoji: "🌍", title: "Water Monitoring",
+        text: "The ALPS-treated water discharge is diluted by ocean water to have tritium concentrations below 1,500 Bq/L, which is 1/40 of the regulatory limit and 1/7 of WHO drinking water guideline (10,000 Bq/L), to be independently monitored by the IAEA.",
+        reference: "IAEA", refURL: "https://www.iaea.org/topics/response/fukushima-daiichi-nuclear-accident/fukushima-daiichi-alps-treated-water-discharge",
       },
     ],
     ar: [
       {
-        emoji: "🌊", title: "مياه ALPS المعالجة",
+        emoji: "", title: "مياه ALPS المعالجة",
         text: "يتم تصفية المياه عبر ALPS لإزالة 62 مادة مشعة. يتم تخفيف التريتيوم المتبقي إلى 243 بيكريل/لتر — أقل 43 مرة من حد مياه الشرب.",
         reference: "1/40", refURL: "من حد السلامة التنظيمي",
       },
     ],
     ja: [
       {
-        emoji: "🌊", title: "ALPS処理水",
+        emoji: "", title: "ALPS処理水",
         text: "ALPSで62種類の放射性物質を除去。残るトリチウムは243 Bq/Lに希釈 — WHO飲料水基準の43分の1以下。",
         reference: "1/40", refURL: "規制安全基準の",
       },
@@ -180,7 +210,7 @@ const FACT_SHEETS = {
       },
       {
         emoji: "🗾", title: "Fukushima Prefecture",
-        text: "As the 3rd largest in Japan, Fukushima Prefecture has an area of 13783.9 square kilometers with three regions: Hamadori coastal area of 2,969.11 square kilometers, Nakadori central area of  5,392.95 square kilometers, and Aizu.",
+        text: "As the 3rd largest in Japan, Fukushima Prefecture has an area of 13783.9 square kilometers with three regions: Hamadori coastal area (21% of total), Nakadori central area (39% of total), and Aizu (40% of total).",
         reference: "Fukushima Prefecture Revitalization Portal", refURL: "https://www.pref.fukushima.lg.jp/site/portal-english/en05-01.html",
       },
       {
@@ -191,7 +221,12 @@ const FACT_SHEETS = {
       {
         emoji: "♨️", title: "Famous Attractions",
         text: "Fukushima city, which is located in the central part, has three famous hot springs; Fukushima coastal area has many fisherman communities and swimming places.",
-        reference: "Fukushima City Guide:", refURL: "https://www.f-kankou.jp/en/onsen/",
+        reference: "Fukushima City Guide", refURL: "https://www.f-kankou.jp/en/onsen/",
+      },
+      {
+        emoji: "🌊", title: "Great East Japan Earthquake",
+        text: "On March 11 2011 at 14:46 JST, the largest earthquake of 9.0 magnitude occurred north of Fukushima Prefecture triggering a massive tsunami along the Pacific coast of northern Tohoku region with human casualties of  19,729 dead and 2,559 missing persons.",
+        reference: "Reconstruction Agency", refURL: "https://www.reconstruction.go.jp/english/topics/GEJE/",
       },
     ],
     ar: [
@@ -227,6 +262,7 @@ const FACT_SHEETS = {
         text: "避難者は160,000人から23,410人に減少。インフラは99%復旧。2024年度の観光客数は過去最高を記録。",
         reference: "99%", refURL: "インフラ復旧率",
       },
+      
     ],
   },
 };
