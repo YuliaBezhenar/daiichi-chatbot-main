@@ -241,10 +241,8 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [countdown, setCountdown] = useState(0);
-  const [showLearn, setShowLearn] = useState(false);
+  const [learnCategory, setLearnCategory] = useState(null);
   const [showConsent, setShowConsent] = useState(false);
-  // Opens automatically on page load, can only be closed via its own button,
-  // and never reopens afterwards (even when navigating back to the topic screen).
   const [showWelcome, setShowWelcome] = useState(true);
   const [welcomeAgreed, setWelcomeAgreed] = useState(false);
   const [submittingConversation, setSubmittingConversation] = useState(false);
@@ -468,15 +466,15 @@ useEffect(() => {
     }
   }
 
-  const facts = FACT_SHEETS[language] || FACT_SHEETS.en;
+  const facts = learnCategory
+    ? FACT_SHEETS[learnCategory]?.[language] || FACT_SHEETS[learnCategory]?.en || []
+    : [];
 
-  // Maps each MENU_CARDS id to its click handler. Cards with no entry here
-  // (nuclear, ocean) render as disabled placeholders.
   const handlers = {
     quiz: startQuiz,
-    general: () => setShowLearn(true),
-    nuclear: () => setShowLearn(true),
-    ocean: () => setShowLearn(true),
+    general: () => setLearnCategory("general"),
+    nuclear: () => setLearnCategory("nuclear"),
+    ocean: () => setLearnCategory("ocean"),
   };
 
   return (
@@ -641,8 +639,6 @@ useEffect(() => {
           </div>
         )}
 
-        {/* Welcome Modal — mockup only. Opens on load, no outside-click close,
-            closes only via its button, and never reopens after that. */}
         {showWelcome && (
           <div style={styles.modalOverlay}>
             <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
