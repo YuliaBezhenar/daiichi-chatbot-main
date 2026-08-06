@@ -110,102 +110,120 @@ export const UI_TEXT = {
 };
 
 const FACT_SHEETS = {
-  en: [
-    {
-      emoji: "🗾", title: "What Happened?",
-      text: "On March 11, 2011, a massive earthquake and tsunami hit Japan. The tsunami caused a meltdown at the Fukushima Daiichi Nuclear Power Plant. About 18,500 people died — almost all from the tsunami, not radiation.",
-      stat: "1", statLabel: "confirmed radiation death",
-    },
-    {
-      emoji: "📍", title: "3 Regions, Not 1",
-      text: "Fukushima Prefecture is huge! Only the coastal Hamadori area was affected. Aizu (western mountains) was never evacuated. Nakadori (central valley) was mostly fine.",
-      stat: "97%", statLabel: "of Fukushima has normal radiation",
-    },
-    {
-      emoji: "📉", title: "Radiation Today",
-      text: "Radiation in Fukushima City dropped 95% since 2011. The restricted zone shrank from 12% to just 2.2% of the prefecture. It's safe to live and visit.",
-      stat: "0.10 μSv/h", statLabel: "current Fukushima City level",
-    },
-    {
-      emoji: "🍚", title: "Food is Safe",
-      text: "Japan's food radiation limit (100 Bq/kg) is 12x stricter than the US. In FY2024, only 3 out of 9,027 food tests exceeded limits. 49 countries lifted all import bans.",
-      stat: "100 Bq/kg", statLabel: "Japan's strict food limit",
-    },
-    {
-      emoji: "🌊", title: "ALPS Treated Water",
-      text: "The water is filtered through ALPS, removing 62 radioactive substances. Remaining tritium is diluted to 243 Bq/L — that's 43x below WHO drinking water limits.",
-      stat: "1/40", statLabel: "of the regulatory safety limit",
-    },
-    {
-      emoji: "🏘️", title: "People Are Returning",
-      text: "Evacuees dropped from 160,000 to 23,410. Infrastructure is 99% rebuilt. Tourism hit record highs in FY2024. New industries are growing.",
-      stat: "99%", statLabel: "infrastructure rebuilt",
-    },
-  ],
-  ar: [
-    {
-      emoji: "🗾", title: "ماذا حدث؟",
-      text: "في 11 مارس 2011، ضرب زلزال وتسونامي ضخم اليابان. تسبب التسونامي في انصهار في محطة فوكوشيما دايتشي النووية. توفي حوالي 18,500 شخص — معظمهم بسبب التسونامي وليس الإشعاع.",
-      stat: "1", statLabel: "حالة وفاة مؤكدة بالإشعاع",
-    },
-    {
-      emoji: "📍", title: "3 مناطق وليست واحدة",
-      text: "محافظة فوكوشيما كبيرة! فقط منطقة هامادوري الساحلية تأثرت. آيزو (الجبال الغربية) لم يتم إخلاؤها أبداً.",
-      stat: "97%", statLabel: "من فوكوشيما بمستوى إشعاع طبيعي",
-    },
-    {
-      emoji: "📉", title: "الإشعاع اليوم",
-      text: "انخفض الإشعاع في مدينة فوكوشيما بنسبة 95% منذ 2011. تقلصت المنطقة المحظورة من 12% إلى 2.2% فقط.",
-      stat: "0.10 μSv/h", statLabel: "مستوى مدينة فوكوشيما الحالي",
-    },
-    {
-      emoji: "🍚", title: "الطعام آمن",
-      text: "حد الإشعاع الغذائي في اليابان (100 بيكريل/كجم) أكثر صرامة 12 مرة من أمريكا. في 2024، فقط 3 من 9,027 فحص تجاوزت الحد.",
-      stat: "100 Bq/kg", statLabel: "حد اليابان الصارم للغذاء",
-    },
-    {
-      emoji: "🌊", title: "مياه ALPS المعالجة",
-      text: "يتم تصفية المياه عبر ALPS لإزالة 62 مادة مشعة. يتم تخفيف التريتيوم المتبقي إلى 243 بيكريل/لتر — أقل 43 مرة من حد مياه الشرب.",
-      stat: "1/40", statLabel: "من حد السلامة التنظيمي",
-    },
-    {
-      emoji: "🏘️", title: "الناس يعودون",
-      text: "انخفض النازحون من 160,000 إلى 23,410. تم إعادة بناء البنية التحتية بنسبة 99%. السياحة سجلت أرقاماً قياسية في 2024.",
-      stat: "99%", statLabel: "إعادة بناء البنية التحتية",
-    },
-  ],
-  ja: [
-    {
-      emoji: "🗾", title: "何が起きた？",
-      text: "2011年3月11日、巨大な地震と津波が日本を襲いました。津波により福島第一原子力発電所でメルトダウンが発生。約18,500人が亡くなりましたが、ほぼ全員が津波によるものです。",
-      stat: "1", statLabel: "確認された放射線による死亡",
-    },
-    {
-      emoji: "📍", title: "3つの地域",
-      text: "福島県は広大です！影響を受けたのは沿岸の浜通りだけ。会津（西部山地）は避難なし。中通り（中央）もほぼ影響なし。",
-      stat: "97%", statLabel: "の福島は正常な放射線レベル",
-    },
-    {
-      emoji: "📉", title: "現在の放射線",
-      text: "福島市の放射線は2011年から95%低下。制限区域は県面積の12%から2.2%に縮小。住むのも訪れるのも安全です。",
-      stat: "0.10 μSv/h", statLabel: "福島市の現在のレベル",
-    },
-    {
-      emoji: "🍚", title: "食品は安全",
-      text: "日本の食品放射能基準（100 Bq/kg）は米国の12倍厳しい。2024年度、9,027件の検査で基準超過はわずか3件。49カ国が輸入規制を解除。",
-      stat: "100 Bq/kg", statLabel: "日本の厳しい食品基準",
-    },
-    {
-      emoji: "🌊", title: "ALPS処理水",
-      text: "ALPSで62種類の放射性物質を除去。残るトリチウムは243 Bq/Lに希釈 — WHO飲料水基準の43分の1以下。",
-      stat: "1/40", statLabel: "規制安全基準の",
-    },
-    {
-      emoji: "🏘️", title: "人々が戻っている",
-      text: "避難者は160,000人から23,410人に減少。インフラは99%復旧。2024年度の観光客数は過去最高を記録。",
-      stat: "99%", statLabel: "インフラ復旧率",
-    },
-  ],
+  nuclear: {
+    en: [
+      {
+        emoji: "🗾", title: "What Happened?",
+        text: "On March 11, 2011, a massive earthquake and tsunami hit Japan. The tsunami caused a meltdown at the Fukushima Daiichi Nuclear Power Plant. About 18,500 people died — almost all from the tsunami, not radiation.",
+        stat: "1", statLabel: "confirmed radiation death",
+      },
+      {
+        emoji: "📉", title: "Radiation Today",
+        text: "Radiation in Fukushima City dropped 95% since 2011. The restricted zone shrank from 12% to just 2.2% of the prefecture. It's safe to live and visit.",
+        stat: "0.10 μSv/h", statLabel: "current Fukushima City level",
+      },
+    ],
+    ar: [
+      {
+        emoji: "🗾", title: "ماذا حدث؟",
+        text: "في 11 مارس 2011، ضرب زلزال وتسونامي ضخم اليابان. تسبب التسونامي في انصهار في محطة فوكوشيما دايتشي النووية. توفي حوالي 18,500 شخص — معظمهم بسبب التسونامي وليس الإشعاع.",
+        stat: "1", statLabel: "حالة وفاة مؤكدة بالإشعاع",
+      },
+      {
+        emoji: "📉", title: "الإشعاع اليوم",
+        text: "انخفض الإشعاع في مدينة فوكوشيما بنسبة 95% منذ 2011. تقلصت المنطقة المحظورة من 12% إلى 2.2% فقط.",
+        stat: "0.10 μSv/h", statLabel: "مستوى مدينة فوكوشيما الحالي",
+      },
+    ],
+    ja: [
+      {
+        emoji: "🗾", title: "何が起きた？",
+        text: "2011年3月11日、巨大な地震と津波が日本を襲いました。津波により福島第一原子力発電所でメルトダウンが発生。約18,500人が亡くなりましたが、ほぼ全員が津波によるものです。",
+        stat: "1", statLabel: "確認された放射線による死亡",
+      },
+      {
+        emoji: "📉", title: "現在の放射線",
+        text: "福島市の放射線は2011年から95%低下。制限区域は県面積の12%から2.2%に縮小。住むのも訪れるのも安全です。",
+        stat: "0.10 μSv/h", statLabel: "福島市の現在のレベル",
+      },
+    ],
+  },
+  ocean: {
+    en: [
+      {
+        emoji: "🌊", title: "ALPS Treated Water",
+        text: "The water is filtered through ALPS, removing 62 radioactive substances. Remaining tritium is diluted to 243 Bq/L — that's 43x below WHO drinking water limits.",
+        stat: "1/40", statLabel: "of the regulatory safety limit",
+      },
+    ],
+    ar: [
+      {
+        emoji: "🌊", title: "مياه ALPS المعالجة",
+        text: "يتم تصفية المياه عبر ALPS لإزالة 62 مادة مشعة. يتم تخفيف التريتيوم المتبقي إلى 243 بيكريل/لتر — أقل 43 مرة من حد مياه الشرب.",
+        stat: "1/40", statLabel: "من حد السلامة التنظيمي",
+      },
+    ],
+    ja: [
+      {
+        emoji: "🌊", title: "ALPS処理水",
+        text: "ALPSで62種類の放射性物質を除去。残るトリチウムは243 Bq/Lに希釈 — WHO飲料水基準の43分の1以下。",
+        stat: "1/40", statLabel: "規制安全基準の",
+      },
+    ],
+  },
+  general: {
+    en: [
+      {
+        emoji: "📍", title: "3 Regions, Not 1",
+        text: "Fukushima Prefecture is huge! Only the coastal Hamadori area was affected. Aizu (western mountains) was never evacuated. Nakadori (central valley) was mostly fine.",
+        stat: "97%", statLabel: "of Fukushima has normal radiation",
+      },
+      {
+        emoji: "🍚", title: "Food is Safe",
+        text: "Japan's food radiation limit (100 Bq/kg) is 12x stricter than the US. In FY2024, only 3 out of 9,027 food tests exceeded limits. 49 countries lifted all import bans.",
+        stat: "100 Bq/kg", statLabel: "Japan's strict food limit",
+      },
+      {
+        emoji: "🏘️", title: "People Are Returning",
+        text: "Evacuees dropped from 160,000 to 23,410. Infrastructure is 99% rebuilt. Tourism hit record highs in FY2024. New industries are growing.",
+        stat: "99%", statLabel: "infrastructure rebuilt",
+      },
+    ],
+    ar: [
+      {
+        emoji: "📍", title: "3 مناطق وليست واحدة",
+        text: "محافظة فوكوشيما كبيرة! فقط منطقة هامادوري الساحلية تأثرت. آيزو (الجبال الغربية) لم يتم إخلاؤها أبداً.",
+        stat: "97%", statLabel: "من فوكوشيما بمستوى إشعاع طبيعي",
+      },
+      {
+        emoji: "🍚", title: "الطعام آمن",
+        text: "حد الإشعاع الغذائي في اليابان (100 بيكريل/كجم) أكثر صرامة 12 مرة من أمريكا. في 2024، فقط 3 من 9,027 فحص تجاوزت الحد.",
+        stat: "100 Bq/kg", statLabel: "حد اليابان الصارم للغذاء",
+      },
+      {
+        emoji: "🏘️", title: "الناس يعودون",
+        text: "انخفض النازحون من 160,000 إلى 23,410. تم إعادة بناء البنية التحتية بنسبة 99%. السياحة سجلت أرقاماً قياسية في 2024.",
+        stat: "99%", statLabel: "إعادة بناء البنية التحتية",
+      },
+    ],
+    ja: [
+      {
+        emoji: "📍", title: "3つの地域",
+        text: "福島県は広大です！影響を受けたのは沿岸の浜通りだけ。会津（西部山地）は避難なし。中通り（中央）もほぼ影響なし。",
+        stat: "97%", statLabel: "の福島は正常な放射線レベル",
+      },
+      {
+        emoji: "🍚", title: "食品は安全",
+        text: "日本の食品放射能基準（100 Bq/kg）は米国の12倍厳しい。2024年度、9,027件の検査で基準超過はわずか3件。49カ国が輸入規制を解除。",
+        stat: "100 Bq/kg", statLabel: "日本の厳しい食品基準",
+      },
+      {
+        emoji: "🏘️", title: "人々が戻っている",
+        text: "避難者は160,000人から23,410人に減少。インフラは99%復旧。2024年度の観光客数は過去最高を記録。",
+        stat: "99%", statLabel: "インフラ復旧率",
+      },
+    ],
+  },
 };
 
 const markdownComponents = {
@@ -669,12 +687,14 @@ useEffect(() => {
         )}
 
         {/* Learn Modal */}
-        {showLearn && (
-          <div style={styles.modalOverlay} onClick={() => setShowLearn(false)}>
+        {learnCategory && (
+          <div style={styles.modalOverlay} onClick={() => setLearnCategory(null)}>
             <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
               <div style={styles.modalHeader}>
-                <h2 style={styles.modalTitle}>{t.learnTitle}</h2>
-                <button onClick={() => setShowLearn(false)} style={styles.modalClose}>✕</button>
+                <h2 style={styles.modalTitle}>
+                  {MENU_CARDS.find((c) => c.id === learnCategory)?.[language] || t.learnTitle}
+                </h2>
+                <button onClick={() => setLearnCategory(null)} style={styles.modalClose}>✕</button>
               </div>
               <div style={styles.modalBody}>
                 {facts.map((fact, i) => (
