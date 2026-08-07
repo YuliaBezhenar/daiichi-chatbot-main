@@ -140,26 +140,56 @@ const FACT_SHEETS = {
     ],
     ar: [
       {
-        emoji: "🗾", title: "ماذا حدث؟",
-        text: "في 11 مارس 2011، ضرب زلزال وتسونامي ضخم اليابان. تسبب التسونامي في انصهار في محطة فوكوشيما دايتشي النووية. توفي حوالي 18,500 شخص — معظمهم بسبب التسونامي وليس الإشعاع.",
-        reference: "1", refURL: "حالة وفاة مؤكدة بالإشعاع",
+        emoji: "☢️", title: "ماذا حدث؟",
+        text: "في 11 مارس 2011، دمّر فيضان التسونامي جميع معدات التبريد الخاصة بالمفاعلات من الوحدة 1 إلى 4 في محطة فوكوشيما دايتشي النووية (FDNPP)، مما أدى إلى وقوع الحادث النووي الكبير.",
+        reference: "World Nuclear Association", refURL: "https://world-nuclear.org/information-library/safety-and-security/safety-of-plants/fukushima-daiichi-accident#inside-the-fukushima-daiichi-reactors",
       },
       {
-        emoji: "📉", title: "الإشعاع اليوم",
-        text: "انخفض الإشعاع في مدينة فوكوشيما بنسبة 95% منذ 2011. تقلصت المنطقة المحظورة من 12% إلى 2.2% فقط.",
-        reference: "0.10 μSv/h", refURL: "مستوى مدينة فوكوشيما الحالي",
+        emoji: "😵", title: "تأثير الحادث النووي",
+        text: "تم إخلاء المنطقة المتضررة من حادث FDNPP التي تجاوزت فيها مستويات الإشعاع 20 ميلي سيفرت سنوياً (أو أكثر من 2 ميكروسيفرت في الساعة)، دون أي وفيات ناجمة عن الإشعاع الحاد، مقارنة بالوفيات الناجمة عن التسونامي والزلزال وعملية الإخلاء.",
+        reference: "UNSCEAR", refURL: "https://www.unscear.org/unscear/en/areas-of-work/fukushima.html",
+      },
+      {
+        emoji: "🍚", title: "سلامة الغذاء",
+        text: "بعد حادث FDNPP، تم خفض الحد الأقصى المسموح به للإشعاع في الغذاء في اليابان إلى 100 بيكريل/كجم، وتقوم حكومة المحافظة بفحص منتجات فوكوشيما الغذائية بدقة للتأكد من أن مستويات الإشعاع أقل من هذا الحد.",
+        reference: "Fukumegu", refURL: "https://fukumegu.org/ok/contentsV2/",
+      },
+      {
+        emoji: "🏘️", title: "جهود إزالة التلوث",
+        text: "منذ بدء جهود إزالة التلوث في محافظة فوكوشيما، انخفضت أقصى مساحة لمنطقة الإخلاء الطارئ من 1150 كم² في أغسطس 2011 إلى 371 كم² في أبريل 2017.",
+        reference: "Fukushima Prefecture Revitalization Portal", refURL: "https://www.pref.fukushima.lg.jp/site/portal-english/en03-08.html",
+      },
+      {
+        emoji: "📉", title: "مستويات الإشعاع الحالية",
+        text: "اكتملت إزالة التلوث في كامل المنطقة بحلول مارس 2018، باستثناء منطقة يصعب العودة إليها، والتي تبلغ مساحتها 309 كم² في عام 2026 ومعدل جرعة الإشعاع الجوي فيها 4.95 ميكروسيفرت/ساعة في بلدة أوكوما بتاريخ 28 يوليو 2026، بينما تقل معدلات جرعة الإشعاع الجوي في مناطق أخرى من مدينة فوكوشيما والبلدات الساحلية عن 0.1 سيفرت/ساعة.",
+        reference: "Japan Radiation Map", refURL: "https://jciv.iidj.net/map/",
       },
     ],
     ja: [
       {
-        emoji: "🗾", title: "何が起きた？",
-        text: "2011年3月11日、巨大な地震と津波が日本を襲いました。津波により福島第一原子力発電所でメルトダウンが発生。約18,500人が亡くなりましたが、ほぼ全員が津波によるものです。",
-        reference: "1", refURL: "確認された放射線による死亡",
+        emoji: "☢️", title: "何が起きた？",
+        text: "2011年3月11日、津波の浸水により福島第一原子力発電所（FDNPP）の1〜4号機の冷却設備がすべて破壊され、大規模な原発事故につながりました。",
+        reference: "World Nuclear Association", refURL: "https://world-nuclear.org/information-library/safety-and-security/safety-of-plants/fukushima-daiichi-accident#inside-the-fukushima-daiichi-reactors",
       },
       {
-        emoji: "📉", title: "現在の放射線",
-        text: "福島市の放射線は2011年から95%低下。制限区域は県面積の12%から2.2%に縮小。住むのも訪れるのも安全です。",
-        reference: "0.10 μSv/h", refURL: "福島市の現在のレベル",
+        emoji: "😵", title: "原発事故の影響",
+        text: "FDNPP事故の影響を受けた地域は、年間20mSv（時間あたり2μSv以上）を超える放射線量で避難対象となりましたが、急性放射線による死者はゼロで、津波・地震・避難に伴う死者とは対照的でした。",
+        reference: "UNSCEAR", refURL: "https://www.unscear.org/unscear/en/areas-of-work/fukushima.html",
+      },
+      {
+        emoji: "🍚", title: "食品の安全性",
+        text: "FDNPP事故後、日本の食品放射能基準は100 Bq/kgに引き下げられ、福島県では県が食品を厳しく検査し、放射線量がこの基準を下回っていることを確認しています。",
+        reference: "Fukumegu", refURL: "https://fukumegu.org/ok/contentsV2/",
+      },
+      {
+        emoji: "🏘️", title: "除染活動",
+        text: "福島県での除染活動の開始以降、最大で1,150平方キロメートルあった緊急避難区域は、2017年4月には371平方キロメートルまで縮小しました。",
+        reference: "Fukushima Prefecture Revitalization Portal", refURL: "https://www.pref.fukushima.lg.jp/site/portal-english/en03-08.html",
+      },
+      {
+        emoji: "📉", title: "現在の放射線レベル",
+        text: "2018年3月までに帰還困難区域を除く全域で除染が完了しました。帰還困難区域は2026年時点で309平方キロメートルあり、2026年7月28日の大熊町の空間放射線量率は4.95μSv/hですが、福島市や沿岸の他の地域では0.1Sv/h未満となっています。",
+        reference: "Japan Radiation Map", refURL: "https://jciv.iidj.net/map/",
       },
     ],
   },
@@ -188,16 +218,46 @@ const FACT_SHEETS = {
     ],
     ar: [
       {
-        emoji: "", title: "مياه ALPS المعالجة",
-        text: "يتم تصفية المياه عبر ALPS لإزالة 62 مادة مشعة. يتم تخفيف التريتيوم المتبقي إلى 243 بيكريل/لتر — أقل 43 مرة من حد مياه الشرب.",
-        reference: "1/40", refURL: "من حد السلامة التنظيمي",
+        emoji: "⚠️", title: "تلوث المياه",
+        text: "نتجت كمية كبيرة من المياه الملوثة عن تسرب المياه الجوفية إلى مباني المفاعلات المتضررة في فوكوشيما دايتشي، التي تطلبت تبريد الوقود النووي المنصهر، وتم تخزينها في العديد من الخزانات السطحية داخل موقع المحطة.",
+        reference: "Agency for Natural Resources and Energy (METI)", refURL: "https://www.enecho.meti.go.jp/en/category/special/article/detail_143.html",
+      },
+      {
+        emoji: "🧪", title: "تنقية المياه",
+        text: "تمت معالجة المياه الملوثة المخزنة بواسطة نظام المعالجة السائلة المتقدم (ALPS) لإزالة 62 نوعاً من النويدات المشعة إلى ما دون حد التصريف في المحيط، باستثناء التريتيوم الذي يبقى لأنه جزء من جزيء الماء نفسه.",
+        reference: "Ministry of Environment", refURL: "https://www.env.go.jp/en/chemi/rhm/basic-info/1st/06-03-05.html",
+      },
+      {
+        emoji: "💧", title: "ما هو التريتيوم؟",
+        text: "التريتيوم (H-3 أو T) هو نويدة مشعة غير مستقرة بعمر نصف يبلغ 12.32 سنة، وهو: </br>أ) ينتج طبيعياً واصطناعياً؛ ب) باعث لجسيمات بيتا؛ ج) يُكوّن ماءً مترتناً (HTO)؛ د) يُصرَّف من محطات الطاقة النووية.",
+        reference: "TEPCO", refURL: "https://www.tepco.co.jp/en/decommission/progress/watertreatment/faq/index-e.html",
+      },
+      {
+        emoji: "🌍", title: "مراقبة المياه",
+        text: "يُخفَّف تصريف المياه المعالجة بنظام ALPS بمياه المحيط بحيث تصل تركيزات التريتيوم إلى أقل من 1,500 بيكريل/لتر، وهو ما يعادل 1/40 من الحد التنظيمي و1/7 من إرشادات منظمة الصحة العالمية لمياه الشرب (10,000 بيكريل/لتر)، وتخضع العملية لمراقبة مستقلة من الوكالة الدولية للطاقة الذرية.",
+        reference: "IAEA", refURL: "https://www.iaea.org/topics/response/fukushima-daiichi-nuclear-accident/fukushima-daiichi-alps-treated-water-discharge",
       },
     ],
     ja: [
       {
-        emoji: "", title: "ALPS処理水",
-        text: "ALPSで62種類の放射性物質を除去。残るトリチウムは243 Bq/Lに希釈 — WHO飲料水基準の43分の1以下。",
-        reference: "1/40", refURL: "規制安全基準の",
+        emoji: "⚠️", title: "汚染水の発生",
+        text: "溶融した核燃料を冷却する必要があったため、地下水が福島第一の損傷した原子炉建屋に流入し、大量の汚染水が発生し、敷地内の多数の地上タンクに保管されてきました。",
+        reference: "Agency for Natural Resources and Energy (METI)", refURL: "https://www.enecho.meti.go.jp/en/category/special/article/detail_143.html",
+      },
+      {
+        emoji: "🧪", title: "水の浄化処理",
+        text: "貯蔵された汚染水は多核種除去設備（ALPS）で処理され、62種類の放射性核種が海洋放出基準値以下まで除去されますが、水分子の一部であるトリチウムだけは除去されずに残ります。",
+        reference: "Ministry of Environment", refURL: "https://www.env.go.jp/en/chemi/rhm/basic-info/1st/06-03-05.html",
+      },
+      {
+        emoji: "💧", title: "トリチウムとは？",
+        text: "トリチウム（H-3またはT）は半減期12.32年の不安定な核種であり、</br>A) 自然にも人工的にも生成される、B) ベータ線を放出する、C) トリチウム水（HTO）を形成する、D) 原子力発電所から放出される、という特徴を持っています。",
+        reference: "TEPCO", refURL: "https://www.tepco.co.jp/en/decommission/progress/watertreatment/faq/index-e.html",
+      },
+      {
+        emoji: "🌍", title: "水質モニタリング",
+        text: "ALPS処理水は海水で希釈され、トリチウム濃度は1,500 Bq/L未満に抑えられます。これは規制基準値の1/40、WHO飲料水ガイドライン（10,000 Bq/L）の1/7に相当し、IAEAによる独立した監視が行われています。",
+        reference: "IAEA", refURL: "https://www.iaea.org/topics/response/fukushima-daiichi-nuclear-accident/fukushima-daiichi-alps-treated-water-discharge",
       },
     ],
   },
@@ -231,38 +291,57 @@ const FACT_SHEETS = {
     ],
     ar: [
       {
-        emoji: "🤔", title: "انتظر… أي فوكوشيما؟",
-        text: "محافظة فوكوشيما كبيرة! فقط منطقة هامادوري الساحلية تأثرت. آيزو (الجبال الغربية) لم يتم إخلاؤها أبداً.",
-        reference: "97%", refURL: "من فوكوشيما بمستوى إشعاع طبيعي",
+        emoji: "🤔", title: "لحظة... أي فوكوشيما؟",
+        text: "توجد محافظة فوكوشيما وعاصمتها مدينة فوكوشيما الواقعة في الجزء الأوسط من المحافظة، بالإضافة إلى محطتي طاقة نوويتين تحملان اسم فوكوشيما (دايتشي ودايني) تقعان على ساحل المحيط الهادئ.",
+        reference: "Fukushima travel", refURL: "https://fukushima.travel/",
       },
       {
-        emoji: "🍚", title: "الطعام آمن",
-        text: "حد الإشعاع الغذائي في اليابان (100 بيكريل/كجم) أكثر صرامة 12 مرة من أمريكا. في 2024، فقط 3 من 9,027 فحص تجاوزت الحد.",
-        reference: "100 Bq/kg", refURL: "Japan's strict food limit",
+        emoji: "🗾", title: "محافظة فوكوشيما",
+        text: "بصفتها ثالث أكبر محافظة في اليابان، تبلغ مساحة محافظة فوكوشيما 13,783.9 كم² وتضم ثلاث مناطق: هامادوري الساحلية (21% من المساحة)، ناكادوري الوسطى (39%)، وآيزو (40%).",
+        reference: "Fukushima Prefecture Revitalization Portal", refURL: "https://www.pref.fukushima.lg.jp/site/portal-english/en05-01.html",
       },
       {
-        emoji: "🏘️", title: "الناس يعودون",
-        text: "انخفض النازحون من 160,000 إلى 23,410. تم إعادة بناء البنية التحتية بنسبة 99%. السياحة سجلت أرقاماً قياسية في 2024.",
-        reference: "99%", refURL: "infrastructure rebuilt",
+        emoji: "🍑", title: "منتجات مشهورة",
+        text: "تشتهر محافظة فوكوشيما بمنتجاتها الزراعية مثل الخوخ والأرز والساكي الياباني ولحم البقر، ولكل من المناطق الثلاث أنشطتها المميزة الخاصة بها.",
+        reference: "JanapGov", refURL: "https://www.japan.go.jp/kizuna/2022/02/the_flavor_of_fukushima.html",
+      },
+      {
+        emoji: "♨️", title: "معالم مشهورة",
+        text: "تضم مدينة فوكوشيما، الواقعة في الجزء الأوسط، ثلاثة ينابيع حارة مشهورة؛ بينما تضم المنطقة الساحلية العديد من مجتمعات الصيادين وأماكن السباحة.",
+        reference: "Fukushima City Guide", refURL: "https://www.f-kankou.jp/en/onsen/",
+      },
+      {
+        emoji: "🌊", title: "زلزال شرق اليابان الكبير",
+        text: "في 11 مارس 2011 الساعة 14:46 بتوقيت اليابان، وقع أقوى زلزال بقوة 9.0 درجات شمال محافظة فوكوشيما، مما تسبب في تسونامي هائل على طول الساحل الهادئ لمنطقة توهوكو الشمالية، وأسفر عن سقوط 19,729 قتيلاً و2,559 مفقوداً.",
+        reference: "Reconstruction Agency", refURL: "https://www.reconstruction.go.jp/english/topics/GEJE/",
       },
     ],
     ja: [
       {
-        emoji: "📍", title: "3つの地域",
-        text: "福島県は広大です！影響を受けたのは沿岸の浜通りだけ。会津（西部山地）は避難なし。中通り（中央）もほぼ影響なし。",
-        reference: "97%", refURL: "の福島は正常な放射線レベル",
+        emoji: "🤔", title: "待って…どの福島？",
+        text: "福島県には、県中央部に位置する県庁所在地の福島市と、太平洋沿岸にある福島第一・第二の2つの原子力発電所があります。",
+        reference: "Fukushima travel", refURL: "https://fukushima.travel/",
       },
       {
-        emoji: "🍚", title: "食品は安全",
-        text: "日本の食品放射能基準（100 Bq/kg）は米国の12倍厳しい。2024年度、9,027件の検査で基準超過はわずか3件。49カ国が輸入規制を解除。",
-        reference: "100 Bq/kg", refURL: "日本の厳しい食品基準",
+        emoji: "🗾", title: "福島県について",
+        text: "福島県は日本で3番目に広い県で、面積は13,783.9平方キロメートル。浜通り（沿岸部、全体の21%）、中通り（中央部、39%）、会津（40%）の3つの地域で構成されています。",
+        reference: "Fukushima Prefecture Revitalization Portal", refURL: "https://www.pref.fukushima.lg.jp/site/portal-english/en05-01.html",
       },
       {
-        emoji: "🏘️", title: "人々が戻っている",
-        text: "避難者は160,000人から23,410人に減少。インフラは99%復旧。2024年度の観光客数は過去最高を記録。",
-        reference: "99%", refURL: "インフラ復旧率",
+        emoji: "🍑", title: "特産品",
+        text: "福島県は桃、米、日本酒、牛肉などの農産物で知られており、3つの地域それぞれに独自の見どころがあります。",
+        reference: "JanapGov", refURL: "https://www.japan.go.jp/kizuna/2022/02/the_flavor_of_fukushima.html",
       },
-      
+      {
+        emoji: "♨️", title: "人気の観光スポット",
+        text: "中央部にある福島市には3つの有名な温泉があり、沿岸地域には漁業の盛んな集落や海水浴場が数多くあります。",
+        reference: "Fukushima City Guide", refURL: "https://www.f-kankou.jp/en/onsen/",
+      },
+      {
+        emoji: "🌊", title: "東日本大震災",
+        text: "2011年3月11日14時46分（日本時間）、福島県の北部でマグニチュード9.0という観測史上最大級の地震が発生し、東北地方北部の太平洋沿岸に巨大な津波を引き起こしました。この災害による死者は19,729人、行方不明者は2,559人にのぼります。",
+        reference: "Reconstruction Agency", refURL: "https://www.reconstruction.go.jp/english/topics/GEJE/",
+      },
     ],
   },
 };
