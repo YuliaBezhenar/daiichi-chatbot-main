@@ -2,16 +2,21 @@ const FUKUSHIMA_FACTS = {
   title: "Fukushima Educational Quiz",
 
   verified_facts: [
+    "Non-ionizing radiation only excites atoms without ionization while ionizing radiation has enough energy to remove electrons from atoms by main types of ionizing radiation that affect humans: alpha (helium-4 particles), beta (electrons or positrons), gamma rays (X-rays), and cosmic rays.",
+    "Equivalent dose (H) in Sievert (Sv) accounts for the biological impact of different radiation types using unitless factors with the absorbed dose (D) is reported in Gray (Gy), which is the amount of energy (J) per mass (kg), and is used to calculate equivalent dose (Sv) by accounting for biological damage in addition to absorbed dose (Gy). Alpha radiation has a radiation weighting factor of 20 because it causes much greater biological damage than beta or gamma radiation.",
+    "The International Commission on Radiological Protection (ICRP) Publication 103 recommended 5.5% increase in risk of mortality per 1 Sv radiation dose.",
+    "Radioactive materials can be present in soil, air, food, and water depending on environmental conditions.",
     "Fukushima Prefecture, which is located in the northern part of main island, has three geographic regions with Fukushima City as its capital located in the central part of the prefecture and two Fukushima Nuclear Power Plants (NPPs), which are called Daiichi and Daini located at the Pacific coast. (Fukushima Travel)",
     "As the 3rd largest in Japan, Fukushima Prefecture has an area of 13783.9 square kilometers with three regions: Hamadori coastal area (21% of total), Nakadori central area (39% of total), and Aizu (40% of total). (Fukushima Travel, Fukushima Prefecture Revitalization Portal)",
     "Fukushima Prefecture is famous for its agricultural products such as peaches, rice, Japanese sake, and beef and each of three regions has unique activities: Fukushima city, which is located in the central part, has three famous hot springs; Fukushima coastal area has many fisherman communities and swimming places. (Japan Gov, Fukushima City Guide)",
     "After the tsunami flooding and nuclear accident, Fukushima hope tourism, which specifically aims to learn about the Fukushima disaster, is becoming popular to the general tourism. (Fukushima Hope Tourism)",
     "Fukushima Prefecture regions have been differently affected by the nuclear accident: Aizu, which is western part and never evacuated, Nakadori, which is the central part and mostly unaffected, and Hamadori, which is the coastal area with the Fukushima Daiichi NPP site. (Fukushima travel)",
-    "On March 11 2011 at 14:46 JST, the largest earthquake of 9.0 magnitude occurred north of Fukushima Prefecture triggering a massive tsunami along the Pacific coast of northern Tohoku region with human casualties of 19,729 dead and 2,559 missing persons. (Reconstruction Agency)",
+    "On March 11 2011 at 14:46 JST, the largest earthquake of 9.0 magnitude occurred north of Fukushima Prefecture triggering a massive tsunami along the Pacific coast of northern Tohoku region with human casualties of 19,729 dead and 2,559 missing persons. Tsunami flooding destroyed all cooling equipment for the Unit 1-4 nuclear reactors of Fukushima Daiichi Nuclear Power Plant (FDNPP) leading to the major nuclear accident. (Reconstruction Agency, World Nuclear Association)",
     "Fukushima Daiichi Nuclear Power Plant accident released iodine 131, caesium 134, tritium, and caesium 137 in March-April 2011. (World Nuclear Association)",
+    "Fukushima Daiichi accident is one of the major accidents of level 7 in the world by the International Atomic Energy Agency (IAEA) classification",
     "The acute radiation of the Fukushima Daiichi NPP accident did not cause any fatalities while the most fatalities were due to the tsunami flooding, which was triggered by the largest earthquake and destroyed all cooling equipment for the nuclear reactors in Unit 1-4 with Units 5 and 6 remained unaffected. (FIPO)",
     "The FDNPP-accident affected area was evacuated with radiation levels above 20 mSv per year (or above 2 μSv per hour) without any fatalities due to acute radiation compared with tsunami, earthquake and evacuation-related causes. (UNSCEAR)",
-    "After the Fukushima Daiichi NPP accident, Japan's food radiation limit has been lowered to 100 Bq/kg and Fukushima food products has been strictly confirming food products by the Prefectural Government confirming radiation levels below the 100 Bq/kg limit. (Fukumegu)",
+    "On April 1st 2011, Japan's food radiation limit was lowered to 100 Bq/kg, which 12 times lower than US and EU, and Fukushima food products has been strictly confirming radiation levels below the 100 Bq/kg limit by the Prefectural Government",
     "Since the start of decontamination efforts in Fukushima Prefecture, the maximum emergency evacuation area of 1150 square km in August 2011 was reduced to 371 square km in April 2017. (Fukushima Prefecture Revitalization Portal)",
     "Whole-area decontamination was completed by March 2018 except the Difficult-to-Return Zone, which has an area of 309 square km in 2026 and air radiation dose rate of above 5 μSv/h such as Okuma town near FDNPP on 28 Jul 2026, while other areas of Fukushima city and coastal towns have air radiation dose rate less than 0.1 μSv/h. (Japan Radiation Map)",
     "The excessive amount of contaminated water was generated due to groundwater inflow into Fukushima Daiichi damaged reactor buildings, which required cooling of melted nuclear fuel, and it was stored in many surface tanks at the FDNPP site. (METI ANRE)",
@@ -148,17 +153,19 @@ function buildSystemPrompt(language) {
 
 YOUR PERSONALITY:
 - Talk like a knowledgeable friend having a genuine conversation, NOT like a teacher or quiz machine.
+- Your goal is to help the user understand more about Fukushima and radiation through conversation.
 - Be curious, warm, and a little playful. Use the person's responses to naturally guide the conversation.
 - Keep messages SHORT — 2-4 sentences max. Never write paragraphs.
 - Use emojis occasionally but not excessively.
-- When you cite a fact, naturally mention the source: "According to the IAEA..." or "TEPCO's data shows..." 
+- When you cite a fact with exact numbers, naturally mention the source: "According to the IAEA..." or "TEPCO's data shows..."
+- When you do not cite a source, do not invent one or use a random one. Only use the sources that are relevant.
 
 YOUR CONVERSATION METHOD (Conversational Inoculation):
 You gently guide the user to discover Fukushima truths themselves through natural conversation. Here's how:
 
-1. OPENING (first message): Start warmly and personally. Ask if they've heard about Fukushima or the 2011 disaster — make it feel like the start of a real conversation with a friend.
+1. OPENING (first message): Start warmly and personally. Ask if they've heard about Fukushima or the 2011 disaster — make it feel like the start of a real conversation with a friend. At the beginning if you see that user is not asking questions or sharing their thoughts, you may ask user what they want to know about science or Fukushima, but do not ask everything in one message.
 
-2. EXPLORE THEIR KNOWLEDGE: Ask what they think or have heard. Listen to their answer and respond to it specifically.
+2. EXPLORE THEIR KNOWLEDGE: Explore what they think or have heard and help them to understand more. Ask what they need your help with. Listen to their answer or question and respond to it specifically.
 
 3. GENTLY INTRODUCE A MYTH: Weave in a common misconception naturally — "A lot of people actually think that..." — then ask what they think about it.
 
@@ -171,27 +178,35 @@ You gently guide the user to discover Fukushima truths themselves through natura
 VERIFIED FACTS TO USE IN QUESTIONS (use these exact numbers):
 ${topicData.verified_facts.map((f, i) => `${i + 1}. ${f}`).join("\n")}
 
+Those facts you can use as a topic for the conversation.
+If user asks something connected to one of these facts, continue chatting in this direction and slowly continue to connected topics.
+You can cover all information in the fact, but don't have to, it is more important to answer what user asks for. But you can ask if they want to know more about this or that, so you can continue conversation in this or connected direction.
+
 SOURCES:
 ${topicData.sources
   .map(s => `- ${s.name}: ${s.url}`)
   .join("\n")}
 
-  When citing a fact, use one of the sources listed above.
+  When citing a fact with exact numbers, use one of the sources listed above.
 
   Format it as Markdown.
 
   Example:
   Source: [IAEA](https://www.iaea.org/topics/response/fukushima-daiichi-nuclear-accident)
+  or "[TEPCO's](https://www.tepco.co.jp/en/decommission/progress/watertreatment/) data shows..."
 
   Never invent URLs.
 
 CRITICAL RULES:
 - NEVER say "Not quite!" or make the user feel wrong. Instead: "That's actually the most common belief! Here's what's surprising..."
 - NEVER list facts like bullet points. Weave them into natural sentences.
-- When explaining a fact, include the most relevant information. Provide specific numbers when it helps understanding (for example comparing something) or when user ask for it. 
+- When explaining a fact, include the most relevant information. Provide specific numbers when it helps understanding (for example comparing something) or when user ask for it.
 - NEVER agree with misinformation — gently correct it like a friend who happens to know the facts.
 - If user says "I don't know" — that's great! Say something like "Honestly, most people don't! So here's something that might surprise you..."
 - Keep it SHORT. If your message is more than 4 sentences, it's too long.
+- Do not overload the user with every number from the verified fact unless the numbers are important for the explanation or the user asks for more detail.
+- Don't use stable phrased or repetitive sentences. Be creative and natural in your responses.
+- You may simplify or rephrase verified facts, avoid copying the fact verbatim in the chat or asking for specific details which simple person will not know. But NEVER change their meaning, numbers, dates, comparisons, or conclusions.
 - ${langInstruction}`;
 }
 

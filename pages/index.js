@@ -124,7 +124,7 @@ const FACT_SHEETS = {
       },
       {
         emoji: "🍚", title: "Food Safety",
-        text: "After the FDNPP accident, Japan's food radiation limit has been lowered to 100 Bq/kg and Fukushima food products has been strictly confirming food products by the Prefectural Government confirming radiation levels below the 100 Bq/kg limit.",
+        text: "On April 1st 2011, Japan's food radiation limit was lowered to 100 Bq/kg, which 12 times lower than US and EU, and Fukushima food products has been strictly confirming radiation levels below the 100 Bq/kg limit by the Prefectural Government",
         reference: "Fukumegu", refURL: "https://fukumegu.org/ok/contentsV2/",
       },
       {
@@ -151,7 +151,7 @@ const FACT_SHEETS = {
       },
       {
         emoji: "🍚", title: "سلامة الغذاء",
-        text: "بعد حادث FDNPP، تم خفض الحد الأقصى المسموح به للإشعاع في الغذاء في اليابان إلى 100 بيكريل/كجم، وتقوم حكومة المحافظة بفحص منتجات فوكوشيما الغذائية بدقة للتأكد من أن مستويات الإشعاع أقل من هذا الحد.",
+        text: "في الأول من أبريل 2011، خفّضت اليابان الحد الأقصى المسموح به لمستويات الإشعاع في الأغذية إلى 100 بيكريل/كجم —وهو مستوى يقل بمقدار 12 ضعفاً عن المعايير المطبقة في الولايات المتحدة والاتحاد الأوروبي— حيث تضمن حكومة المحافظة التزام المنتجات الغذائية القادمة من فوكوشيما بصرامة بمستويات إشعاع تقل عن هذا الحد.",
         reference: "Fukumegu", refURL: "https://fukumegu.org/ok/contentsV2/",
       },
       {
@@ -178,7 +178,7 @@ const FACT_SHEETS = {
       },
       {
         emoji: "🍚", title: "食品の安全性",
-        text: "FDNPP事故後、日本の食品放射能基準は100 Bq/kgに引き下げられ、福島県では県が食品を厳しく検査し、放射線量がこの基準を下回っていることを確認しています。",
+        text: "2011年4月1日、日本の食品中の放射性物質の基準値は100Bq/kgに引き下げられました。これは米国やEUの基準値と比べて12倍も厳しい水準であり、福島県産の食品については、県によって放射性物質の濃度がこの100Bq/kgという基準値を下回っていることが厳格に確認されています。",
         reference: "Fukumegu", refURL: "https://fukumegu.org/ok/contentsV2/",
       },
       {
@@ -215,6 +215,11 @@ const FACT_SHEETS = {
         text: "The ALPS-treated water discharge is diluted by ocean water to have tritium concentrations below 1,500 Bq/L, which is 1/40 of the regulatory limit and 1/7 of WHO drinking water guideline (10,000 Bq/L), to be independently monitored by the IAEA.",
         reference: "IAEA", refURL: "https://www.iaea.org/topics/response/fukushima-daiichi-nuclear-accident/fukushima-daiichi-alps-treated-water-discharge",
       },
+      {
+        emoji: "🖥️", title: "Ocean tritium modeling",
+        text: "Anthropogenic tritium releases from the FDNPP site to the Pacific ocean were modeled by the ocean general circulation model COCO4.9 demonstrating anthropogenic tritium levels below detection levels except the release point",
+        reference: "Cauqouin et al., 2025", refURL: "10.1016/j.marpolbul.2025.118294",
+      },
     ],
     ar: [
       {
@@ -237,6 +242,11 @@ const FACT_SHEETS = {
         text: "يُخفَّف تصريف المياه المعالجة بنظام ALPS بمياه المحيط بحيث تصل تركيزات التريتيوم إلى أقل من 1,500 بيكريل/لتر، وهو ما يعادل 1/40 من الحد التنظيمي و1/7 من إرشادات منظمة الصحة العالمية لمياه الشرب (10,000 بيكريل/لتر)، وتخضع العملية لمراقبة مستقلة من الوكالة الدولية للطاقة الذرية.",
         reference: "IAEA", refURL: "https://www.iaea.org/topics/response/fukushima-daiichi-nuclear-accident/fukushima-daiichi-alps-treated-water-discharge",
       },
+      {
+        emoji: "🖥️", title: "نمذجة التريتيوم في المحيطات",
+        text: "تمت محاكاة انبعاثات التريتيوم الناتجة عن الأنشطة البشرية من موقع محطة فوكوشيما دايتشي للطاقة النووية إلى المحيط الهادئ باستخدام نموذج الدوران العام للمحيطات COCO4.9، مما أظهر مستويات التريتيوم الناتجة عن الأنشطة البشرية أقل من مستويات الكشف باستثناء نقطة الانبعاث.",
+        reference: "Cauqouin et al., 2025", refURL: "10.1016/j.marpolbul.2025.118294",
+      },
     ],
     ja: [
       {
@@ -258,6 +268,11 @@ const FACT_SHEETS = {
         emoji: "🌍", title: "水質モニタリング",
         text: "ALPS処理水は海水で希釈され、トリチウム濃度は1,500 Bq/L未満に抑えられます。これは規制基準値の1/40、WHO飲料水ガイドライン（10,000 Bq/L）の1/7に相当し、IAEAによる独立した監視が行われています。",
         reference: "IAEA", refURL: "https://www.iaea.org/topics/response/fukushima-daiichi-nuclear-accident/fukushima-daiichi-alps-treated-water-discharge",
+      },
+      {
+        emoji: "🖥️", title: "海洋におけるトリチウムのモデリング",
+        text: "海洋大循環モデルCOCO4.9を用いて、福島第一原子力発電所から太平洋への人為起源トリチウムの放出をモデル化した結果、放出点を除き、人為起源トリチウムの濃度は検出限界未満であることが示された。",
+        reference: "Cauqouin et al., 2025", refURL: "10.1016/j.marpolbul.2025.118294",
       },
     ],
   },
