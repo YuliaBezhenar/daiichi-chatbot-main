@@ -361,6 +361,54 @@ const FACT_SHEETS = {
   },
 };
 
+const SURVEY_QUESTIONS = [
+  {
+    id: "q1",
+    question: "Question 1",
+    options: [
+      "Answer 1",
+      "Answer 2",
+      "Answer 3",
+    ],
+  },
+  {
+    id: "q2",
+    question: "Question 2",
+    options: [
+      "Answer 1",
+      "Answer 2",
+      "Answer 3",
+    ],
+  },
+  {
+    id: "q3",
+    question: "Question 3",
+    options: [
+      "Answer 1",
+      "Answer 2",
+      "Answer 3",
+    ],
+  },
+  {
+    id: "q4",
+    question: "Question 4",
+    options: [
+      "Answer 1",
+      "Answer 2",
+      "Answer 3",
+    ],
+  },
+  {
+    id: "q5",
+    question: "Question 5",
+    options: [
+      "Answer 1",
+      "Answer 2",
+      "Answer 3",
+    ],
+  },
+];
+
 const markdownComponents = {
   a: ({ node, ...props }) => (
     <a {...props} target="_blank" rel="noopener noreferrer" style={styles.mdLink} />
@@ -385,6 +433,9 @@ export default function Home() {
   const chatEndRef = useRef(null);
   const inputRef = useRef(null);
   const countdownRef = useRef(null);
+  const [showSurvey, setShowSurvey] = useState(false);
+  const [surveyAnswers, setSurveyAnswers] = useState({});
+  const [submittingSurvey, setSubmittingSurvey] = useState(false);
 
   const t = UI_TEXT[language];
   const dir = LANGUAGES[language].dir;
@@ -514,6 +565,10 @@ useEffect(() => {
     setShowChat(false);
   }
 
+  function handleShareConversation() {
+    setShowSurvey(true);
+  }
+
   async function submitConversation() {
 
     if (messages.length === 0) return;
@@ -556,6 +611,38 @@ useEffect(() => {
 
     }
 
+  }
+
+  async function submitSurvey() {
+    try {
+      setSubmittingSurvey(true);
+
+      const res = await fetch("/api/submit-survey", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sessionId,
+          language,
+          answers: surveyAnswers,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Unknown error");
+      }
+
+      setShowSurvey(false);
+      setShowConsent(true);
+
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setSubmittingSurvey(false);
+    }
   }
 
   async function handleNewConversation() {
@@ -768,7 +855,7 @@ useEffect(() => {
                   messages.length === 0 ||
                   submittingConversation
                 }
-                onClick={() => setShowConsent(true)}
+                onClick={handleShareConversation}
               />
             </div>
           </div>
@@ -850,6 +937,87 @@ useEffect(() => {
             </div>
           </div>
         )}
+
+        {showSurvey && (
+          <div style={styles.modalOverlay}>
+            <div
+              style={styles.modal}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div style={styles.modalHeader}>
+                <h2 style={styles.modalTitle}>
+                  Share your experience
+                </h2>
+              </div>
+
+              <div style={styles.modalBody}>
+
+                <p style={styles.welcomeCaption}>
+                  We would be grateful if you could answer a few questions
+                  first and share your experience and impressions of using
+                  the chatbot.
+                </p>
+
+                {SURVEY_QUESTIONS.map((question) => (
+                  <div
+                    key={question.id}
+                    style={{ marginBottom: "24px" }}
+                  >
+                    <p style={{ fontWeight: "600" }}>
+                      {question.question}
+                    </p>
+
+                    {question.options.map((option) => (
+                      <label
+                        key={option}
+                        style={styles.welcomeCheckboxRow}
+                      >
+                        <input
+                          type="radio"
+                          name={question.id}
+                          value={option}
+                          checked={surveyAnswers[question.id] === option}
+                          onChange={(e) =>
+                            setSurveyAnswers({
+                              ...surveyAnswers,
+                              [question.id]: e.target.value,
+                            })
+                          }
+                        />
+
+                        {option}
+                      </label>
+                    ))}
+                  </div>
+                ))}
+
+                <button
+                  onClick={submitSurvey}
+                  disabled={
+                    SURVEY_QUESTIONS.some(
+                      (question) => !surveyAnswers[question.id]
+                    ) || submittingSurvey
+                  }
+                  style={
+                    SURVEY_QUESTIONS.every(
+                      (question) => surveyAnswers[question.id]
+                    )
+                      ? styles.welcomeButton
+                      : {
+                          ...styles.welcomeButton,
+                          opacity: 0.5,
+                          cursor: "not-allowed",
+                        }
+                  }
+                >
+                  {submittingSurvey ? "Submitting..." : "Continue"}
+                </button>
+
+              </div>
+            </div>
+          </div>
+        )}
+
         <ConsentModal
           open={showConsent}
           language={language}

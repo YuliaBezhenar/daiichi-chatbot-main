@@ -24,9 +24,10 @@ export default async function handler(req, res) {
   try {
 
     const apiKey = process.env.GEMINI_API_KEY;
+    const model = "gemini-3.6-flash";
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
       {
         method: "POST",
         headers: {
@@ -86,19 +87,15 @@ export default async function handler(req, res) {
 
       language: language,
 
+      model: model,
+
       completed: true,
 
       updated_at: new Date().toISOString(),
 
       age: analysis.age,
 
-      knowledge: analysis.knowledge,
-
-      knowledge_score: analysis.knowledge_score,
-
       misconceptions: analysis.misconceptions,
-
-      sources_of_knowledge: analysis.sources_of_knowledge,
 
       notes: analysis.notes,
 
