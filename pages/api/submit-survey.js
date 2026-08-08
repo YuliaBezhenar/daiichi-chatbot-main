@@ -1,18 +1,15 @@
 import supabase from "../../lib/supabase";
 
-export default async function handler(req, res) {
+const SURVEY_QUESTION_IDS = ["q1", "q2", "q3", "q4", "q5"];
 
+export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({
       error: "Method not allowed",
     });
   }
 
-  const {
-    sessionId,
-    language,
-    answers,
-  } = req.body;
+  const { sessionId, language, answers } = req.body;
 
   if (!sessionId || !answers) {
     return res.status(400).json({
@@ -20,19 +17,28 @@ export default async function handler(req, res) {
     });
   }
 
-  try {
+  const missing = SURVEY_QUESTION_IDS.filter((id) => !answers[id]);
+  if (missing.length > 0) {
+    return res.status(400).json({
+      error: `Missing answers for: ${missing.join(", ")}`,
+    });
+  }
 
+  try {
     const { error } = await supabase
       .from("chat_surveys")
       .insert({
         session_id: sessionId,
         language: language,
-        answers: answers,
+        q1: answers.q1,
+        q2: answers.q2,
+        q3: answers.q3,
+        q4: answers.q4,
+        q5: answers.q5,
       });
 
     if (error) {
       console.error(error);
-
       return res.status(500).json({
         error: error.message,
       });
@@ -41,12 +47,9 @@ export default async function handler(req, res) {
     return res.status(200).json({
       success: true,
     });
-
   } catch (err) {
-
     return res.status(500).json({
       error: err.message,
     });
-
   }
 }

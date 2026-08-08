@@ -70,6 +70,10 @@ export const UI_TEXT = {
     welcomeSubtitle: "*Make sure to complere the survey. After pressing this button you will be switched to main chatbot screen and will not be able to take the survey anymore.",
     welcomeButton: "Proceed to Daiichi",
     urltex: "Or open the survey via this URL",
+    surveyTitle: "Share your experience",
+    surveyCaption: "We would be grateful if you could answer a few questions first and share your experience and impressions of using the chatbot.",
+    surveyContinue: "Continue",
+    surveySubmitting: "Submitting...",
   },
   ar: {
     title: "دايتشي",
@@ -88,6 +92,10 @@ export const UI_TEXT = {
     welcomeSubtitle: "بعد الضغط على هذا الزر، سيتم نقلك إلى الشاشة الرئيسية لروبوت المحادثة ولن تتمكن من إجراء الاستبيان بعد الآن.",
     welcomeButton: "توجه إلى داييتشي",
     urltex: "أو افتح الاستبيان عبر هذا الرابط.",
+    surveyTitle: "شارك تجربتك",
+    surveyCaption: "سنكون ممتنين لو تكرمت بالإجابة عن بعض الأسئلة أولاً ومشاركة تجربتك وانطباعاتك حول استخدام روبوت الدردشة.",
+    surveyContinue: "متابعة",
+    surveySubmitting: "جارٍ الإرسال...",
   },
   ja: {
     title: "ダイイチ",
@@ -106,6 +114,10 @@ export const UI_TEXT = {
     welcomeSubtitle: "このボタンを押すと、メインのチャットボット画面に切り替わり、アンケートには回答できなくなります。",
     welcomeButton: "ダイイチへお進みください。",
     urltex: "または、こちらのURLからアンケートを開いてください。",
+    surveyTitle: "ご感想をお聞かせください",
+    surveyCaption: "まずいくつかの質問にお答えいただき、チャットボットのご利用に関するご感想やご意見をお聞かせいただけますと幸いです。",
+    surveyContinue: "続ける",
+    surveySubmitting: "送信中...",
   },
 };
 
@@ -361,53 +373,60 @@ const FACT_SHEETS = {
   },
 };
 
-const SURVEY_QUESTIONS = [
-  {
-    id: "q1",
-    question: "Question 1",
-    options: [
-      "Answer 1",
-      "Answer 2",
-      "Answer 3",
-    ],
-  },
-  {
-    id: "q2",
-    question: "Question 2",
-    options: [
-      "Answer 1",
-      "Answer 2",
-      "Answer 3",
-    ],
-  },
-  {
-    id: "q3",
-    question: "Question 3",
-    options: [
-      "Answer 1",
-      "Answer 2",
-      "Answer 3",
-    ],
-  },
-  {
-    id: "q4",
-    question: "Question 4",
-    options: [
-      "Answer 1",
-      "Answer 2",
-      "Answer 3",
-    ],
-  },
-  {
-    id: "q5",
-    question: "Question 5",
-    options: [
-      "Answer 1",
-      "Answer 2",
-      "Answer 3",
-    ],
-  },
-];
+const SURVEY_QUESTIONS = {
+  en: [
+    { id: "q1",
+      question:
+      "Question 1",
+      options: ["Answer 1", "Answer 2", "Answer 3"] },
+    { id:"q2",
+      question: "Question 2",
+      options: ["Answer 1", "Answer 2", "Answer 3"] },
+    { id: "q3",
+      question: "Question 3",
+      options: ["Answer 1", "Answer 2", "Answer 3"] },
+    { id: "q4",
+      question: "Question 4",
+      options: ["Answer 1", "Answer 2", "Answer 3"] },
+    { id: "q5",
+      question: "Question 5",
+      options: ["Answer 1", "Answer 2", "Answer 3"] },
+  ],
+  ar: [
+    { id: "q1",
+      question: "السؤال 1",
+      options: ["الإجابة 1", "الإجابة 2", "الإجابة 3"] },
+    { id: "q2",
+      question: "السؤال 2",
+      options: ["الإجابة 1", "الإجابة 2", "الإجابة 3"] },
+    { id: "q3",
+      question: "السؤال 3",
+      options: ["الإجابة 1", "الإجابة 2", "الإجابة 3"] },
+    { id: "q4",
+      question: "السؤال 4",
+      options: ["الإجابة 1", "الإجابة 2", "الإجابة 3"] },
+    { id: "q5",
+      question: "السؤال 5",
+      options: ["الإجابة 1", "الإجابة 2", "الإجابة 3"] },
+  ],
+  ja: [
+    { id: "q1",
+      question: "質問1",
+      options: ["回答1", "回答2", "回答3"] },
+    { id: "q2",
+      question: "質問2",
+      options: ["回答1", "回答2", "回答3"] },
+    { id: "q3",
+      question: "質問3",
+      options: ["回答1", "回答2", "回答3"] },
+    { id: "q4",
+      question: "質問4",
+      options: ["回答1", "回答2", "回答3"] },
+    { id: "q5",
+      question: "質問5",
+      options: ["回答1", "回答2", "回答3"] },
+  ],
+};
 
 const markdownComponents = {
   a: ({ node, ...props }) => (
@@ -940,79 +959,68 @@ useEffect(() => {
 
         {showSurvey && (
           <div style={styles.modalOverlay}>
-            <div
-              style={styles.modal}
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
               <div style={styles.modalHeader}>
-                <h2 style={styles.modalTitle}>
-                  Share your experience
-                </h2>
+                <h2 style={styles.modalTitle}>{t.surveyTitle}</h2>
               </div>
 
               <div style={styles.modalBody}>
+                <p style={styles.welcomeCaption}>{t.surveyCaption}</p>
 
-                <p style={styles.welcomeCaption}>
-                  We would be grateful if you could answer a few questions
-                  first and share your experience and impressions of using
-                  the chatbot.
-                </p>
-
-                {SURVEY_QUESTIONS.map((question) => (
-                  <div
-                    key={question.id}
-                    style={{ marginBottom: "24px" }}
-                  >
-                    <p style={{ fontWeight: "600" }}>
-                      {question.question}
+                {(SURVEY_QUESTIONS[language] || SURVEY_QUESTIONS.en).map((question, qIndex) => (
+                  <div key={question.id} style={styles.surveyQuestionCard}>
+                    <p style={styles.surveyQuestionTitle}>
+                      {qIndex + 1}. {question.question}
                     </p>
-
-                    {question.options.map((option) => (
-                      <label
-                        key={option}
-                        style={styles.welcomeCheckboxRow}
-                      >
-                        <input
-                          type="radio"
-                          name={question.id}
-                          value={option}
-                          checked={surveyAnswers[question.id] === option}
-                          onChange={(e) =>
-                            setSurveyAnswers({
-                              ...surveyAnswers,
-                              [question.id]: e.target.value,
-                            })
-                          }
-                        />
-
-                        {option}
-                      </label>
-                    ))}
+                    <div style={styles.surveyOptionsList}>
+                      {question.options.map((option) => {
+                        const selected = surveyAnswers[question.id] === option;
+                        return (
+                          <label
+                            key={option}
+                            style={{
+                              ...styles.surveyOptionRow,
+                              ...(selected ? styles.surveyOptionRowSelected : {}),
+                            }}
+                          >
+                            <input
+                              type="radio"
+                              name={question.id}
+                              value={option}
+                              checked={selected}
+                              onChange={(e) =>
+                                setSurveyAnswers({
+                                  ...surveyAnswers,
+                                  [question.id]: e.target.value,
+                                })
+                              }
+                              style={styles.surveyRadio}
+                            />
+                            <span>{option}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
                   </div>
                 ))}
 
                 <button
                   onClick={submitSurvey}
                   disabled={
-                    SURVEY_QUESTIONS.some(
+                    (SURVEY_QUESTIONS[language] || SURVEY_QUESTIONS.en).some(
                       (question) => !surveyAnswers[question.id]
                     ) || submittingSurvey
                   }
                   style={
-                    SURVEY_QUESTIONS.every(
+                    (SURVEY_QUESTIONS[language] || SURVEY_QUESTIONS.en).every(
                       (question) => surveyAnswers[question.id]
                     )
                       ? styles.welcomeButton
-                      : {
-                          ...styles.welcomeButton,
-                          opacity: 0.5,
-                          cursor: "not-allowed",
-                        }
+                      : { ...styles.welcomeButton, opacity: 0.5, cursor: "not-allowed" }
                   }
                 >
-                  {submittingSurvey ? "Submitting..." : "Continue"}
+                  {submittingSurvey ? t.surveySubmitting : t.surveyContinue}
                 </button>
-
               </div>
             </div>
           </div>
@@ -1102,4 +1110,10 @@ const styles = {
   factRef: { display: "flex", alignItems: "baseline", gap: 8, padding: "10px 14px", background: "#d8f3dc", borderRadius: 10 },
   factReference: { fontSize: 16, color: "#2d6a4f", fontWeight: 600, textDecoration: "underline", wordBreak: "break-word" },
   shareContainer: { padding: "0 16px 12px",  background: "#fff", },
+  surveyQuestionCard: { background: "#fff", borderRadius: 14, padding: "16px 18px", border: "1px solid #d8f3dc", boxShadow: "0 2px 8px rgba(26,58,42,0.06)", },
+  surveyQuestionTitle: { fontSize: 15, fontWeight: 700, color: "#1a3a2a", marginBottom: 10, },
+  surveyOptionsList: { display: "flex", flexDirection: "column", gap: 8, },
+  surveyOptionRow: { display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", borderRadius: 10, border: "1px solid #d8f3dc", background: "#f7fbf8", fontSize: 14, color: "#1a3a2a", cursor: "pointer", transition: "all 0.15s", },
+  surveyOptionRowSelected: { background: "#d8f3dc", borderColor: "#74c69d", fontWeight: 600, },
+  surveyRadio: { accentColor: "#2d6a4f", width: 16, height: 16, flexShrink: 0, },
 };
