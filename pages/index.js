@@ -1115,5 +1115,5 @@ const styles = {
   surveyOptionsList: { display: "flex", flexDirection: "column", gap: 8, },
   surveyOptionRow: { display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", borderRadius: 10, border: "1px solid #d8f3dc", background: "#f7fbf8", fontSize: 14, color: "#1a3a2a", cursor: "pointer", transition: "all 0.15s", },
   surveyOptionRowSelected: { background: "#d8f3dc", borderColor: "#74c69d", fontWeight: 600, },
-  surveyRadio: { accentColor: "#2d6a4f", width: 16, height: 16, flexShrink: 0, },
+  surveyRadio: { accentColor: "#2d6a4f", width: 16, height: 16, flexShrink: 0,},
 };
