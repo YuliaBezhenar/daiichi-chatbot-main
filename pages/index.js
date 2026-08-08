@@ -890,13 +890,13 @@ useEffect(() => {
                 <p style={styles.welcomeCaption}>{t.welcomeCaption}</p>
                 <div style={styles.welcomeImagePlaceholder}>
                   <img 
-                    src="/img/QRcode1.jpeg"
+                    src="/img/QRCode-OnlineSurvey-MG-8Aug2026.png"
                     alt="📷"
                     style={styles.welcomeImage}
                   />                  
                 </div>
                 <a
-                href="https://forms.gle/chvR55UbcLxisTQv9"
+                href="https://forms.gle/6xQWtggMdUntS5Uk8"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={styles.welcomeURL}>
