@@ -551,30 +551,31 @@ useEffect(() => {
   fetchUsage();
 }, []);
 
-  async function callAPI(msgs, lang) {
-    const res = await fetch("/api/chat", {
+async function callAPI(msgs, lang) {
+  const res = await fetch("/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ messages: msgs, language: lang }),
+  });
+  const data = await res.json();
+  if (data.usage) setUsage(data.usage); // ← додати цей рядок
+
+  if (res.status === 429 && data.retryAfter) {
+    const waitSec = Math.min(data.retryAfter + 2, 30);
+    setCountdown(waitSec);
+    await new Promise((resolve) => setTimeout(resolve, waitSec * 1000));
+    setCountdown(0);
+    const res2 = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ messages: msgs, language: lang }),
     });
-    const data = await res.json();
-    if (data.usage) setUsage(data.usage);
-    if (res.status === 429 && data.retryAfter) {
-      const waitSec = Math.min(data.retryAfter + 2, 30);
-      setCountdown(waitSec);
-      await new Promise((resolve) => setTimeout(resolve, waitSec * 1000));
-      setCountdown(0);
-      const res2 = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: msgs, language: lang }),
-      });
-      const data2 = await res2.json();
-      if (data2.usage) setUsage(data2.usage);
-      return data2;
-    }
-    return data;
+    const data2 = await res2.json();
+    if (data2.usage) setUsage(data2.usage); // ← і тут теж
+    return data2;
   }
+  return data;
+}
 
   async function startQuiz() {
     setShowChat(true);
