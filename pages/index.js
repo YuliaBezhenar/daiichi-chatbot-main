@@ -56,7 +56,8 @@ export const UI_TEXT = {
   en: {
     title: "Daiichi",
     subtitle: "Fukushima Myth-Buster Chatbot",
-    OpenChatMessage: "This is the Daiichi main page to start learning with chatbot or Fukushima related facts.",
+    mainpagetitle: "Welcome to the main page!",
+    OpenChatMessage: "Please start Daiichi chatbot to bust Fukushima myths:",
     typeMessage: "Type your answer...",
     send: "Send",
     powered: "Built at IER, Fukushima University",
@@ -74,11 +75,14 @@ export const UI_TEXT = {
     surveyCaption: "We would be grateful if you could answer a few questions first and share your experience and impressions of using the chatbot.",
     surveyContinue: "Continue",
     surveySubmitting: "Submitting...",
+    usageLabel: "Daily API requests",
+    usageLimitReached: "Limit reached — try again tomorrow",
   },
   ar: {
     title: "دايتشي",
     subtitle: "روبوت تصحيح خرافات فوكوشيما",
-    OpenChatMessage: "افتح روبوت الدردشة لبدء التعلم:",
+    mainpagetitle: "مرحباً بك في الصفحة الرئيسية!",
+    OpenChatMessage: "يرجى بدء روبوت الدردشة دايتشي لتصحيح خرافات فوكوشيما:",
     typeMessage: "اكتب إجابتك...",
     send: "إرسال",
     powered: "تم بناؤه في IER، جامعة فوكوشيما",
@@ -96,11 +100,15 @@ export const UI_TEXT = {
     surveyCaption: "سنكون ممتنين لو تكرمت بالإجابة عن بعض الأسئلة أولاً ومشاركة تجربتك وانطباعاتك حول استخدام روبوت الدردشة.",
     surveyContinue: "متابعة",
     surveySubmitting: "جارٍ الإرسال...",
+    usageLabel: "طلبات API اليومية",
+    usageLimitReached: "تم الوصول إلى الحد الأقصى — حاول مرة أخرى غدًا",
+
   },
   ja: {
     title: "ダイイチ",
     subtitle: "福島の誤解を正すチャットボット",
-    OpenChatMessage: "チャットボットを開いて学び始めよう：",
+    mainpagetitle: "メインページへようこそ！",
+    OpenChatMessage: "福島の神話を解き明かすために、ダイイチ・チャットボットを開始してください：",
     typeMessage: "回答を入力...",
     send: "送信",
     powered: "福島大学IERで開発",
@@ -118,6 +126,8 @@ export const UI_TEXT = {
     surveyCaption: "まずいくつかの質問にお答えいただき、チャットボットのご利用に関するご感想やご意見をお聞かせいただけますと幸いです。",
     surveyContinue: "続ける",
     surveySubmitting: "送信中...",
+    usageLabel: "本日のAPIリクエスト数",
+    usageLimitReached: "上限に達しました。明日もう一度お試しください",
   },
 };
 
@@ -439,6 +449,27 @@ const SURVEY_QUESTIONS = {
   ],
 };
 
+const USAGE_INSTRUCTIONS = {
+  en: [
+    {
+      emoji: "💬", title: "Chat with the bot",
+      text: "Type your questions or answers in the input box and press Enter or click the Send button to communicate with the chatbot.",
+    }
+  ],
+  ar: [
+    {
+      emoji: "💬", title: "الدردشة مع الروبوت",
+      text: "اكتب أسئلتك أو إجاباتك في صندوق الإدخال واضغط على Enter أو انقر على زر الإرسال للتواصل مع الروبوت المحادث.",
+    }
+  ],
+  ja: [
+    {
+      emoji: "💬", title: "ボットとチャット",
+      text: "入力ボックスに質問や回答を入力し、Enterキーを押すか[送信]ボタンをクリックして、チャットボットとコミュニケーションを取ってください。",
+    }
+  ],
+};
+
 const markdownComponents = {
   a: ({ node, ...props }) => (
     <a {...props} target="_blank" rel="noopener noreferrer" style={styles.mdLink} />
@@ -466,6 +497,7 @@ export default function Home() {
   const [showSurvey, setShowSurvey] = useState(false);
   const [surveyAnswers, setSurveyAnswers] = useState({});
   const [submittingSurvey, setSubmittingSurvey] = useState(false);
+  const [usage, setUsage] = useState(null); // { count, limit, date }
 
   const t = UI_TEXT[language];
   const dir = LANGUAGES[language].dir;
@@ -505,7 +537,19 @@ useEffect(() => {
   saveLanguage(language);
 }, [language]);
 
+async function fetchUsage() {
+  try {
+    const res = await fetch("/api/usage");
+    const data = await res.json();
+    setUsage(data);
+  } catch (err) {
+    console.error("fetchUsage error:", err);
+  }
+}
 
+useEffect(() => {
+  fetchUsage();
+}, []);
 
   async function callAPI(msgs, lang) {
     const res = await fetch("/api/chat", {
@@ -514,6 +558,7 @@ useEffect(() => {
       body: JSON.stringify({ messages: msgs, language: lang }),
     });
     const data = await res.json();
+    if (data.usage) setUsage(data.usage);
     if (res.status === 429 && data.retryAfter) {
       const waitSec = Math.min(data.retryAfter + 2, 30);
       setCountdown(waitSec);
@@ -524,7 +569,9 @@ useEffect(() => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: msgs, language: lang }),
       });
-      return await res2.json();
+      const data2 = await res2.json();
+      if (data2.usage) setUsage(data2.usage);
+      return data2;
     }
     return data;
   }
@@ -627,10 +674,9 @@ useEffect(() => {
       }
 
       setShowConsent(false);
-
       console.log(data);
-
       alert("Thank you! Your conversation has been submitted.");
+      fetchUsage();
 
     } catch (err) {
 
@@ -735,7 +781,7 @@ useEffect(() => {
       <Head>
         <title>Daiichi — Fukushima Myth-Buster</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Quiz-based AI chatbot that busts Fukushima myths." />
+        <meta name="description" content="AI chatbot that busts Fukushima myths." />
       </Head>
 
       <div style={{ ...styles.container, direction: dir }}>
@@ -774,7 +820,7 @@ useEffect(() => {
             <div style={styles.heroSection}>
               <div style={styles.heroEmoji}>🌿</div>
               <h2 style={styles.heroTitle}>
-                {t.title}
+                {t.mainpagetitle}
               </h2>
               <p style={styles.heroDesc}>
                 {t.OpenChatMessage}
@@ -1061,6 +1107,29 @@ useEffect(() => {
         />
       </div>
 
+      {showChat && usage && (
+        <div className="usage-widget" style={styles.usageWidget}>
+          <div style={styles.usageCard}>
+            <span style={styles.usageLabel}>{t.usageLabel}</span>
+            <span style={styles.usageValue}>
+              {usage.count} / {usage.limit}
+            </span>
+            <div style={styles.usageBarTrack}>
+              <div
+                style={{
+                  ...styles.usageBarFill,
+                  width: `${Math.min(100, (usage.count / usage.limit) * 100)}%`,
+                  background: usage.count >= usage.limit ? "#e63946" : "#2d6a4f",
+                }}
+              />
+            </div>
+            {usage.count >= usage.limit && (
+              <span style={styles.usageWarning}>{t.usageLimitReached}</span>
+            )}
+          </div>
+        </div>
+      )}
+
       <style jsx global>{`
         @keyframes blink {
           0%, 80%, 100% { opacity: 0.3; }
@@ -1068,6 +1137,14 @@ useEffect(() => {
         }
         .md-content p:last-child {
           margin-bottom: 0;
+        }
+        .usage-widget {
+          display: none;
+        }
+        @media (min-width: 1150px) {
+          .usage-widget {
+            display: block;
+          }
         }
       `}</style>
     </>
@@ -1144,4 +1221,11 @@ const styles = {
   surveyOptionRowSelected: { background: "#d8f3dc", borderColor: "#74c69d", fontWeight: 600, },
   surveyRadio: { accentColor: "#2d6a4f", width: 16, height: 16, flexShrink: 0,},
   surveyTextarea: { width: "100%", padding: "10px 14px", borderRadius: 10, border: "1px solid #d8f3dc", background: "#f7fbf8", fontSize: 14, color: "#1a3a2a", fontFamily: "inherit", resize: "vertical", outline: "none", boxSizing: "border-box" },
+  usageWidget: { position: "fixed", top: 90, right: 24, zIndex: 50 },
+  usageCard: { background: "#fff", borderRadius: 14, padding: "14px 18px", border: "1px solid #d8f3dc", boxShadow: "0 4px 16px rgba(26,58,42,0.1)", display: "flex", flexDirection: "column", gap: 6, width: 180 },
+  usageLabel: { fontSize: 12, color: "#6b8f7a", fontWeight: 600 },
+  usageValue: { fontSize: 18, fontWeight: 700, color: "#1a3a2a" },
+  usageBarTrack: { width: "100%", height: 6, background: "#d8f3dc", borderRadius: 4, overflow: "hidden" },
+  usageBarFill: { height: "100%", borderRadius: 4, transition: "width 0.3s" },
+  usageWarning: { fontSize: 11, color: "#e63946", fontWeight: 600 },
 };

@@ -1,3 +1,5 @@
+import { incrementApiUsage, getApiUsage, DAILY_REQUEST_LIMIT } from "../../lib/apiUsage";
+
 const FUKUSHIMA_FACTS = {
   title: "Fukushima Educational Quiz",
 
@@ -236,6 +238,14 @@ export default async function handler(req, res) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return res.status(500).json({ error: "GEMINI_API_KEY not configured" });
+  }
+
+  const usageBefore = await getApiUsage();
+  if (usageBefore.count >= DAILY_REQUEST_LIMIT) {
+    return res.status(429).json({
+      error: "Daily request limit reached. Please try again tomorrow.",
+      usage: usageBefore,
+    });
   }
 
   const systemPrompt = buildSystemPrompt(language || "en");
