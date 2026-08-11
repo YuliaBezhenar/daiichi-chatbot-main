@@ -56,7 +56,7 @@ export const UI_TEXT = {
   en: {
     title: "Daiichi",
     subtitle: "Fukushima Myth-Buster Chatbot",
-    OpenChatMessage: "This is the main page of Daiichi Chatbot with four menu options to start learning. The upper left will open AI chatbot (with limited requests) and the other three menu options give you facts with sources about Fukushima Information, Nuclear Accident and Ocean Situation.",
+    OpenChatMessage: "This is the Daiichi main page to start learning with chatbot or Fukushima related facts.",
     typeMessage: "Type your answer...",
     send: "Send",
     powered: "Built at IER, Fukushima University",
