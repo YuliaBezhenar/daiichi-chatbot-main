@@ -454,21 +454,105 @@ const SURVEY_QUESTIONS = {
 const USAGE_INSTRUCTIONS = {
   en: [
     {
+      emoji: "🏠", title: "Main page",
+      text: "The Daiichi main page has the header, the AI chatbot panel titled “Start Fukushima chatbot”, and three information panels as pop-up windows.",
+    },
+    {
+      emoji: "🌐", title: "Change the language",
+      text: "The header displays a unique session identifier and English, Arabic, and Japanese language buttons, that you can use to switch the language of the interface and chatbot. But if you switch the language, your chat will be reset and you will start a new conversation with the chatbot.",
+    },
+    {
+      emoji: "📚", title: "Discover information about Fukushima",
+      text: "Each of three pop-up windows has five Fukushima-related facts and these facts are divided into general information “Fukushima Information”, nuclear power plant accident “Nuclear Accident”, and ALPS-treated water discharge “Ocean Situation”.",
+    },
+    {
+      emoji: "🤖", title: "Open the chatbot",
+      text: "“Start Fukushima chatbot” panel opens the User and the AI dialogue page with the free version of the Gemini Flash 3.6 model, which has a limit of 20 requests per day.",
+    },
+    {
+      emoji: "🔙", title: "Return to the main page",
+      text: "The “Menu” button, provided in the chatbot header, allows the User to check Fukushima-related facts on the main page and return to the same conversation with the chatbot. Your conversation will be saved in the browser’s local storage even if you leave to the main page and you can continue it later.",
+    },
+    {
+      emoji: "🔄", title: "Start a new conversation",
+      text: "You can begin a new conversation “New Conversation”, provided in the chatbot header. The unique session identifier will be refreshed after that.",
+    },
+    {
       emoji: "💬", title: "Chat with the bot",
-      text: "Type your questions or answers in the input box and press Enter or click the Send button to communicate with the chatbot.",
-    }
+      text: "In the dialogue page footer, you can type your messages in the dialogue area “Type your answer…” and post them by pressing Enter or clicking the “Send” button.",
+    },
+    {
+      emoji: "📤", title: "Share Your Conversation",
+      text: "Below the dialogue area, the chatbot has the “Share Conversation” button, which stores the session conversation in our database for research purposes. We would appreciate it if you could share your conversation with us. Please note that the shared conversation will be sent anonymously.",
+    },
   ],
   ar: [
     {
+      emoji: "🏠", title: "الصفحة الرئيسية",
+      text: "تحتوي الصفحة الرئيسية لدايتشي على الترويسة، ولوحة روبوت الدردشة بعنوان \"ابدأ الدردشة\"، وثلاث لوحات معلومات تظهر كنوافذ منبثقة.",
+    },
+    {
+      emoji: "🌐", title: "تغيير اللغة",
+      text: "تعرض الترويسة معرّف جلسة فريد وأزرار اللغة الإنجليزية والعربية واليابانية التي يمكنك استخدامها لتبديل لغة الواجهة والروبوت المحادث. لكن عند تبديل اللغة، ستتم إعادة تعيين محادثتك وستبدأ محادثة جديدة مع الروبوت.",
+    },
+    {
+      emoji: "📚", title: "اكتشف معلومات عن فوكوشيما",
+      text: "تحتوي كل نافذة من النوافذ المنبثقة الثلاث على خمس حقائق متعلقة بفوكوشيما، وهذه الحقائق مقسمة إلى معلومات عامة \"تعرف على فوكوشيما\"، وحادث محطة الطاقة النووية \"الحادث النووي\"، وتصريف المياه المعالجة بنظام ALPS \"وضع المحيط\".",
+    },
+    {
+      emoji: "🤖", title: "فتح روبوت الدردشة",
+      text: "تفتح لوحة \"ابدأ الدردشة\" صفحة الحوار بين المستخدم والذكاء الاصطناعي باستخدام النسخة المجانية من نموذج Gemini Flash 3.6، والتي تحتوي على حد أقصى يبلغ 20 طلباً في اليوم.",
+    },
+    {
+      emoji: "🔙", title: "العودة إلى الصفحة الرئيسية",
+      text: "يتيح زر \"القائمة\" الموجود في ترويسة روبوت الدردشة للمستخدم الاطلاع على الحقائق المتعلقة بفوكوشيما في الصفحة الرئيسية والعودة إلى المحادثة نفسها مع الروبوت. سيتم حفظ محادثتك في وحدة التخزين المحلية للمتصفح حتى إذا انتقلت إلى الصفحة الرئيسية، ويمكنك متابعتها لاحقاً.",
+    },
+    {
+      emoji: "🔄", title: "بدء محادثة جديدة",
+      text: "يمكنك بدء محادثة جديدة عبر زر \"محادثة جديدة\" الموجود في ترويسة روبوت الدردشة. سيتم تحديث معرّف الجلسة الفريد بعد ذلك.",
+    },
+    {
       emoji: "💬", title: "الدردشة مع الروبوت",
-      text: "اكتب أسئلتك أو إجاباتك في صندوق الإدخال واضغط على Enter أو انقر على زر الإرسال للتواصل مع الروبوت المحادث.",
-    }
+      text: "في أسفل صفحة الحوار، يمكنك كتابة رسائلك في حقل الإدخال \"اكتب إجابتك...\" ونشرها بالضغط على Enter أو النقر على زر \"إرسال\".",
+    },
+    {
+      emoji: "📤", title: "شارك محادثتك",
+      text: "أسفل حقل الحوار، يوجد زر \"مشاركة المحادثة\" الذي يقوم بحفظ محادثة الجلسة في قاعدة بياناتنا لأغراض بحثية. سنكون ممتنين لو شاركت محادثتك معنا. يرجى ملاحظة أن المحادثة التي تتم مشاركتها سترسل بشكل مجهول الهوية.",
+    },
   ],
   ja: [
     {
+      emoji: "🏠", title: "メインページ",
+      text: "ダイイチのメインページには、ヘッダー、「チャットを始める」というAIチャットボットパネル、そしてポップアップウィンドウとして表示される3つの情報パネルがあります。",
+    },
+    {
+      emoji: "🌐", title: "言語を変更する",
+      text: "ヘッダーには、固有のセッションIDと、英語・アラビア語・日本語の言語ボタンが表示されており、これらを使ってインターフェースとチャットボットの言語を切り替えることができます。ただし、言語を切り替えると会話はリセットされ、チャットボットとの新しい会話が始まります。",
+    },
+    {
+      emoji: "📚", title: "福島についての情報を見る",
+      text: "3つのポップアップウィンドウにはそれぞれ福島に関する5つの事実が含まれており、これらは一般情報「福島について学ぶ」、原発事故「原発事故」、ALPS処理水の海洋放出「海洋の状況」に分類されています。",
+    },
+    {
+      emoji: "🤖", title: "チャットボットを開く",
+      text: "「チャットを始める」パネルをクリックすると、無料版のGemini Flash 3.6モデルを使用したユーザーとAIの対話ページが開きます。このモデルには1日あたり20件のリクエスト制限があります。",
+    },
+    {
+      emoji: "🔙", title: "メインページに戻る",
+      text: "チャットボットのヘッダーにある「メニュー」ボタンを使うと、メインページで福島に関する情報を確認したうえで、同じ会話に戻ることができます。メインページに移動しても会話はブラウザのローカルストレージに保存されるため、後で続きから再開できます。",
+    },
+    {
+      emoji: "🔄", title: "新しい会話を始める",
+      text: "チャットボットのヘッダーにある「新しい会話」ボタンから、新しい会話を始めることができます。この操作の後、固有のセッションIDが更新されます。",
+    },
+    {
       emoji: "💬", title: "ボットとチャット",
-      text: "入力ボックスに質問や回答を入力し、Enterキーを押すか[送信]ボタンをクリックして、チャットボットとコミュニケーションを取ってください。",
-    }
+      text: "対話ページの下部にある「回答を入力...」という入力欄にメッセージを入力し、Enterキーを押すか「送信」ボタンをクリックして送信できます。",
+    },
+    {
+      emoji: "📤", title: "会話を共有する",
+      text: "入力欄の下には「会話を共有する」ボタンがあり、研究目的でセッションの会話を私たちのデータベースに保存します。会話を共有していただけますと幸いです。共有された会話は匿名で送信されますので、ご安心ください。",
+    },
   ],
 };
 
