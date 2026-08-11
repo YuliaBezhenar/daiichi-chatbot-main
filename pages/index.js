@@ -1088,7 +1088,7 @@ const styles = {
   heroSection: { textAlign: "center" },
   heroEmoji: { fontSize: 56, marginBottom: 12 },
   heroTitle: { fontSize: 24, fontWeight: 700, color: "#1a3a2a", marginBottom: 8 },
-  heroDesc: { fontSize: 15, color: "#3a5a48", maxWidth: 440, lineHeight: 1.5 },
+  heroDesc: { fontSize: 15, color: "#3a5a48", maxWidth: 500, lineHeight: 1.5 },
   topicGrid: { display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16, width: "100%", maxWidth: 520 },
   topicCard: { display: "flex", flexDirection: "column", alignItems: "center", gap: 10, padding: "28px 16px", background: "#fff", border: "2px solid #d8f3dc", borderRadius: 16, cursor: "pointer", transition: "all 0.2s", boxShadow: "0 2px 12px rgba(26,58,42,0.08)" },
   topicEmoji: { fontSize: 36 },
