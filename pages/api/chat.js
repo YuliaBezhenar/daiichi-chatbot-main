@@ -295,6 +295,7 @@ export default async function handler(req, res) {
           ?.map((p) => p.text)
           .join("") || "Sorry, I could not generate a response.";
 
+      const usage = await incrementApiUsage();
       return res.status(200).json({ response: text });
     } catch (err) {
       if (attempt < maxRetries - 1) {
