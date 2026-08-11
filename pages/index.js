@@ -77,6 +77,7 @@ export const UI_TEXT = {
     surveySubmitting: "Submitting...",
     usageLabel: "Daily API requests",
     usageLimitReached: "Limit reached — try again tomorrow",
+    instructionsTitle: "How to use Daiichi",
   },
   ar: {
     title: "دايتشي",
@@ -102,7 +103,7 @@ export const UI_TEXT = {
     surveySubmitting: "جارٍ الإرسال...",
     usageLabel: "طلبات API اليومية",
     usageLimitReached: "تم الوصول إلى الحد الأقصى — حاول مرة أخرى غدًا",
-
+    instructionsTitle: "كيفية استخدام دايتشي",
   },
   ja: {
     title: "ダイイチ",
@@ -128,6 +129,7 @@ export const UI_TEXT = {
     surveySubmitting: "送信中...",
     usageLabel: "本日のAPIリクエスト数",
     usageLimitReached: "上限に達しました。明日もう一度お試しください",
+    instructionsTitle: "ダイイチの使い方",
   },
 };
 
@@ -498,6 +500,7 @@ export default function Home() {
   const [surveyAnswers, setSurveyAnswers] = useState({});
   const [submittingSurvey, setSubmittingSurvey] = useState(false);
   const [usage, setUsage] = useState(null); // { count, limit, date }
+  const [showInstructions, setShowInstructions] = useState(false);
 
   const t = UI_TEXT[language];
   const dir = LANGUAGES[language].dir;
@@ -876,9 +879,9 @@ async function callAPI(msgs, lang) {
               >
                 ↻ New Conversation
               </button>
-              <span style={styles.topicBarLabel}>
-                  🌿 Daiichi
-              </span>
+              <button onClick={() => setShowInstructions(true)} style={styles.backBtn}>
+                ℹ️ <span className="info-btn-label">{t.instructionsTitle}</span>
+              </button>
           </div>
             <div style={styles.chatMessages}>
               {messages.map((msg, i) => (
@@ -1131,6 +1134,29 @@ async function callAPI(msgs, lang) {
         </div>
       )}
 
+      {/* Instructions Modal */}
+        {showInstructions && (
+          <div style={styles.modalOverlay} onClick={() => setShowInstructions(false)}>
+            <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
+              <div style={styles.modalHeader}>
+                <h2 style={styles.modalTitle}>{t.instructionsTitle}</h2>
+                <button onClick={() => setShowInstructions(false)} style={styles.modalClose}>✕</button>
+              </div>
+              <div style={styles.modalBody}>
+                {(USAGE_INSTRUCTIONS[language] || USAGE_INSTRUCTIONS.en).map((item, i) => (
+                  <div key={i} style={styles.factCard}>
+                    <div style={styles.factTop}>
+                      <span style={styles.factEmoji}>{item.emoji}</span>
+                      <h3 style={styles.factTitle}>{item.title}</h3>
+                    </div>
+                    <p style={styles.factText}>{item.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
       <style jsx global>{`
         @keyframes blink {
           0%, 80%, 100% { opacity: 0.3; }
@@ -1145,6 +1171,14 @@ async function callAPI(msgs, lang) {
         @media (min-width: 1150px) {
           .usage-widget {
             display: block;
+          }
+        }
+        .info-btn-label {
+          display: none;
+        }
+        @media (min-width: 480px) {
+          .info-btn-label {
+            display: inline;
           }
         }
       `}</style>
