@@ -114,11 +114,10 @@ export default function ConsentModal({
 
           <button
             onClick={handleSubmit}
-            disabled={consent === null}
+            disabled={!(consent === null)}
             style={{
               ...styles.submit,
-              opacity: consent === null ? 1 : 0.5,
-              cursor: consent === null ? "pointer" : "not-allowed",
+              opacity: (consent === null) ? 1 : 0.5,
             }}
           >
             {t.submit}
