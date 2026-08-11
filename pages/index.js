@@ -758,9 +758,8 @@ useEffect(() => {
                 key={key}
                 onClick={() => {
                     setLanguage(key);
-                    setMessages([]);
-
                     saveConversation([]);
+                    setSurveyAnswers({});
                 }}
                 style={{ ...styles.langBtn, ...(language === key ? styles.langBtnActive : {}) }}
               >
@@ -974,6 +973,7 @@ useEffect(() => {
             <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
               <div style={styles.modalHeader}>
                 <h2 style={styles.modalTitle}>{t.surveyTitle}</h2>
+                <button onClick={() => setShowSurvey(false)} style={styles.modalClose}>✕</button>
               </div>
 
               <div style={styles.modalBody}>

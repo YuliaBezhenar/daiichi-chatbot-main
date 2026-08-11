@@ -1,6 +1,6 @@
 import supabase from "../../lib/supabase";
 
-const SURVEY_QUESTION_IDS = ["q1", "q2", "q3", "q4", "q5", "q6"];
+const SURVEY_QUESTION_IDS = ["q1", "q2", "q3", "q4", "q5"];
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -36,7 +36,7 @@ export default async function handler(req, res) {
           q3: answers.q3,
           q4: answers.q4,
           q5: answers.q5,
-          q6: answers.q6,
+          q6: answers.q6 || null,
         },
         { onConflict: "session_id" }
       );
