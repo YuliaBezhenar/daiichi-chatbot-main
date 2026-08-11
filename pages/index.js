@@ -376,55 +376,66 @@ const FACT_SHEETS = {
 const SURVEY_QUESTIONS = {
   en: [
     { id: "q1",
-      question:
-      "Question 1",
-      options: ["Answer 1", "Answer 2", "Answer 3"] },
-    { id:"q2",
-      question: "Question 2",
-      options: ["Answer 1", "Answer 2", "Answer 3"] },
+      question: "1. Was it convenient for you to learn from the chatbot?",
+      options: ["Yes", "No"] },
+    { id: "q2",
+      question: "2. Have you gained enough understanding to explain about Fukushima?",
+      options: ["Yes", "No"] },
     { id: "q3",
-      question: "Question 3",
-      options: ["Answer 1", "Answer 2", "Answer 3"] },
+      question: "3. Did talking to a chatbot change your opinion about the Fukushima disaster in 2011 (earthquake, tsunami and nuclear accident)?",
+      options: ["Yes", "No"] },
     { id: "q4",
-      question: "Question 4",
-      options: ["Answer 1", "Answer 2", "Answer 3"] },
+      question: "4. Did talking to a chatbot change your opinion about the radiological safety in Fukushima?",
+      options: ["Yes", "No"] },
     { id: "q5",
-      question: "Question 5",
-      options: ["Answer 1", "Answer 2", "Answer 3"] },
+      question: "5. Would you be interested in using chatbot to learn more facts about other related topics?",
+      options: ["Yes", "No"] },
+    { id: "q6",
+      type: "text",
+      question: "If you have additional comments, please share them with us in this field.",
+      placeholder: "Write your comments here..." },
   ],
   ar: [
     { id: "q1",
-      question: "السؤال 1",
-      options: ["الإجابة 1", "الإجابة 2", "الإجابة 3"] },
+      question: "1. هل كان من السهل عليك التعلم من الروبوت المحادث؟",
+      options: ["نعم", "لا"] },
     { id: "q2",
-      question: "السؤال 2",
-      options: ["الإجابة 1", "الإجابة 2", "الإجابة 3"] },
+      question: "2. هل اكتسبت فهماً كافياً لتتمكن من شرح ما يتعلق بفوكوشيما؟",
+      options: ["نعم", "لا"] },
     { id: "q3",
-      question: "السؤال 3",
-      options: ["الإجابة 1", "الإجابة 2", "الإجابة 3"] },
+      question: "3. هل غيّرت محادثتك مع الروبوت رأيك بشأن كارثة فوكوشيما عام 2011 (الزلزال والتسونامي والحادث النووي)؟",
+      options: ["نعم", "لا"] },
     { id: "q4",
-      question: "السؤال 4",
-      options: ["الإجابة 1", "الإجابة 2", "الإجابة 3"] },
+      question: "4. هل غيّرت محادثتك مع الروبوت رأيك بشأن السلامة الإشعاعية في فوكوشيما؟",
+      options: ["نعم", "لا"] },
     { id: "q5",
-      question: "السؤال 5",
-      options: ["الإجابة 1", "الإجابة 2", "الإجابة 3"] },
+      question: "5. هل تود استخدام الروبوت المحادث لمعرفة المزيد من الحقائق حول مواضيع أخرى ذات صلة؟",
+      options: ["نعم", "لا"] },
+    { id: "q6",
+      type: "text",
+      question: "إذا كانت لديك تعليقات إضافية، يرجى مشاركتها معنا في هذا الحقل.",
+      placeholder: "اكتب تعليقاتك هنا..." },
   ],
   ja: [
     { id: "q1",
-      question: "質問1",
-      options: ["回答1", "回答2", "回答3"] },
+      question: "1. チャットボットで学ぶことは便利でしたか？",
+      options: ["はい", "いいえ"] },
     { id: "q2",
-      question: "質問2",
-      options: ["回答1", "回答2", "回答3"] },
+      question: "2. 福島について説明できるほど十分に理解できましたか？",
+      options: ["はい", "いいえ"] },
     { id: "q3",
-      question: "質問3",
-      options: ["回答1", "回答2", "回答3"] },
+      question: "3. チャットボットとの会話によって、2011年の福島での災害（地震、津波、原発事故）についてのあなたの考えは変わりましたか？",
+      options: ["はい", "いいえ"] },
     { id: "q4",
-      question: "質問4",
-      options: ["回答1", "回答2", "回答3"] },
+      question: "4. チャットボットとの会話によって、福島の放射線安全性についてのあなたの考えは変わりましたか？",
+      options: ["はい", "いいえ"] },
     { id: "q5",
-      question: "質問5",
-      options: ["回答1", "回答2", "回答3"] },
+      question: "5. 他の関連トピックについてもっと知るために、チャットボットを利用してみたいと思いますか？",
+      options: ["はい", "いいえ"] },
+    { id: "q6",
+      type: "text",
+      question: "追加のご意見がありましたら、こちらの欄にご記入ください。",
+      placeholder: "ここにコメントを入力してください..." },
   ],
 };
 
@@ -588,7 +599,7 @@ useEffect(() => {
     setShowSurvey(true);
   }
 
-  async function submitConversation() {
+  async function submitConversation(consent) {
 
     if (messages.length === 0) return;
 
@@ -605,6 +616,7 @@ useEffect(() => {
           sessionId,
           language,
           conversation: messages,
+          consent,
         }),
       });
 
@@ -967,40 +979,55 @@ useEffect(() => {
               <div style={styles.modalBody}>
                 <p style={styles.welcomeCaption}>{t.surveyCaption}</p>
 
-                {(SURVEY_QUESTIONS[language] || SURVEY_QUESTIONS.en).map((question, qIndex) => (
+                {(SURVEY_QUESTIONS[language] || SURVEY_QUESTIONS.en).map((question) => (
                   <div key={question.id} style={styles.surveyQuestionCard}>
                     <p style={styles.surveyQuestionTitle}>
-                      {qIndex + 1}. {question.question}
+                      {question.question}
                     </p>
-                    <div style={styles.surveyOptionsList}>
-                      {question.options.map((option) => {
-                        const selected = surveyAnswers[question.id] === option;
-                        return (
-                          <label
-                            key={option}
-                            style={{
-                              ...styles.surveyOptionRow,
-                              ...(selected ? styles.surveyOptionRowSelected : {}),
-                            }}
-                          >
-                            <input
-                              type="radio"
-                              name={question.id}
-                              value={option}
-                              checked={selected}
-                              onChange={(e) =>
-                                setSurveyAnswers({
-                                  ...surveyAnswers,
-                                  [question.id]: e.target.value,
-                                })
-                              }
-                              style={styles.surveyRadio}
-                            />
-                            <span>{option}</span>
-                          </label>
-                        );
-                      })}
-                    </div>
+                    {question.type === "text" ? (
+                      <textarea
+                        value={surveyAnswers[question.id] || ""}
+                        onChange={(e) =>
+                          setSurveyAnswers({
+                            ...surveyAnswers,
+                            [question.id]: e.target.value,
+                          })
+                        }
+                        placeholder={question.placeholder}
+                        style={styles.surveyTextarea}
+                        rows={3}
+                      />
+                    ) : (
+                      <div style={styles.surveyOptionsList}>
+                        {question.options.map((option) => {
+                          const selected = surveyAnswers[question.id] === option;
+                          return (
+                            <label
+                              key={option}
+                              style={{
+                                ...styles.surveyOptionRow,
+                                ...(selected ? styles.surveyOptionRowSelected : {}),
+                              }}
+                            >
+                              <input
+                                type="radio"
+                                name={question.id}
+                                value={option}
+                                checked={selected}
+                                onChange={(e) =>
+                                  setSurveyAnswers({
+                                    ...surveyAnswers,
+                                    [question.id]: e.target.value,
+                                  })
+                                }
+                                style={styles.surveyRadio}
+                              />
+                              <span>{option}</span>
+                            </label>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
                 ))}
 
@@ -1008,12 +1035,12 @@ useEffect(() => {
                   onClick={submitSurvey}
                   disabled={
                     (SURVEY_QUESTIONS[language] || SURVEY_QUESTIONS.en).some(
-                      (question) => !surveyAnswers[question.id]
+                      (question) => question.type !== "text" && !surveyAnswers[question.id]
                     ) || submittingSurvey
                   }
                   style={
                     (SURVEY_QUESTIONS[language] || SURVEY_QUESTIONS.en).every(
-                      (question) => surveyAnswers[question.id]
+                      (question) => question.type === "text" || surveyAnswers[question.id]
                     )
                       ? styles.welcomeButton
                       : { ...styles.welcomeButton, opacity: 0.5, cursor: "not-allowed" }
@@ -1116,4 +1143,5 @@ const styles = {
   surveyOptionRow: { display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", borderRadius: 10, border: "1px solid #d8f3dc", background: "#f7fbf8", fontSize: 14, color: "#1a3a2a", cursor: "pointer", transition: "all 0.15s", },
   surveyOptionRowSelected: { background: "#d8f3dc", borderColor: "#74c69d", fontWeight: 600, },
   surveyRadio: { accentColor: "#2d6a4f", width: 16, height: 16, flexShrink: 0,},
+  surveyTextarea: { width: "100%", padding: "10px 14px", borderRadius: 10, border: "1px solid #d8f3dc", background: "#f7fbf8", fontSize: 14, color: "#1a3a2a", fontFamily: "inherit", resize: "vertical", outline: "none", boxSizing: "border-box" },
 };

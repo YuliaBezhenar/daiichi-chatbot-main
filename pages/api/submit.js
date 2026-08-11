@@ -13,6 +13,7 @@ export default async function handler(req, res) {
     sessionId,
     language,
     conversation,
+    consent,
   } = req.body;
 
   if (!conversation || !Array.isArray(conversation)) {
@@ -100,6 +101,8 @@ export default async function handler(req, res) {
       notes: analysis.notes,
 
       conversation: conversation,
+ 
+      consent: consent,
     },
     {
       onConflict: "session_id",

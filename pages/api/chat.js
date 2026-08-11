@@ -6,6 +6,8 @@ const FUKUSHIMA_FACTS = {
     "Equivalent dose (H) in Sievert (Sv) accounts for the biological impact of different radiation types using unitless factors with the absorbed dose (D) is reported in Gray (Gy), which is the amount of energy (J) per mass (kg), and is used to calculate equivalent dose (Sv) by accounting for biological damage in addition to absorbed dose (Gy). Alpha radiation has a radiation weighting factor of 20 because it causes much greater biological damage than beta or gamma radiation.",
     "The International Commission on Radiological Protection (ICRP) Publication 103 recommended 5.5% increase in risk of mortality per 1 Sv radiation dose.",
     "Radioactive materials can be present in soil, air, food, and water depending on environmental conditions.",
+    "Naturally occurring radionuclide materials (NORM), including uranium, thorium, potassium-40, and their decay products like radium and radon, can be present in soil, air, food, and water depending on the environmental conditions. (IAEA NORM)",
+    "In a year, one trans-atlantic airline flight and one chest X-ray would each contribute of about 0.1 mSv while drinking a bottle of still water and eating one banana per day would give negligible contributions to the annual radiation dose of 2.1 mSv from natural sources in Japan (QST)",
     "Fukushima Prefecture, which is located in the northern part of main island, has three geographic regions with Fukushima City as its capital located in the central part of the prefecture and two Fukushima Nuclear Power Plants (NPPs), which are called Daiichi and Daini located at the Pacific coast. (Fukushima Travel)",
     "As the 3rd largest in Japan, Fukushima Prefecture has an area of 13783.9 square kilometers with three regions: Hamadori coastal area (21% of total), Nakadori central area (39% of total), and Aizu (40% of total). (Fukushima Travel, Fukushima Prefecture Revitalization Portal)",
     "Fukushima Prefecture is famous for its agricultural products such as peaches, rice, Japanese sake, and beef and each of three regions has unique activities: Fukushima city, which is located in the central part, has three famous hot springs; Fukushima coastal area has many fisherman communities and swimming places. (Japan Gov, Fukushima City Guide)",
@@ -85,6 +87,14 @@ const FUKUSHIMA_FACTS = {
     {
       name: "IAEA",
       url: "https://www.iaea.org/topics/response/fukushima-daiichi-nuclear-accident"
+    },
+    {
+      name: "IAEA NORM",
+      url: "https://www.iaea.org/topics/radiation-safety-norm"
+    },
+    {
+      name: "The National Institutes for Quantum Science and Technology (QST)",
+      url: "https://www.qst.go.jp/uploaded/attachment/32295.pdf"
     }
   ]
 };
