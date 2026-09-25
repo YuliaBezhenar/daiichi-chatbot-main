@@ -157,7 +157,7 @@ const LANGUAGE_INSTRUCTIONS = {
   ja: "Respond in Japanese (日本語). Use Japanese script for your entire response."
 };
 
-function buildSystemPrompt(language) {
+function buildSystemPrompt(language, remainingRequests) {
   const topicData = FUKUSHIMA_FACTS;
   const langInstruction = LANGUAGE_INSTRUCTIONS[language] || LANGUAGE_INSTRUCTIONS.en;
 
@@ -212,6 +212,7 @@ ${topicData.sources
   Never invent URLs.
 
 After discussing minimum 10 facts, gently ask user, if they can share the conversation and feedback to help the research via button below the chat. You can continue chatting after that. Information will be shared anonymously.
+There is a daily API request limit. If remain requests are near 20, gently suggest that the user start wrapping up the conversation and ask if they can share the conversation and feedback to help the research via button below the chat. Also you can suggest to continue conversation after limit updates (it updates every dat by UTC -8).
 
 CRITICAL RULES:
 - NEVER say "Not quite!" or make the user feel wrong. Instead: "That's actually the most common belief! Here's what's surprising..."

@@ -76,6 +76,7 @@ export const UI_TEXT = {
     surveyContinue: "Continue",
     surveySubmitting: "Submitting...",
     usageLabel: "Daily API requests",
+    usageLableNotice: "Updates every day at 00:00 UTC -8",
     usageLimitReached: "Limit reached — try again tomorrow",
     instructionsTitle: "How to use Daiichi",
   },
@@ -102,6 +103,7 @@ export const UI_TEXT = {
     surveyContinue: "متابعة",
     surveySubmitting: "جارٍ الإرسال...",
     usageLabel: "طلبات API اليومية",
+    usageLableNotice: "Updates every day at 00:00 UTC -8",
     usageLimitReached: "تم الوصول إلى الحد الأقصى — حاول مرة أخرى غدًا",
     instructionsTitle: "كيفية استخدام دايتشي",
   },
@@ -128,6 +130,7 @@ export const UI_TEXT = {
     surveyContinue: "続ける",
     surveySubmitting: "送信中...",
     usageLabel: "本日のAPIリクエスト数",
+    usageLableNotice: "Updates every day at 00:00 UTC -8",
     usageLimitReached: "上限に達しました。明日もう一度お試しください",
     instructionsTitle: "ダイイチの使い方",
   },
@@ -1201,6 +1204,7 @@ async function callAPI(msgs, lang) {
         <div className="usage-widget" style={styles.usageWidget}>
           <div style={styles.usageCard}>
             <span style={styles.usageLabel}>{t.usageLabel}</span>
+            <span style={styles.usageLabelN}>{t.usageLableNotice}</span>
             <span style={styles.usageValue}>
               {usage.count} / {usage.limit}
             </span>
@@ -1345,6 +1349,7 @@ const styles = {
   usageWidget: { position: "fixed", top: 90, right: 24, zIndex: 50 },
   usageCard: { background: "#fff", borderRadius: 14, padding: "14px 18px", border: "1px solid #d8f3dc", boxShadow: "0 4px 16px rgba(26,58,42,0.1)", display: "flex", flexDirection: "column", gap: 6, width: 180 },
   usageLabel: { fontSize: 12, color: "#6b8f7a", fontWeight: 600 },
+  usageLabelN: { fontSize: 10, color: "#6b6b6b", fontWeight: 500 },
   usageValue: { fontSize: 18, fontWeight: 700, color: "#1a3a2a" },
   usageBarTrack: { width: "100%", height: 6, background: "#d8f3dc", borderRadius: 4, overflow: "hidden" },
   usageBarFill: { height: "100%", borderRadius: 4, transition: "width 0.3s" },
