@@ -645,7 +645,7 @@ async function callAPI(msgs, lang) {
     body: JSON.stringify({ messages: msgs, language: lang }),
   });
   const data = await res.json();
-  if (data.usage) setUsage(data.usage); // ← додати цей рядок
+  if (data.usage) setUsage(data.usage);
 
   if (res.status === 429 && data.retryAfter) {
     const waitSec = Math.min(data.retryAfter + 2, 30);
@@ -658,7 +658,7 @@ async function callAPI(msgs, lang) {
       body: JSON.stringify({ messages: msgs, language: lang }),
     });
     const data2 = await res2.json();
-    if (data2.usage) setUsage(data2.usage); // ← і тут теж
+    if (data2.usage) setUsage(data2.usage);
     return data2;
   }
   return data;
@@ -724,6 +724,7 @@ async function callAPI(msgs, lang) {
     }
     setLoading(false);
     setCountdown(0);
+    fetchUsage();
   }
 
   function goBack() {
@@ -817,6 +818,7 @@ async function callAPI(msgs, lang) {
 
     setMessages([]);
     saveConversation([]);
+    fetchUsage();
 
     setShowChat(true);
 
