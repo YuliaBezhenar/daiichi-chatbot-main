@@ -280,17 +280,35 @@ export default async function handler(req, res) {
 
       if (data.error) {
         const msg = data.error.message || "";
-        if (response.status === 429 || msg.includes("quota") || msg.includes("rate")) {
-          const match = msg.match(/retry in ([\d.]+)s/i);
-          const waitSec = match ? Math.ceil(parseFloat(match[1])) + 1 : 5;
-          if (attempt < maxRetries - 1) {
-            await new Promise((r) => setTimeout(r, waitSec * 1000));
-            continue;
-          } else {
-            return res.status(429).json({ error: "Rate limited", retryAfter: waitSec });
-          }
+
+        const isRetryable =
+          response.status === 429 ||
+          response.status === 500 ||
+          response.status === 503 ||
+          response.status === 504 ||
+          msg.includes("quota") ||
+          msg.includes("rate") ||
+          msg.includes("high demand") ||
+          msg.includes("temporarily unavailable");
+
+        if (isRetryable && attempt < maxRetries - 1) {
+          const baseDelay = 2000; // 2 seconds
+          const exponentialDelay = baseDelay * Math.pow(2, attempt);
+          const jitter = Math.random() * 1000;
+
+          const waitMs = exponentialDelay + jitter;
+
+          console.log(
+            `Gemini error ${response.status}. Retrying in ${Math.round(waitMs)} ms...`
+          );
+
+          await new Promise((r) => setTimeout(r, waitMs));
+          continue;
         }
-        return res.status(500).json({ error: data.error.message });
+
+        return res.status(response.status || 500).json({
+          error: msg || "Gemini API error",
+        });
       }
 
       const text =
