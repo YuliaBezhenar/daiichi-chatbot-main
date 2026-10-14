@@ -258,7 +258,7 @@ export default async function handler(req, res) {
     parts: [{ text: m.content }],
   }));
 
-  const maxRetries = 3;
+  const maxRetries = 5;
 
   const model = "gemini-3.6-flash";
 
