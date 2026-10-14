@@ -260,7 +260,7 @@ export default async function handler(req, res) {
 
   const maxRetries = 5;
 
-  const model = "gemini-3.6-flash";
+  const model = "gemini-3.7-flash";
 
   for (let attempt = 0; attempt < maxRetries; attempt++) {
     try {
