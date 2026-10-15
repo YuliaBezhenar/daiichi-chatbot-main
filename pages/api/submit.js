@@ -30,6 +30,7 @@ export default async function handler(req, res) {
 
     const apiKey = process.env.GEMINI_API_KEY;
     const model = "gemini-3.6-flash";
+    const chatModel = "gemini-3.5-flash-lite";
 
     let data;
 
@@ -131,7 +132,7 @@ export default async function handler(req, res) {
 
       language: language,
 
-      model: model,
+      model: chatModel,
 
       completed: true,
 
